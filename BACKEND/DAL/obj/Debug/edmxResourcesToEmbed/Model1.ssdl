@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Charity_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CategoryGMH">
+    <Key>
+      <PropertyRef Name="CategoryCode" />
+    </Key>
+    <Property Name="CategoryCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MasterCategoryCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GMH">
+    <Key>
+      <PropertyRef Name="GmhCode" />
+    </Key>
+    <Property Name="GmhCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GmeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserCode" Type="int" Nullable="false" />
+    <Property Name="CategoryCode" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="image" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="FreeDescription" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsDisposable" Type="bit" Nullable="false" />
+    <Property Name="SecurityDepositAmount" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LENDINGS">
+    <Key>
+      <PropertyRef Name="LendingCode" />
+    </Key>
+    <Property Name="LendingCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserCode" Type="int" Nullable="false" />
+    <Property Name="ProductCode" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="LendingDate" Type="date" />
+    <Property Name="ReturnDate" Type="date" />
+  </EntityType>
+  <EntityType Name="OPINIONS">
+    <Key>
+      <PropertyRef Name="OpinionCode" />
+    </Key>
+    <Property Name="OpinionCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LandingCode" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Productname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestForLoan">
+    <Key>
+      <PropertyRef Name="RequestCode" />
+    </Key>
+    <Property Name="RequestCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserCode" Type="int" Nullable="false" />
+    <Property Name="ProductCode" Type="int" Nullable="false" />
+    <Property Name="RequestDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserCode" />
+    </Key>
+    <Property Name="UserCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="Cell-Phone" Type="nchar" MaxLength="9" />
+    <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Permission" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CategoryG__Maste__239E4DCF">
+    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="1" />
+    <End Role="CategoryGMH1" Type="Self.CategoryGMH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryGMH">
+        <PropertyRef Name="CategoryCode" />
+      </Principal>
+      <Dependent Role="CategoryGMH1">
+        <PropertyRef Name="MasterCategoryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GMH__CategoryCod__300424B4">
+    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="1" />
+    <End Role="GMH" Type="Self.GMH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryGMH">
+        <PropertyRef Name="CategoryCode" />
+      </Principal>
+      <Dependent Role="GMH">
+        <PropertyRef Name="CategoryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GMH__UserCode__2F10007B">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="GMH" Type="Self.GMH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserCode" />
+      </Principal>
+      <Dependent Role="GMH">
+        <PropertyRef Name="UserCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LENDINGS__Produc__3A81B327">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="LENDINGS" Type="Self.LENDINGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="LENDINGS">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LENDINGS__UserCo__398D8EEE">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="LENDINGS" Type="Self.LENDINGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserCode" />
+      </Principal>
+      <Dependent Role="LENDINGS">
+        <PropertyRef Name="UserCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OPINIONS__Landin__3D5E1FD2">
+    <End Role="LENDINGS" Type="Self.LENDINGS" Multiplicity="1" />
+    <End Role="OPINIONS" Type="Self.OPINIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LENDINGS">
+        <PropertyRef Name="LendingCode" />
+      </Principal>
+      <Dependent Role="OPINIONS">
+        <PropertyRef Name="LandingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Catego__36B12243">
+    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryGMH">
+        <PropertyRef Name="CategoryCode" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RequestFo__Produ__412EB0B6">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="RequestForLoan">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RequestFo__UserC__403A8C7D">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserCode" />
+      </Principal>
+      <Dependent Role="RequestForLoan">
+        <PropertyRef Name="UserCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Charity_DBModelStoreContainer">
+    <EntitySet Name="CategoryGMH" EntityType="Self.CategoryGMH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GMH" EntityType="Self.GMH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LENDINGS" EntityType="Self.LENDINGS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OPINIONS" EntityType="Self.OPINIONS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestForLoan" EntityType="Self.RequestForLoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CategoryG__Maste__239E4DCF" Association="Self.FK__CategoryG__Maste__239E4DCF">
+      <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+      <End Role="CategoryGMH1" EntitySet="CategoryGMH" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GMH__CategoryCod__300424B4" Association="Self.FK__GMH__CategoryCod__300424B4">
+      <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+      <End Role="GMH" EntitySet="GMH" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GMH__UserCode__2F10007B" Association="Self.FK__GMH__UserCode__2F10007B">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="GMH" EntitySet="GMH" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LENDINGS__Produc__3A81B327" Association="Self.FK__LENDINGS__Produc__3A81B327">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="LENDINGS" EntitySet="LENDINGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LENDINGS__UserCo__398D8EEE" Association="Self.FK__LENDINGS__UserCo__398D8EEE">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="LENDINGS" EntitySet="LENDINGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OPINIONS__Landin__3D5E1FD2" Association="Self.FK__OPINIONS__Landin__3D5E1FD2">
+      <End Role="LENDINGS" EntitySet="LENDINGS" />
+      <End Role="OPINIONS" EntitySet="OPINIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Catego__36B12243" Association="Self.FK__Products__Catego__36B12243">
+      <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RequestFo__Produ__412EB0B6" Association="Self.FK__RequestFo__Produ__412EB0B6">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="RequestForLoan" EntitySet="RequestForLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RequestFo__UserC__403A8C7D" Association="Self.FK__RequestFo__UserC__403A8C7D">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="RequestForLoan" EntitySet="RequestForLoan" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

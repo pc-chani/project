@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1fc6fcbfed14392bee7e81ec087597f" Name="Diagram1">
+        <EntityTypeShape EntityType="Charity_DBModel.CategoryGMH" Width="1.5" PointX="5.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.GMH" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.LENDING" Width="1.5" PointX="2.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.OPINION" Width="1.5" PointX="0.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Product" Width="1.5" PointX="7.625" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.RequestForLoan" Width="1.5" PointX="5.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.USER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Charity_DBModel.FK__CategoryG__Maste__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__GMH__CategoryCod__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Products__Catego__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__GMH__UserCode__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__Produc__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__UserCo__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__OPINIONS__Landin__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

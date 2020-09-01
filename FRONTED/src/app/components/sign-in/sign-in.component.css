@@ -1,0 +1,23 @@
+.txt{  
+    margin-top: -80px;
+    margin-right: 100px;    
+}
+
+.error{
+ margin-top: -40px;
+ margin-right: 105%;
+ width: 50%; 
+ color: crimson;
+}
+
+.content {
+    display: flex;
+    margin: 82px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    direction:rtl; 
+    text-align: right;
+  }

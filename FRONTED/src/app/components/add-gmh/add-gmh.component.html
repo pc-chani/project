@@ -1,0 +1,59 @@
+<div  class="content">
+    <form [formGroup]="registerForm" (submit)="addUser()" >
+        <div class="form-group">
+            <label > שם פרטי:</label>
+            <input  class="txt" type="text" class="form-control" formControlName="firstName">
+            <div class="error" *ngIf="registerForm.controls['firstName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> שם משפחה:</label>
+            <input class="txt" type="text" class="form-control" formControlName="lastName">
+            <div class="error" *ngIf="registerForm.controls['lastName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> כתובת:</label>
+            <input class="txt" type="text" class="form-control" formControlName="adress">
+            <div class="error" *ngIf="registerForm.controls['adress'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> טלפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="cell_phone">
+            <div class="error" *ngIf="registerForm.controls['cell_phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> פלאפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="phone">
+            <div class="error" *ngIf="registerForm.controls['phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> מייל:</label>
+            <input class="txt" type="text" class="form-control" formControlName="e_mail">
+            <div class="error" *ngIf="registerForm.controls['e_mail'].errors!=null">שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> :סיסמה </label>
+            <input class="txt" type="password" class="form-control" formControlName="password">
+            <div class="error" *ngIf="registerForm.controls['password'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label>אימות סיסמה</label>
+            <input class="txt" type="text" class="form-control" formControlName="confirm">
+        </div>
+        <div *ngIf="registerForm.errors?.passwordError!=null" style="text-align: center;">
+            {{registerForm.errors?.passwordError}}
+        </div>
+        <div class="form-group">
+            <label>הרשאה:</label>
+            <select formControlName="permission" class="form-control">
+               <option>מנהל</option>
+               <option>בעל גמח</option>
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" formControlName="accept" style="margin-right: 5%;"><label>אני מסכים לתנאי האתר</label>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-success" value="הרשמי"  [disabled]="!registerForm.valid" style="margin-right: 35%;">
+        </div>
+    </form>
+    </div>

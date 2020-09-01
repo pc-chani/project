@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Charity_DBModelStoreContainer" CdmEntityContainer="Charity_DBEntities">
+    <EntitySetMapping Name="CategoryGMHs">
+      <EntityTypeMapping TypeName="Charity_DBModel.CategoryGMH">
+        <MappingFragment StoreEntitySet="CategoryGMH">
+          <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="MasterCategoryCode" ColumnName="MasterCategoryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GMHs">
+      <EntityTypeMapping TypeName="Charity_DBModel.GMH">
+        <MappingFragment StoreEntitySet="GMH">
+          <ScalarProperty Name="GmhCode" ColumnName="GmhCode" />
+          <ScalarProperty Name="GmeName" ColumnName="GmeName" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="FreeDescription" ColumnName="FreeDescription" />
+          <ScalarProperty Name="IsDisposable" ColumnName="IsDisposable" />
+          <ScalarProperty Name="SecurityDepositAmount" ColumnName="SecurityDepositAmount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LENDINGS">
+      <EntityTypeMapping TypeName="Charity_DBModel.LENDING">
+        <MappingFragment StoreEntitySet="LENDINGS">
+          <ScalarProperty Name="LendingCode" ColumnName="LendingCode" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="LendingDate" ColumnName="LendingDate" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OPINIONS">
+      <EntityTypeMapping TypeName="Charity_DBModel.OPINION">
+        <MappingFragment StoreEntitySet="OPINIONS">
+          <ScalarProperty Name="OpinionCode" ColumnName="OpinionCode" />
+          <ScalarProperty Name="LandingCode" ColumnName="LandingCode" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="Charity_DBModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Productname" ColumnName="Productname" />
+          <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestForLoans">
+      <EntityTypeMapping TypeName="Charity_DBModel.RequestForLoan">
+        <MappingFragment StoreEntitySet="RequestForLoan">
+          <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="Charity_DBModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Cell_Phone" ColumnName="Cell-Phone" />
+          <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
