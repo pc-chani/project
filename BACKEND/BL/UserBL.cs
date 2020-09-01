@@ -41,6 +41,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
+                User user =BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password));
                 if (db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password) != null)
                     return true;
                 else return false;
