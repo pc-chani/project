@@ -14,6 +14,7 @@ import { AddGMHComponent } from './components/add-gmh/add-gmh.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.component';
+import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
 
 
 
@@ -27,7 +28,8 @@ import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.compon
     AddGMHComponent,
     RegisterComponent,
     SignInComponent,
-    NeedsGMHimComponent
+    NeedsGMHimComponent,
+    OneGmhComponent
   ],
   imports: [
     BrowserModule,

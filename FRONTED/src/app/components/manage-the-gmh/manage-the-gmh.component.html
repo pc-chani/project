@@ -1,1 +1,27 @@
-<p>manage-the-gmh works!</p>
+<div class="content">
+    <h1>הגמחים של {{currentUser.FirstName}}</h1>
+    <div>
+        <table *ngFor="let g of myGmhim" class="table table-hover">
+            <thead>
+                <td>שם:</td>
+                <td>כתובת:</td> 
+                <td>טלפון:</td>                
+                <td>אימייל:</td>                
+                <td>הערות:</td>                
+            </thead>
+            <tbody>
+                <tr>
+                    <td [routerLink]="['/one-gmh',g.GmhCode]">{{g.GmhName}} </td>
+                    <td>{{g.Adress}}</td>
+                    <td>{{g.Phone}}</td>
+                    <td>{{g.e_mail}}</td>
+                    <td>{{g.commits}}</td>                          
+                    <td><input type="button" class="btn btn-primary" value='הסרה מרשימת הגמ"חים'></td>
+                    <td><input type="button" class="btn btn-primary" value='עריכת פרטי הגמ"ח'></td>
+                    <td><input type="button" class="btn btn-primary" value='ניהול גמ"ח זה'></td>
+                </tr>
+            </tbody>
+        </table>
+        <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
+    </div>
+</div>

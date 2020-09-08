@@ -8,12 +8,27 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
+  public currentUser = undefined
   
   constructor(private http:HttpClient) { }
+  get IsLogin() {
+    return this.currentUser != undefined;
+  }
 
+  get CurrentUser() {
+    return this.currentUser;
+  }
+
+  setCurrentUser(user) {
+    this.currentUser = user;
+  }
+  setLogoff(){
+    this.currentUser=undefined;
+  }
   checkUser(email:string,password:string,user:User):Observable<boolean>{//post 
 user.Password=password
 user.E_mail=email
+
     return this.http.post<boolean>(environment.url+'user/checkUser',user);
   }
   addUser(user:User): Observable<boolean>{//post

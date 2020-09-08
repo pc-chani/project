@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     user.Phone = this.registerForm.controls.phone.value;
     user.E_mail = this.registerForm.controls.e_mail.value;
     user.Password = this.registerForm.controls.password.value;
-    user.Permission=  this.registerForm.controls.permission.value;
+    user.Permission=  'בעל גמ"ח'
     
     console.log(user);
     

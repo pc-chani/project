@@ -7,7 +7,17 @@
  
 
  
-
+.content {
+    display: flex;
+    margin: 82px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    direction:rtl; 
+    text-align: right;
+  }
   
 
 

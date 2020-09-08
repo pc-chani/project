@@ -46,6 +46,7 @@
     <Compile Include="LENDING.cs" />
     <Compile Include="OPINION.cs" />
     <Compile Include="PRODUCT.cs" />
+    <Compile Include="ProductToGMH.cs" />
     <Compile Include="RequestForLoan.cs" />
     <Compile Include="USER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

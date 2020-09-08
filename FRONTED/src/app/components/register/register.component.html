@@ -42,13 +42,6 @@
         <div *ngIf="registerForm.errors?.passwordError!=null" style="text-align: center;">
             {{registerForm.errors?.passwordError}}
         </div>
-        <div class="form-group">
-            <label>הרשאה:</label>
-            <select formControlName="permission" class="form-control">
-               <option>מנהל</option>
-               <option>בעל גמח</option>
-            </select>
-        </div>
         <div>
             <input type="checkbox" formControlName="accept" style="margin-right: 5%;"><label>אני מסכים לתנאי האתר</label>
         </div>

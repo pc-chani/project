@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
+
+namespace API.Controllers
+{
+    [EnableCors("*", "*", "*")]
+    [RoutePrefix("api/gmh")]
+    public class gmhController : ApiController
+    {
+        [Route("updateGMH"), HttpPost]
+        public IHttpActionResult updateGMH(DTO.GMH gMH)
+        {
+            if (BL.gmhBL.updateGMH(gMH))
+                return Ok(true);
+            else return Ok(false);
+        }
+        [Route("getMyGmhim"), HttpPost]
+        public IHttpActionResult getMyGmhim(DTO.User user)
+        {
+            return Ok(BL.gmhBL.getMyGmhim(user));      
+        }
+    }
+    
+}

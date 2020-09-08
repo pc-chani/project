@@ -12,16 +12,14 @@ namespace BL.Converters
         {
             return new DTO.GMH
             {
-                GmeName=g.GmeName,
-                GmhCode=g.GmhCode,
-                Adress=g.Adress,
-                Amount=g.Amount,
+                GmhName = g.GmhName,
+                GmhCode = g.GmhCode,
+                Adress = g.Adress,
+                commits = g.commits,
+                e_mail = g.e_mail,
+                Phone = g.Phone,
                 CategoryCode=g.CategoryCode,
-                FreeDescription=g.FreeDescription,
-                IsDisposable=g.IsDisposable,
-                Picture=g.Picture,
-                SecurityDepositAmount=g.SecurityDepositAmount,
-                Status=g.Status,
+        
                 UserCode=g.UserCode
             };
         }
@@ -29,16 +27,13 @@ namespace BL.Converters
         {
             return new DAL.GMH
             {
-                GmeName = g.GmeName,
+                GmhName = g.GmhName,
                 GmhCode = g.GmhCode,
                 Adress = g.Adress,
-                Amount = g.Amount,
+                
                 CategoryCode = g.CategoryCode,
-                FreeDescription = g.FreeDescription,
-                IsDisposable = g.IsDisposable,
-                Picture = g.Picture,
-                SecurityDepositAmount = g.SecurityDepositAmount,
-                Status = g.Status,
+            
+                
                 UserCode = g.UserCode
 
             };
@@ -46,6 +41,10 @@ namespace BL.Converters
         public static List<DTO.GMH> convertToDTOList(List<DAL.GMH> gList)
         {
             return gList.Select(g => convertToDTO(g)).ToList();
+        }
+        public static DTO.GMH[] convertToDTOarray(DAL.GMH[] gList)
+        {
+            return gList.Select(g => convertToDTO(g)).ToArray();
         }
     }
 }

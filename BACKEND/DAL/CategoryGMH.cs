@@ -24,7 +24,7 @@ namespace DAL
     
         public int CategoryCode { get; set; }
         public string CategoryName { get; set; }
-        public int MasterCategoryCode { get; set; }
+        public Nullable<int> MasterCategoryCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryGMH> CategoryGMH1 { get; set; }

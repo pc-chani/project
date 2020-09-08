@@ -27,9 +27,7 @@ namespace API.Controllers
         [Route("checkUser"), HttpPost]
         public IHttpActionResult checkUser(DTO.User user)
         {
-            if (BL.UserBL.checkUser(user.E_mail, user.Password))
-                return Ok(true);
-            else return Ok(false);
+          return Ok(BL.UserBL.checkUser(user.E_mail, user.Password));           
         }
         [Route("addUser"),HttpPost]
         public IHttpActionResult addUser(DTO.User user)

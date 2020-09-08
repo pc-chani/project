@@ -14,7 +14,7 @@ namespace BL.Converters
             {
                 CategoryCode = c.CategoryCode,
                 CategoryName = c.CategoryName,
-                MasterCategoryCode = c.MasterCategoryCode
+                MasterCategoryCode = Convert.ToInt32( c.MasterCategoryCode)
 
             };
         }

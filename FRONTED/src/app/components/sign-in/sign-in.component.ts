@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/User.model';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,9 +24,11 @@ export class SignInComponent implements OnInit {
     let E_mail:string = this.signInForm.controls.e_mail.value;
     let passsword:string = this.signInForm.controls.password.value;
     this.userService.checkUser(E_mail,passsword,user).subscribe(
-      res => { console.log(res); },
+      res => {this.userService.currentUser=res; console.log(res); },
       err => { console.log(err); }
+     
     )
+
   }
 }
 

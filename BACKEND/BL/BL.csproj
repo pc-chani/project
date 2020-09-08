@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\ProductToGmhConverter.cs" />
+    <Compile Include="gmhBL.cs" />
     <Compile Include="UserBL.cs" />
     <Compile Include="Converters\CategoryGMHConvereter.cs" />
     <Compile Include="Converters\GMHConverter.cs" />

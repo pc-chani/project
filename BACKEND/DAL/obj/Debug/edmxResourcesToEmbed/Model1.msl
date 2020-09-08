@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Charity_DBModelStoreContainer" CdmEntityContainer="Charity_DBEntities">
+  <EntityContainerMapping StorageEntityContainer="Charity_DBModelStoreContainer" CdmEntityContainer="Charity_DBEntities1">
     <EntitySetMapping Name="CategoryGMHs">
       <EntityTypeMapping TypeName="Charity_DBModel.CategoryGMH">
         <MappingFragment StoreEntitySet="CategoryGMH">
@@ -14,16 +14,13 @@
       <EntityTypeMapping TypeName="Charity_DBModel.GMH">
         <MappingFragment StoreEntitySet="GMH">
           <ScalarProperty Name="GmhCode" ColumnName="GmhCode" />
-          <ScalarProperty Name="GmeName" ColumnName="GmeName" />
+          <ScalarProperty Name="GmhName" ColumnName="GmhName" />
           <ScalarProperty Name="Adress" ColumnName="Adress" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="FreeDescription" ColumnName="FreeDescription" />
-          <ScalarProperty Name="IsDisposable" ColumnName="IsDisposable" />
-          <ScalarProperty Name="SecurityDepositAmount" ColumnName="SecurityDepositAmount" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+          <ScalarProperty Name="commits" ColumnName="commits" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,6 +52,21 @@
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="Productname" ColumnName="Productname" />
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTtoGMHs">
+      <EntityTypeMapping TypeName="Charity_DBModel.PRODUCTtoGMH">
+        <MappingFragment StoreEntitySet="PRODUCTtoGMH">
+          <ScalarProperty Name="ProductCodeToGMH" ColumnName="ProductCodeToGMH" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="GmhCode" ColumnName="GmhCode" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="FreeDescription" ColumnName="FreeDescription" />
+          <ScalarProperty Name="IsDisposable" ColumnName="IsDisposable" />
+          <ScalarProperty Name="SecurityDepositAmount" ColumnName="SecurityDepositAmount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

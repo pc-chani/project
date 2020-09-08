@@ -37,32 +37,14 @@ namespace BL
             }
         }
 
-        public static bool checkUser(string email, string password)
+        public static User checkUser(string email, string password)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 User user =BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password));
-                if (db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password) != null)
-                    return true;
-                else return false;
-                //try
-                //{
-                //    System.Diagnostics.Debug.WriteLine("yes");
-                //}
-                //catch (DbEntityValidationException ex)
-                //{
-                //    //הדפסת שגיאה בקישור לדאטא בס
-                //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                //    {
-                //        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                //        {
-                //            System.Diagnostics.Debug.WriteLine(
-                //            "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                //        }
-                //    }
-                //    System.Diagnostics.Debug.WriteLine("no");
-                //}
-            }
+                return user;
+              
+          }
 
         }
     }

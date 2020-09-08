@@ -13,7 +13,7 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Charity_DBEntities : DbContext
+    public partial class Charity_DBEntities: DbContext
     {
         public Charity_DBEntities()
             : base("name=Charity_DBEntities")
@@ -30,6 +30,7 @@ namespace DAL
         public virtual DbSet<LENDING> LENDINGS { get; set; }
         public virtual DbSet<OPINION> OPINIONS { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
         public virtual DbSet<RequestForLoan> RequestForLoans { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
     }

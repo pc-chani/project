@@ -1,13 +1,10 @@
 export class GMH{
     GmhCode :number
-    GmeName:string
+    GmhName:string
     Adress:string
     UserCode:number
     CategoryCode:number
-    Picture:ImageData
-    Amount:number
-    FreeDescription:string
-    IsDisposable:boolean
-    SecurityDepositAmount:number
-    Status:string
+    Phone:string
+    e_mail:string
+    commits:string
 }
