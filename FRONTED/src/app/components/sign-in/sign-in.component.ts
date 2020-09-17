@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
     let E_mail:string = this.signInForm.controls.e_mail.value;
     let passsword:string = this.signInForm.controls.password.value;
     this.userService.checkUser(E_mail,passsword,user).subscribe(
-      res => {this.userService.currentUser=res; console.log(res); },
+      res => {this.userService.setCurrentUser(res); console.log(res); },
       err => { console.log(err); }
      
     )

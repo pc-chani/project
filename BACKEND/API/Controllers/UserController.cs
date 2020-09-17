@@ -13,11 +13,11 @@ namespace API.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        [Route("get")]
+        [Route("getuser"),HttpPost]
         [HttpGet]//brirat mecdak
-        public IHttpActionResult Get()
+        public IHttpActionResult getUser(DTO.GMH gMH)
         {
-            return Ok(1);
+            return Ok(BL.UserBL.getUser(gMH));
         }
         [Route("get1")]
         public int Get1()

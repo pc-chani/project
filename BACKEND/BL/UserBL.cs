@@ -47,5 +47,15 @@ namespace BL
           }
 
         }
+        public static User getUser(GMH gMH)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                if(gMH!=null)
+                return BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u=>u.UserCode==gMH.UserCode));
+                return new User();
+            }
+
+        }
     }
 }

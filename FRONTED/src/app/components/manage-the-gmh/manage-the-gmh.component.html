@@ -2,26 +2,30 @@
     <h1>הגמחים של {{currentUser.FirstName}}</h1>
     <div>
         <table *ngFor="let g of myGmhim" class="table table-hover">
-            <thead>
-                <td>שם:</td>
-                <td>כתובת:</td> 
-                <td>טלפון:</td>                
-                <td>אימייל:</td>                
-                <td>הערות:</td>                
-            </thead>
             <tbody>
                 <tr>
-                    <td [routerLink]="['/one-gmh',g.GmhCode]">{{g.GmhName}} </td>
+                    <td>{{g.GmhName}} </td>
                     <td>{{g.Adress}}</td>
                     <td>{{g.Phone}}</td>
                     <td>{{g.e_mail}}</td>
                     <td>{{g.commits}}</td>                          
-                    <td><input type="button" class="btn btn-primary" value='הסרה מרשימת הגמ"חים'></td>
-                    <td><input type="button" class="btn btn-primary" value='עריכת פרטי הגמ"ח'></td>
-                    <td><input type="button" class="btn btn-primary" value='ניהול גמ"ח זה'></td>
+                    <td><input type="button"  value='הסרה מרשימת הגמ"חים' (click)="delete(g)"></td>
+                    <td><input type="button"  value='עריכת פרטי הגמ"ח' (click)="edit(g)"></td>
+                    <td><input type="button"  value='ניהול גמ"ח זה'  [routerLink]="['/one-gmh',g.GmhCode]"></td>
                 </tr>
             </tbody>
         </table>
-        <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
+       <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->
     </div>
+</div>
+<div *ngIf="open" style="float: right;direction: rtl;">פרטי הגמח:
+<p>שם:<input type="text" value="{{currentgmh.GmhName}}"></p>
+<p>טלפון:<input type="text" value="{{currentgmh.Phone}}"></p>
+<p>אימיל:<input type="text" value="{{currentgmh.e_mail}}"></p>
+<p>כתובת:<input type="text" value="{{currentgmh.Adress}}"></p>
+<p>שם:<input type="text" value="{{currentgmh.User.FirstName}}"> <input type="text" value="{{currentgmh.User.LastName}}"></p>
+<p>הערות:<input type="text" value="{{currentgmh.commits}}"></p>
+
+<p><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange()"></p>
+
 </div>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  public currentUser = undefined
+  private currentUser = undefined
   
   constructor(private http:HttpClient) { }
   get IsLogin() {

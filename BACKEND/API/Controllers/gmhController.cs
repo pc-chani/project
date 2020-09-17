@@ -24,6 +24,16 @@ namespace API.Controllers
         {
             return Ok(BL.gmhBL.getMyGmhim(user));      
         }
+        [Route("delete"), HttpPost]
+        public IHttpActionResult delete(DTO.GMH gMH)
+        {
+            return Ok(BL.gmhBL.delete(gMH));
+        }
+        [Route("saveChange"), HttpPost]
+        public IHttpActionResult saveChange(DTO.GMH gMH)
+        {
+            return Ok(BL.gmhBL.saveChange(gMH));
+        }
     }
     
 }

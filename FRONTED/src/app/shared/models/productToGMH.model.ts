@@ -1,4 +1,5 @@
 export class productToGmh{
+    public Name:string
     public ProductCodeToGMH:number
     public ProductCode:number
     public GmhCode:number

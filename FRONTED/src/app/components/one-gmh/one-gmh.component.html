@@ -1,24 +1,20 @@
-<div>
-    <div style="position: absolute;">
-        <table class="table table-hover">
-            <thead>
-                <td>שם:</td>
-                <td>כתובת:</td>
+<div class="content">
 
-                             
-
-            </thead>
+    <div>
+        <table *ngFor="let p of products" class="table table-hover">
+       
             <tbody>
                 <tr>
-                    <td>{{myGmh.GmhName}} </td>
-                    <td>{{myGmh.Adress}}</td>
-                    
+                    <td>{{p.Name}} </td>
+<td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
+<td *ngIf="!p.IsDisposable"><input type="date"></td>
 
-
                     
-                    <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
+                                       
+              
                 </tr>
             </tbody>
         </table>
+     <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->  
     </div>
 </div>

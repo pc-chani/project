@@ -9,11 +9,15 @@ import { UserService } from './shared/services/user.service';
 })
 export class AppComponent {
   title = 'app';
-  currentUser:User
+  show=false;
+  currentUser:User=this.userService.CurrentUser;;
   
-  constructor( private userService: UserService) { }
+  constructor( public userService: UserService) { }
   ngOnInit(): void {
-    this.currentUser=this.userService.currentUser;
+    this.currentUser=this.userService.CurrentUser;
     console.log(this.currentUser);
+  }
+  message(){
+this.show=true
   }
 }
