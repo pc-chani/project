@@ -6,6 +6,7 @@
   
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/signIn']" routerLinkActive="active">כניסה</a>
+      <a *ngIf="currentUser!=undefined" class="nav-link" [routerLink]="['/signIn']" routerLinkActive="active">יציאה</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">הרשמה</a>

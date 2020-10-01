@@ -18,6 +18,11 @@ export class ProductsService {
   }
   getProduct(ptg:productToGmh):Observable<Product>{
     return this.http.post<Product>(environment.url+'products/getProduct',ptg);
-
+  }
+  saveChange(product:productToGmh):Observable<boolean>{
+    return this.http.post<boolean>(environment.url+'products/saveChange',product);
+  }
+  addProduct( product:productToGmh):Observable<boolean>{
+       return this.http.post<boolean>(environment.url+'products/add',product);
   }
 }

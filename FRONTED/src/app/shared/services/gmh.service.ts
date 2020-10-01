@@ -35,5 +35,7 @@ private myGmhim:GMH[];
     return this.http.post<boolean>(environment.url+'gmh/saveChange',gmh);
   
   }
-  
+  add(gmh:GMH):Observable<boolean>{
+    return this.http.post<boolean>(environment.url+'gmh/add',gmh);
+  }
 }

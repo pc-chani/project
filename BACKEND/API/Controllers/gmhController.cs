@@ -12,12 +12,11 @@ namespace API.Controllers
     [RoutePrefix("api/gmh")]
     public class gmhController : ApiController
     {
-        [Route("updateGMH"), HttpPost]
-        public IHttpActionResult updateGMH(DTO.GMH gMH)
+        [Route("add"), HttpPost]
+        public IHttpActionResult add(DTO.GMH gMH)
         {
-            if (BL.gmhBL.updateGMH(gMH))
-                return Ok(true);
-            else return Ok(false);
+            return Ok(BL.gmhBL.addGMH(gMH));
+   
         }
         [Route("getMyGmhim"), HttpPost]
         public IHttpActionResult getMyGmhim(DTO.User user)

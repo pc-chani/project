@@ -5,7 +5,11 @@ export class GMH{
     GmhName:string
     Adress:string
     User:User
+    UserCode:number
+
     CategoryCode:number
+    CategoryName:string
+
     Phone:string
     e_mail:string
     commits:string

@@ -1,20 +1,69 @@
 <div class="content">
+    <table *ngFor="let p of products" class="table table-hover">
 
-    <div>
-        <table *ngFor="let p of products" class="table table-hover">
-       
-            <tbody>
-                <tr>
-                    <td>{{p.Name}} </td>
-<td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
-<td *ngIf="!p.IsDisposable"><input type="date"></td>
-
-                    
-                                       
-              
-                </tr>
-            </tbody>
-        </table>
-     <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->  
-    </div>
+        <tbody>
+            <tr>
+                <td (click)="showdetails(p)">{{p.Name}} </td>
+                <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
+                <td *ngIf="!p.IsDisposable"><input type="date"></td>
+                <td><img src="assets\a.png"></td>
+                <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
+                <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
+            </tr>
+            <tr *ngIf="show && p==currentProduct">
+                <div ><img src="assets\close.png" (click)="close()">
+                    <p><input type="text" value="{{currentProduct.Name}}"></p>
+                    <p><input type="image" value="{{currentProduct.Picture}}"></p>
+                    <p><input type="text" value="{{currentProduct.FreeDescription}}"></p>
+                    <p><input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
+                    <p><input type="text" value="{{currentProduct.Status}}"></p>
+                    <p><input type="button" class="btn btn-primary" (click)="saveChange()" value="שמור שינויים"></p>
+            
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    <img src="assets\add.png" (click)="add()">
+    <form [formGroup]="newPForm"  *ngIf="newProduct" >
+        <div class="form-group">
+            <label> שם:</label>
+            <input class="txt" type="text" class="form-control" formControlName="Name">
+            <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>
+        </div>
+        <div class="form-group">
+            <label> :תמונה </label>
+            <input class="txt" type="image" class="form-control" formControlName="Picture">
+            <div class="error" *ngIf="newPForm.controls['Picture'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label> :כמות </label>
+            <input class="txt" type="number" class="form-control" formControlName="Amount">
+            <div class="error" *ngIf="newPForm.controls['Amount'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label> :תאור </label>
+            <input class="txt" type="text" class="form-control" formControlName="FreeDescription">
+            <div class="error" *ngIf="newPForm.controls['FreeDescription'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label> :האם חד פעמי? </label>
+            <input class="txt" type="checkbox" class="form-control" formControlName="IsDisposable">
+            <div class="error" *ngIf="newPForm.controls['IsDisposable'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label> : פקדון </label>
+            <input class="txt" type="number" class="form-control" formControlName="SecurityDepositAmount">
+            <div class="error" *ngIf="newPForm.controls['SecurityDepositAmount'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label> : סטטוס </label>
+            <input class="txt" type="text" class="form-control" formControlName="Status">
+            <div class="error" *ngIf="newPForm.controls['Status'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div>
+            <input type="button" class="btn btn-success" value="הוסף"  (click)="addProduct()" [disabled]="!newPForm.valid" style="margin-right: 35%;">
+        </div>
+    </form>
+    <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->
+   
 </div>

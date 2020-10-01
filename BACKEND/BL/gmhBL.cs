@@ -10,12 +10,31 @@ namespace BL
 {
    public class gmhBL
 {
-        public static bool updateGMH(GMH gmh)
+        public static bool addGMH(GMH gmh)
         {
+            
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return true;
-                
+                db.GMHs.Add(Converters.GMHConverter.convertToDal(gmh));
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine(
+                            "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine("no");
+                    return false;
+                }
+
 
             }
 
@@ -26,8 +45,8 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
-                pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
+                //List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
+                //pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
                 db.PRODUCTtoGMHs.RemoveRange(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode));
                 db.GMHs.Remove((db.GMHs.SingleOrDefault(g => g.GmhCode == gmh.GmhCode)));
                 try

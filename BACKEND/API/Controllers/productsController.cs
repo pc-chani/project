@@ -23,6 +23,15 @@ namespace API.Controllers
         {
             return Ok(BL.productsBL.getProduct(p));
         }
-        
+        [Route("saveChange"), HttpPost]
+        public IHttpActionResult saveChange(DTO.ProductToGMH p)
+        {
+            return Ok(BL.productsBL.saveChange(p));
+        }
+        [Route("add"), HttpPost]
+        public IHttpActionResult add(DTO.ProductToGMH p)
+        {
+            return Ok(BL.productsBL.add(p));
+        }
     }
 }

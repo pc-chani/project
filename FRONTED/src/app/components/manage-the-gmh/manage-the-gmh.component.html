@@ -8,24 +8,49 @@
                     <td>{{g.Adress}}</td>
                     <td>{{g.Phone}}</td>
                     <td>{{g.e_mail}}</td>
-                    <td>{{g.commits}}</td>                          
-                    <td><input type="button"  value='הסרה מרשימת הגמ"חים' (click)="delete(g)"></td>
-                    <td><input type="button"  value='עריכת פרטי הגמ"ח' (click)="edit(g)"></td>
-                    <td><input type="button"  value='ניהול גמ"ח זה'  [routerLink]="['/one-gmh',g.GmhCode]"></td>
+                    <td>{{g.commits}}</td>
+                    <td class="img"><img src="assets\a.png"  (click)="delete(g)">
+                        <span class="text">מחק גמח </span>
+                    </td>
+                    <td class="img"><img src="assets\editt.png" (click)="edit(g)">
+                            <span class="text">ערוך פרטי גמח</span>
+                    </td>
+                    <td><input type="button" value='ניהול הגמ"ח' [routerLink]="['/one-gmh',g.GmhCode]"></td>
+                </tr>
+                <tr *ngIf="open && g==currentgmh">פרטי הגמח:<img src="assets\close.png" (click)="close()">
+                    <p>שם:<input type="text" value="{{currentgmh.GmhName}}"></p>
+                    <p>טלפון:<input type="text" value="{{currentgmh.Phone}}"></p>
+                    <p>אימיל:<input type="text" value="{{currentgmh.e_mail}}"></p>
+                    <p>כתובת:<input type="text" value="{{currentgmh.Adress}}"></p>
+                    <p>שם:<input type="text" value="{{currentgmh.User.FirstName}}"> <input type="text"
+                            value="{{currentgmh.User.LastName}}"></p>
+                    <p>הערות:<input type="text" value="{{currentgmh.commits}}"></p>
+                    <p><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange()"></p>
                 </tr>
             </tbody>
         </table>
-       <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->
+        <img src="assets\add.png" (click)="new()">
+        <form  [formGroup]="gmhForm"  *ngIf="newgmh" >
+            <div class="form-group">
+                <label> שם:</label>
+                <input class="txt" type="text" class="form-control" formControlName="GmhName">
+                <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
+            </div>
+            <div class="form-group">
+                <label> קטגוריה:</label>
+                <input class="txt" type="text" class="form-control" formControlName="Categories">
+                <div class="error" *ngIf="gmhForm.controls['Categories'].errors!=null">*</div>
+                <input type="text" value="הוסף קטגוריה">
+            </div>
+            <div class="form-group">
+                <label> הערות:</label>
+                <input class="txt" type="text" class="form-control" formControlName="commits">
+                <div class="error" *ngIf="gmhForm.controls['commits'].errors!=null">*</div>
+            </div>
+            <div>
+                <input type="button" class="btn btn-success" value="הוסף"  (click)="addGmh()" [disabled]="!gmhForm.valid" style="margin-right: 35%;">
+            </div>
+        </form>
+        <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->
     </div>
-</div>
-<div *ngIf="open" style="float: right;direction: rtl;">פרטי הגמח:
-<p>שם:<input type="text" value="{{currentgmh.GmhName}}"></p>
-<p>טלפון:<input type="text" value="{{currentgmh.Phone}}"></p>
-<p>אימיל:<input type="text" value="{{currentgmh.e_mail}}"></p>
-<p>כתובת:<input type="text" value="{{currentgmh.Adress}}"></p>
-<p>שם:<input type="text" value="{{currentgmh.User.FirstName}}"> <input type="text" value="{{currentgmh.User.LastName}}"></p>
-<p>הערות:<input type="text" value="{{currentgmh.commits}}"></p>
-
-<p><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange()"></p>
-
 </div>
