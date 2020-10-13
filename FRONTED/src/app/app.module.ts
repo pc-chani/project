@@ -15,8 +15,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.component';
 import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
-
-
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule , } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,14 @@ import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GooglePlaceModule,
+    MatAutocompleteModule,
+    NoopAnimationsModule,
+    MatFormFieldModule ,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

@@ -4,9 +4,6 @@ import { Observable } from 'rxjs';
 import { GMH } from '../models/Gmh.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-var map;
-var service;
-var infowindow
 
 @Injectable({
   providedIn: 'root'

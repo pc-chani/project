@@ -9,11 +9,11 @@
                     <td>{{g.Phone}}</td>
                     <td>{{g.e_mail}}</td>
                     <td>{{g.commits}}</td>
-                    <td class="img"><img src="assets\a.png"  (click)="delete(g)">
+                    <td class="img"><img src="assets\a.png" (click)="delete(g)">
                         <span class="text">מחק גמח </span>
                     </td>
                     <td class="img"><img src="assets\editt.png" (click)="edit(g)">
-                            <span class="text">ערוך פרטי גמח</span>
+                        <span class="text">ערוך פרטי גמח</span>
                     </td>
                     <td><input type="button" value='ניהול הגמ"ח' [routerLink]="['/one-gmh',g.GmhCode]"></td>
                 </tr>
@@ -30,17 +30,24 @@
             </tbody>
         </table>
         <img src="assets\add.png" (click)="new()">
-        <form  [formGroup]="gmhForm"  *ngIf="newgmh" >
+        <form [formGroup]="gmhForm" *ngIf="newgmh">
             <div class="form-group">
                 <label> שם:</label>
                 <input class="txt" type="text" class="form-control" formControlName="GmhName">
                 <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
             </div>
             <div class="form-group">
-                <label> קטגוריה:</label>
-                <input class="txt" type="text" class="form-control" formControlName="Categories">
+                <label> קטגוריה:</label> <input type="radio" name="rad">
+                <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Categories"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
+                    <mat-option *ngFor="let c of filteredCategories | async" [value]="c.CategoryName">
+                        {{c.CategoryName}}
+                    </mat-option>
+                </mat-autocomplete>
+               
                 <div class="error" *ngIf="gmhForm.controls['Categories'].errors!=null">*</div>
-                <input type="text" value="הוסף קטגוריה">
+                <input type="radio" name="rad"> <input type="text" placeholder="הוסף קטגוריה">
             </div>
             <div class="form-group">
                 <label> הערות:</label>
@@ -48,7 +55,8 @@
                 <div class="error" *ngIf="gmhForm.controls['commits'].errors!=null">*</div>
             </div>
             <div>
-                <input type="button" class="btn btn-success" value="הוסף"  (click)="addGmh()" [disabled]="!gmhForm.valid" style="margin-right: 35%;">
+                <input type="button" class="btn btn-success" value="הוסף" (click)="addGmh()" [disabled]="!gmhForm.valid"
+                    style="margin-right: 35%;">
             </div>
         </form>
         <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->

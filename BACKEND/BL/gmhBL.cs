@@ -11,8 +11,7 @@ namespace BL
    public class gmhBL
 {
         public static bool addGMH(GMH gmh)
-        {
-            
+        {           
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 db.GMHs.Add(Converters.GMHConverter.convertToDal(gmh));
@@ -43,8 +42,7 @@ namespace BL
         {
 
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {
-
+            { 
                 //List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
                 //pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
                 db.PRODUCTtoGMHs.RemoveRange(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode));
@@ -86,8 +84,6 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-
-
                 try
                 {
                     db.SaveChanges();
