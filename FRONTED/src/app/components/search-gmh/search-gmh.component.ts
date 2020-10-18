@@ -6,13 +6,11 @@ import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { Router } from '@angular/router';
 
-declare var google;
 @Component({
   selector: 'app-search-gmh',
   templateUrl: './search-gmh.component.html',
   
   styleUrls: ['./search-gmh.component.css'],
-
 })
 export class SearchGMHComponent implements OnInit {
  gmhForSearch:CategoryGMH;

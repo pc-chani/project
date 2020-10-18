@@ -1,6 +1,8 @@
+<input  ngx-google-places-autocomplete #placesRef="ngx-places"
+  (onAddressChange)="handleDestinationChange($event)" placeholder="Address to">‏
 
 <input type="search" >
-<div id="map" style="height: 50%;width: 50%;"></div>
+
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8jpgtKXljRdzM5zWFhqKbDnCknpsBnV8&libraries=places"></script>
 

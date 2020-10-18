@@ -1,6 +1,7 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,36 @@ namespace BL
                     return false; }
             }
         }
+
+        public static bool delete(ProductToGMH p)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+
+                DAL.PRODUCTtoGMH p1 = db.PRODUCTtoGMHs.SingleOrDefault(pt => pt.ProductCodeToGMH == p.ProductCodeToGMH);
+                db.PRODUCTtoGMHs.Remove(p1);
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine(
+                            "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine("no");
+                    return false;
+                }
+            }
+        }
+
         public static bool remove(ProductToGMH pTgmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())

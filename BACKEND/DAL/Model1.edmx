@@ -524,7 +524,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Charity_DBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Charity_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CategoryGMHs" EntityType="Self.CategoryGMH" />
           <EntitySet Name="GMHs" EntityType="Self.GMH" />
           <EntitySet Name="LENDINGS" EntityType="Self.LENDING" />
@@ -583,7 +583,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Charity_DBModelStoreContainer" CdmEntityContainer="Charity_DBEntities1">
+        <EntityContainerMapping StorageEntityContainer="Charity_DBModelStoreContainer" CdmEntityContainer="Charity_DBEntities">
           <EntitySetMapping Name="CategoryGMHs">
             <EntityTypeMapping TypeName="Charity_DBModel.CategoryGMH">
               <MappingFragment StoreEntitySet="CategoryGMH">
