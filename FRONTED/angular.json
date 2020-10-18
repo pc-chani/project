@@ -124,12 +124,8 @@
       }
     }
   },
-<<<<<<< HEAD
   "defaultProject": "app",
   "cli": {
     "analytics": false
   }
-=======
-  "defaultProject": "app"
->>>>>>> 774e900000862fa6ff75e9c9c8769c873e83436c
 }

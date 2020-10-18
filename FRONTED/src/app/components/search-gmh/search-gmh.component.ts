@@ -5,11 +5,11 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { Router } from '@angular/router';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
   selector: 'app-search-gmh',
   templateUrl: './search-gmh.component.html',
-  
   styleUrls: ['./search-gmh.component.css'],
 })
 export class SearchGMHComponent implements OnInit {
@@ -31,6 +31,7 @@ export class SearchGMHComponent implements OnInit {
       location: new FormControl('', Validators.required),
      });
      this. getCategoryGmh();
+    
    
   }
  
@@ -53,6 +54,9 @@ this.gmhService.getCategoryGmach().subscribe(res => {
   
 }
 
+handleDestinationChange(a: Address) {
+  console.log(a)
+}
 
 getCategoriesForGmach()
 {
