@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SearchGMHComponent implements OnInit {
 
   constructor(private gmhService: GmhService) { }
-  imageUrl = null;
+  
  
   ngOnInit(): void {
     this.getCurrentLocation()
