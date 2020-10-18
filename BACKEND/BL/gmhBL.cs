@@ -112,5 +112,43 @@ namespace BL
             }
 
         }
+        public static CategoryGMH[] getCategoriesForGmach(CategoryGMH masterGmachCode)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMHs.Where(s => s.MasterCategoryCode == masterGmachCode.CategoryCode).ToList());
+                // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
+                return (a.ToArray<CategoryGMH>());
+
+            }
+        }
+        public static CategoryGMH[] getCategories()
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMHs.Where(s => s.MasterCategoryCode == null).ToList());
+                System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
+                return (a.ToArray<CategoryGMH>());
+
+            }
+        }
+
+        public static List<GMH> searchGMH(CategoryGMH gmhForSEarch)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                List<GMH> a=new List<GMH>();
+
+
+                if (db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode) != null)
+                     a = BL.Converters.GMHConverter.convertToDTOList(db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode).ToList());
+                    // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
+                    return a;
+                
+
+            }
+        }
     }
 }

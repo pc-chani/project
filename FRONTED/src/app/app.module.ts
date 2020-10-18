@@ -15,6 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.component';
 import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
+import { GMHComponent } from './components/gmh/gmh.component';
 
 
 
@@ -29,6 +30,7 @@ import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
     RegisterComponent,
     SignInComponent,
     NeedsGMHimComponent,
+    GMHComponent,
     OneGmhComponent
   ],
   imports: [
