@@ -25,4 +25,14 @@ export class ProductsService {
   addProduct( product:productToGmh):Observable<boolean>{
        return this.http.post<boolean>(environment.url+'products/add',product);
   }
+  delete( product:productToGmh):Observable<boolean>{
+    return this.http.post<boolean>(environment.url+'products/delete',product);
+}
+postImage(fd : FormData): Observable<string>{
+  return this.http.post<string>(environment.url+'products/postImg', fd );
+}
+
+getImage(): Observable<Blob> {
+  return this.http.get( environment.url+'products/getImg', { responseType: 'blob' })      
+}
 }

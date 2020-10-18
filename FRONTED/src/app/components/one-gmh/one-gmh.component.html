@@ -6,25 +6,29 @@
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
                 <td *ngIf="!p.IsDisposable">
-                   
-                        <mat-label> בחר תאריך </mat-label>
-                        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter">
-                        <mat-datepicker-toggle matSuffix [for]="picker">
-                            </mat-datepicker-toggle>
-                            <mat-datepicker [dateClass]="dateClass" #picker>
-                            </mat-datepicker>
-                   
-                <td><img src="assets\a.png"></td>
+
+                    <mat-label> בחר תאריך </mat-label>
+                    <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter">
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker [dateClass]="dateClass" #picker>
+                    </mat-datepicker>
+
+                <td><img src="assets\a.png" (click)="deleteProduct(p)"></td>
                 <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
                 <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
             </tr>
             <tr *ngIf="show && p==currentProduct">
                 <div><img src="assets\close.png" (click)="close()">
-                    <p><input type="text" value="{{currentProduct.Name}}"></p>
-                    <p><input type="image" value="{{currentProduct.Picture[0]}}"></p>
-                    <p><input type="text" value="{{currentProduct.FreeDescription}}"></p>
-                    <p><input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
-                    <p><input type="text" value="{{currentProduct.Status}}"></p>
+                    <p>שם<input type="text" value="{{currentProduct.Name}}"></p>
+                    <p>תמונה<input type="image" value="{{currentProduct.Picture}}"></p>
+                    <p> <input type="file" (change)="handleFileInput($event.target.files)"
+                            accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+                        <img [src]="imageSrc" height="100" width="150">
+                        <img [src]="currentProduct.Picture" height="100" width="150">
+                    </p>
+                    <p>פקדון<input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
+                    <p>מצב<input type="text" value="{{currentProduct.Status}}"></p>
                     <p><input type="button" class="btn btn-primary" (click)="saveChange()" value="שמור שינויים"></p>
 
                 </div>
@@ -35,16 +39,23 @@
     <form [formGroup]="newPForm" *ngIf="newProduct">
         <div class="form-group">
             <label> שם:</label>
-            <input class="txt" type="text" class="form-control" formControlName="Name">
+            <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
+                [matAutocomplete]="auto">
+            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let p of filteredPs | async" [value]="p.ProductName">
+                    {{p.ProductName}}
+                </mat-option>
+            </mat-autocomplete>
             <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>
         </div>
         <div class="form-group">
             <label> :תמונה </label>
             <div class="input-box">
-                <input type="file" (change)="handleFileInput($event.target.files)"
+                <input type="file" (change)="handleFileInput($event.target.files)" multiple
                     accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
             </div>
-            <img [src]="imageSrc" height="100" width="150">
+            
+            <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
         </div>
         <div class="form-group">
             <label> :כמות </label>
