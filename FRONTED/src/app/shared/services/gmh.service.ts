@@ -4,6 +4,11 @@ import { Observable } from 'rxjs';
 import { GMH } from '../models/Gmh.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CategoryGMH } from '../models/CategoryGMH.model';
+
+var map;
+var service;
+var infowindow
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +40,24 @@ private myGmhim:GMH[];
   add(gmh:GMH):Observable<boolean>{
     return this.http.post<boolean>(environment.url+'gmh/add',gmh);
   }
+
+
+  getCategoryGmach():Observable<CategoryGMH[]>{
+    console.log(this.http.get<CategoryGMH[]>(environment.url+'gmh/getCategories'));
+    return this.http.get<CategoryGMH[]>(environment.url+'gmh/getCategories')
+  }
+
+
+  getCategoriesForGmach(masterGmh:CategoryGMH):Observable<CategoryGMH[]>{
+    console.log(this.http.post<CategoryGMH[]>(environment.url+'gmh/getCategoriesForGmach',masterGmh));
+    return this.http.post<CategoryGMH[]>(environment.url+'gmh/getCategoriesForGmach',masterGmh)
+  }
+
+  search(gmhForSearch:CategoryGMH):Observable<GMH[]>{
+    console.log(this.http.post<GMH[]>(environment.url+'gmh/searchGMH',gmhForSearch));
+    return this.http.post<GMH[]>(environment.url+'gmh/searchGMH',gmhForSearch)
+  }
+
+  //showGMHS(a: any, gmhs: GMH[]) {   }
+
 }

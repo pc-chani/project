@@ -4,5 +4,47 @@
 <input type="search" >
 
 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8jpgtKXljRdzM5zWFhqKbDnCknpsBnV8&libraries=places"></script>
 
+
+<div  class="content">
+    <form [formGroup]="searchForm" (submit)="search()" >
+        <div class="form-group">
+            <label > טקסט לחיפוש:</label>
+            <input class="txt" type="search" class="form-control" formControlName="textSearch">
+            <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label>קטגוריה:</label>
+            <select  formControlName="category" class="form-control"  (change)="getCategoriesForGmach()" >
+                <option  selected hidden>-בחר קטגוריה-</option>
+                <option  *ngFor="let a of categories" >{{a.CategoryName}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label> תת קטגוריה:</label>         
+            <select  formControlName="tatCategory" class="form-control"  >
+                <option  selected hidden>-בחר קטגוריה-</option>
+                <option   *ngFor="let b of tatCategories" >{{b.CategoryName}}</option>
+             </select>
+            </div>
+       <div class="form-group">
+           <label>אזור ישוב:</label>
+           <select formControlName="location" class="form-control">
+              <option>מיקום נוכחי</option>
+              <option>בחר ישוב</option>
+           </select>
+       </div>    
+        
+       
+        
+       
+        <div>
+            <input type="submit" class="btn btn-success" value="חפש"  [disabled]="!searchForm.valid" style="margin-right: 35%;">
+        </div>
+    </form>
+    </div>
+
+<app-gmh *ngIf="gmhs" (send)="showGMHS($event)" [gmh]="gmhs"></app-gmh>
 

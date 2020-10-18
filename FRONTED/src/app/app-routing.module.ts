@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'needsGMHim', component: NeedsGMHimComponent },
+  
   { path: 'searchGMH', component: SearchGMHComponent },
   { path: 'manageTheGMH', component: ManageTheGMHComponent },
   { path: 'donations', component: DonationsComponent },

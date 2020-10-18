@@ -33,6 +33,29 @@ namespace API.Controllers
         {
             return Ok(BL.gmhBL.saveChange(gMH));
         }
+        [Route("getCategories")]
+
+        public IHttpActionResult getCategories()
+        {
+
+            return Ok(BL.gmhBL.getCategories());
+        }
+        [Route("getCategoriesForGmach"), HttpPost]
+
+        public IHttpActionResult getCategoriesForGmach(DTO.CategoryGMH masterGmachCode)
+        {
+
+            return Ok(BL.gmhBL.getCategoriesForGmach(masterGmachCode));
+        }
+
+
+        [Route("searchGMH"), HttpPost]
+
+        public IHttpActionResult searchGMH(DTO.CategoryGMH gmhForSEarch)
+        {
+
+            return Ok(BL.gmhBL.searchGMH(gmhForSEarch));
+        }
     }
     
 }
