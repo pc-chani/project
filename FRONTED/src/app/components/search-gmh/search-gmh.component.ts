@@ -9,6 +9,9 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { Product } from 'src/app/shared/models/Product.model';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-gmh',
@@ -22,19 +25,41 @@ export class SearchGMHComponent implements OnInit {
   tatCategories: CategoryGMH[];
   gmhForSearch: any;
   gmhs: GMH[];
+  filteredProducts: Observable<Product[]>;
+  products: Array<Product>
 
-  constructor(private userService: UserService, private router: Router, private gmhService: GmhService) { }
+  constructor(private userService: UserService,private productsService: ProductsService, private router: Router, private gmhService: GmhService) { }
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
-      textSearch: new FormControl('', Validators.required),
+      textSearch: new FormControl(''),
       category: new FormControl('', Validators.required),
       tatCategory: new FormControl({ value: '', disabled: true }, Validators.required),
       location: new FormControl('', Validators.required),
     });
     this.getCategoryGmh();
+    this.productsService.getProducts().subscribe(
+      res => {this.products = res,
+      console.log(res),
+    this.filter()},
+      err => console.log(err),  
+    );
+    
   }
+filter()
+  {
+    this.filteredProducts = this.searchForm.controls.textSearch.valueChanges
+  .pipe(
+    startWith(''),
+    map(value => typeof value === 'string' ? value : value.Productname),
+    map(name => name ? this._filter(name) : this.products.slice())
+  );
+}
 
+  private _filter(name: string): Product[] {
+    const filterValue = name.toLowerCase();
+    return this.products.filter(c => c.Productname.toLowerCase().indexOf(filterValue) === 0);
+  }
   
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
@@ -83,6 +108,10 @@ export class SearchGMHComponent implements OnInit {
   showGMHS(a) {
     console.log(a);
     this.router.navigate(['/gmh', this.gmhs]);
+  }
+
+  displayFn(c: Product): string {
+    return c && c.Productname ? c.Productname : '';
   }
 
 }

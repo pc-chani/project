@@ -31,8 +31,9 @@ export class OneGmhComponent implements OnInit {
   urls = [];
   selectedDate;
   lendings = [new Date(2020, 10, 14)]
+  
   dates: Array<string> = [];
-  ps = Array<Product>()
+  ps: Array<Product>
   filteredPs: Observable<Product[]>;
   formData: FormData
   constructor(private router: Router, private route: ActivatedRoute,
@@ -48,6 +49,7 @@ export class OneGmhComponent implements OnInit {
     });
     this.newPForm = new FormGroup({
       Name: new FormControl('', Validators.required),
+      textSearch: new FormControl(),
       ProductCodeToGMH: new FormControl(),
       ProductCode: new FormControl(),
       GmhCode: new FormControl(),
@@ -60,7 +62,7 @@ export class OneGmhComponent implements OnInit {
     })
     const GmhCode = this.route.snapshot.paramMap.get('id');
     this.myGmh = this.gmhService.getOneGmh(parseInt(GmhCode));
-    this.productsServices.getProducts(this.myGmh).subscribe(
+    this.productsServices.getProductsForGMH(this.myGmh).subscribe(
       res => {
         this.products = res; console.log(res);
         this.products.forEach(p => {
@@ -72,20 +74,34 @@ export class OneGmhComponent implements OnInit {
       },
       err => { console.log(err); }
     )
-    this.filteredPs = this.newPForm.controls.Name.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.CategoryName),
-        map(name => name ? this._filter(name) : this.ps.slice())
-      );
+
+    this.productsServices.getProductsAccordingToGmhCategory(this.myGmh).subscribe(
+      res => {this.ps = res,
+      console.log(res)
+    this.filter()},
+      err => console.log(err),  
+    );
+    
   }
+ 
+
+  filter()
+  {
+    this.filteredPs = this.newPForm.controls.textSearch.valueChanges
+  .pipe(
+    startWith(''),
+    map(value => typeof value === 'string' ? value : value.Productname),
+    map(name => name ? this._filter(name) : this.ps.slice())
+  );
+}
+
   private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();
-
-    return this.ps.filter(p => p.Productname.toLowerCase().indexOf(filterValue) === 0);
+    return this.ps.filter(c => c.Productname.toLowerCase().indexOf(filterValue) === 0);
   }
-  displayFn(p: Product): string {
-    return p && p.Productname ? p.Productname : '';
+
+  displayFn(c: Product): string {
+    return c && c.Productname ? c.Productname : '';
   }
   deleteProduct(p) {
     console.log(p);
@@ -118,7 +134,9 @@ export class OneGmhComponent implements OnInit {
     let p = new productToGmh();
     p.Amount = this.newPForm.controls.Amount.value;
     p.GmhCode = this.myGmh.GmhCode;
-    p.ProductCode = 2002;
+
+    p.ProductCode = this.newPForm.controls.textSearch.value;
+    //p.ProductCode =1;
     p.FreeDescription = this.newPForm.controls.FreeDescription.value;
     p.IsDisposable = this.newPForm.controls.IsDisposable.value;
     p.Name = this.newPForm.controls.Name.value;
@@ -127,6 +145,7 @@ export class OneGmhComponent implements OnInit {
     // p.Picture = this.newPForm.controls.Picture.value;
     p.Picture = new Array<FormData>()
     p.Picture.push(this.formData)
+    console.log(p);
 
     this.productsServices.addProduct(p).subscribe(
       res => {

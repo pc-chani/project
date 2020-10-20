@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CheckPassword } from 'src/app/validators/valid';
 import { User } from 'src/app/shared/models/User.model';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
+
 
 @Component({
   selector: 'app-register',
@@ -20,10 +22,9 @@ export class RegisterComponent implements OnInit {
       adress: new FormControl('', Validators.required),
       cell_phone: new FormControl('', Validators.pattern('[0-9]{9}')),
       phone: new FormControl('', Validators.pattern('[0-9]{10}')),
-      e_mail: new FormControl('', Validators.required),
+      e_mail: new FormControl('', Validators.email),
       password: new FormControl('', Validators.required),
       confirm: new FormControl('', Validators.required),
-      permission: new FormControl('', Validators.required),
       accept: new FormControl('', Validators.requiredTrue),
     }, { validators: CheckPassword('password', 'confirm') });
   }
@@ -50,6 +51,9 @@ export class RegisterComponent implements OnInit {
       res => { console.log(res); },
       err => { console.log(err); }
     )
+  }
+  handleDestinationChange(a: Address) {
+    console.log(a)
   }
 }
 

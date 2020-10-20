@@ -11,7 +11,18 @@ namespace BL
 {
    public class productsBL
     {
-        public static ProductToGMH[] getProducts(GMH gmh)
+
+        public static PRODUCT[] getProducts()
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                return (BL.Converters.ProductConverter.convertToDTOList((db.Products.Select(p => p).ToList())).ToArray());
+      
+            }
+
+        }
+
+        public static ProductToGMH[] getProductsForGMH(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -19,7 +30,16 @@ namespace BL
             }
 
         }
+        
 
+            public static PRODUCT[] getProductsAccordingToGmhCategory(GMH gmh)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                return BL.Converters.ProductConverter.convertToDTOarray(db.Products.Where(p => p.CategoryCode == gmh.CategoryCode).ToArray());
+            }
+
+        }
         public static PRODUCT getProduct(ProductToGMH pTgmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())

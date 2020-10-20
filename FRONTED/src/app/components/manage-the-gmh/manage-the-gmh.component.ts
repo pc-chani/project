@@ -32,13 +32,13 @@ export class ManageTheGMHComponent implements OnInit {
     );
     this.gmhForm = new FormGroup({
       GmhName: new FormControl(),
-      Categories: new FormControl(),
+      CategoriesChoose: new FormControl(''),
       commits: new FormControl()
     })
     this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim()
     console.log(this.myGmhim)
-    this.filteredCategories = this.gmhForm.controls.Categories.valueChanges
+    this.filteredCategories = this.gmhForm.controls.CategoriesChoose.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.CategoryName),
@@ -90,8 +90,12 @@ export class ManageTheGMHComponent implements OnInit {
     let g = new GMH();
     g.GmhName = this.gmhForm.controls.GmhName.value;
     g.Adress = this.currentUser.Adress;
-    g.CategoryName = this.gmhForm.controls.Categories.value;
-    g.CategoryCode = 5;
+    g.CategoryName = this.gmhForm.controls.CategoriesChoose.value;
+   
+   this.categories.forEach(element => {
+    if (element.CategoryName == this.gmhForm.controls.CategoriesChoose.value)
+      g.CategoryCode = element.CategoryCode;
+  });
     g.Phone = this.currentUser.Phone;
     g.e_mail = this.currentUser.E_mail;
     g.UserCode = this.currentUser.UserCode;
@@ -100,8 +104,16 @@ export class ManageTheGMHComponent implements OnInit {
       res => console.log(res)
 
     )
+    //this.getCategoryGmh();
   }
   displayFn(c: CategoryGMH): string {
     return c && c.CategoryName ? c.CategoryName : '';
+  }
+  getCategoryGmh() {
+    this.gmhService.getCategoryGmach().subscribe(res => {
+      this.categories = res;
+      console.log(res);
+      err => { console.log(err); }
+    });
   }
 }

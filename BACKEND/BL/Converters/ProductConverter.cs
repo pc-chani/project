@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
+using DTO;
 
 namespace BL.Converters
 {
@@ -29,6 +31,11 @@ namespace BL.Converters
         public static List<DTO.PRODUCT> convertToDTOList(List<DAL.Product> pList)
         {
             return pList.Select(p => convertToDTO(p)).ToList();
+        }
+
+        public static DTO.PRODUCT[] convertToDTOarray(DAL.Product[] pList)
+        {
+            return pList.Select(p => convertToDTO(p)).ToArray();
         }
     }
 }
