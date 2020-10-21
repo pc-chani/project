@@ -39,9 +39,9 @@
             <div class="form-group">
                 <label> קטגוריה:</label> <input type="radio" name="rad">
                 <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Categories"
-                    [matAutocomplete]="auto">
+                    [matAutocomplete]="auto" [value]="displayFn">
                 <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
-                    <mat-option *ngFor="let c of filteredCategories | async" [value]="c.CategoryName">
+                    <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
                         {{c.CategoryName}}
                     </mat-option>
                 </mat-autocomplete>

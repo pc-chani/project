@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Script.Serialization;
 
 namespace API.Controllers
 {
@@ -33,7 +34,7 @@ namespace API.Controllers
         [Route("add"), HttpPost]
         public IHttpActionResult add(DTO.ProductToGMH p)
         {
-            System.Diagnostics.Debug.WriteLine(p.Picture);
+         //   System.Diagnostics.Debug.WriteLine(p.Picture);
             return Ok(BL.productsBL.add(p));
         }
         [Route("delete"), HttpPost]
@@ -45,8 +46,13 @@ namespace API.Controllers
         [Route("postImg"), HttpPost]
         public IHttpActionResult postImg()
         {
-            string imageName = null;
             var httpRequest = HttpContext.Current.Request;
+            var product = new JavaScriptSerializer().Deserialize<DTO.ProductToGMH>(httpRequest["product"]);
+           
+
+            System.Diagnostics.Debug.WriteLine(product);
+            string imageName = null;
+           
             //Upload Image
             var postedFile = httpRequest.Files["Image"];
             //Create custom filename
@@ -56,9 +62,11 @@ namespace API.Controllers
                 imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
                 var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
                 postedFile.SaveAs(filePath);
-
+                   product.Picture = filePath;
+               return Ok(BL.productsBL.add(product));
             }
-            return Ok();
+            return Ok(false);
         }
+       
     }
 }

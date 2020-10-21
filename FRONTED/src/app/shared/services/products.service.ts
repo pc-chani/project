@@ -22,15 +22,17 @@ export class ProductsService {
   saveChange(product:productToGmh):Observable<boolean>{
     return this.http.post<boolean>(environment.url+'products/saveChange',product);
   }
-  addProduct( product:productToGmh):Observable<boolean>{
-       return this.http.post<boolean>(environment.url+'products/add',product);
+  addProduct( fd:FormData):Observable<boolean>{
+    console.log(fd);
+    
+       return this.http.post<boolean>(environment.url+'products/add',fd);
   }
-  delete( product:productToGmh):Observable<boolean>{
-    return this.http.post<boolean>(environment.url+'products/delete',product);
+  delete( p:productToGmh):Observable<boolean>{
+    return this.http.post<boolean>(environment.url+'products/delete',p);
 }
-postImage(fd : FormData): Observable<string>{
-  return this.http.post<string>(environment.url+'products/postImg', fd );
-}
+//postImage(fd : FormData): Observable<string>{
+//  return this.http.post<string>(environment.url+'products/postImg', fd );
+//}
 
 getImage(): Observable<Blob> {
   return this.http.get( environment.url+'products/getImg', { responseType: 'blob' })      

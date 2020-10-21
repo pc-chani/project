@@ -57,6 +57,7 @@
     <Compile Include="donationsBL.cs" />
     <Compile Include="gmhBL.cs" />
     <Compile Include="googlemaps.cs" />
+    <Compile Include="lendingsBL.cs" />
     <Compile Include="productsBL.cs" />
     <Compile Include="UserBL.cs" />
     <Compile Include="Converters\CategoryGMHConvereter.cs" />

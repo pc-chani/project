@@ -101,6 +101,7 @@
     <Compile Include="Controllers\categoriesController.cs" />
     <Compile Include="Controllers\donationsController.cs" />
     <Compile Include="Controllers\gmhController.cs" />
+    <Compile Include="Controllers\lendingsController.cs" />
     <Compile Include="Controllers\productsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">

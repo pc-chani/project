@@ -56,7 +56,7 @@
     <Property Name="ProductCodeToGMH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductCode" Type="int" Nullable="false" />
     <Property Name="GmhCode" Type="int" Nullable="false" />
-    <Property Name="Picture" Type="image" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
     <Property Name="Amount" Type="int" />
     <Property Name="FreeDescription" Type="nvarchar" MaxLength="100" />
     <Property Name="IsDisposable" Type="bit" Nullable="false" />
@@ -171,7 +171,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PRODUCTto__GmhCo__75A278F5">
+  <Association Name="FK__PRODUCTto__GmhCo__0C85DE4D">
     <End Role="GMH" Type="Self.GMH" Multiplicity="1" />
     <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="*" />
     <ReferentialConstraint>
@@ -183,7 +183,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PRODUCTto__Produ__76969D2E">
+  <Association Name="FK__PRODUCTto__Produ__0D7A0286">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,11 +256,11 @@
       <End Role="CategoryGMH" EntitySet="CategoryGMH" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__PRODUCTto__GmhCo__75A278F5" Association="Self.FK__PRODUCTto__GmhCo__75A278F5">
+    <AssociationSet Name="FK__PRODUCTto__GmhCo__0C85DE4D" Association="Self.FK__PRODUCTto__GmhCo__0C85DE4D">
       <End Role="GMH" EntitySet="GMH" />
       <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
     </AssociationSet>
-    <AssociationSet Name="FK__PRODUCTto__Produ__76969D2E" Association="Self.FK__PRODUCTto__Produ__76969D2E">
+    <AssociationSet Name="FK__PRODUCTto__Produ__0D7A0286" Association="Self.FK__PRODUCTto__Produ__0D7A0286">
       <End Role="Products" EntitySet="Products" />
       <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
     </AssociationSet>

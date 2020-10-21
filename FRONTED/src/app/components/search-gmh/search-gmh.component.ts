@@ -6,9 +6,7 @@ import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { ProductsService } from 'src/app/shared/services/products.service';
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-search-gmh',
@@ -35,7 +33,19 @@ export class SearchGMHComponent implements OnInit {
     this.getCategoryGmh();
   }
 
-  
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        let currLat = position.coords.latitude;
+        let currLng = position.coords.longitude;
+      });
+    }
+    else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
+
+  }
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res;

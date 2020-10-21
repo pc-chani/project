@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Charity_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Charity_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CategoryGMH">
           <Key>
             <PropertyRef Name="CategoryCode" />
@@ -61,7 +61,7 @@
           <Property Name="ProductCodeToGMH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductCode" Type="int" Nullable="false" />
           <Property Name="GmhCode" Type="int" Nullable="false" />
-          <Property Name="Picture" Type="image" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="50" />
           <Property Name="Amount" Type="int" />
           <Property Name="FreeDescription" Type="nvarchar" MaxLength="100" />
           <Property Name="IsDisposable" Type="bit" Nullable="false" />
@@ -176,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTto__GmhCo__75A278F5">
+        <Association Name="FK__PRODUCTto__GmhCo__0C85DE4D">
           <End Role="GMH" Type="Self.GMH" Multiplicity="1" />
           <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTto__Produ__76969D2E">
+        <Association Name="FK__PRODUCTto__Produ__0D7A0286">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -261,11 +261,11 @@
             <End Role="CategoryGMH" EntitySet="CategoryGMH" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTto__GmhCo__75A278F5" Association="Self.FK__PRODUCTto__GmhCo__75A278F5">
+          <AssociationSet Name="FK__PRODUCTto__GmhCo__0C85DE4D" Association="Self.FK__PRODUCTto__GmhCo__0C85DE4D">
             <End Role="GMH" EntitySet="GMH" />
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTto__Produ__76969D2E" Association="Self.FK__PRODUCTto__Produ__76969D2E">
+          <AssociationSet Name="FK__PRODUCTto__Produ__0D7A0286" Association="Self.FK__PRODUCTto__Produ__0D7A0286">
             <End Role="Products" EntitySet="Products" />
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
           </AssociationSet>
@@ -278,8 +278,7 @@
             <End Role="RequestForLoan" EntitySet="RequestForLoan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Charity_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -354,7 +353,7 @@
           <Property Name="ProductCodeToGMH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductCode" Type="Int32" Nullable="false" />
           <Property Name="GmhCode" Type="Int32" Nullable="false" />
-          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Int32" />
           <Property Name="FreeDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsDisposable" Type="Boolean" Nullable="false" />

@@ -71,7 +71,7 @@
     <Property Name="ProductCodeToGMH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductCode" Type="Int32" Nullable="false" />
     <Property Name="GmhCode" Type="Int32" Nullable="false" />
-    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Amount" Type="Int32" />
     <Property Name="FreeDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsDisposable" Type="Boolean" Nullable="false" />

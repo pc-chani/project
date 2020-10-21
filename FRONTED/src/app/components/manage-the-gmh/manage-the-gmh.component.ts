@@ -47,7 +47,6 @@ export class ManageTheGMHComponent implements OnInit {
   }
   private _filter(name: string): CategoryGMH[] {
     const filterValue = name.toLowerCase();
-
     return this.categories.filter(c => c.CategoryName.toLowerCase().indexOf(filterValue) === 0);
   }
   getMyGmhim() {
@@ -104,4 +103,5 @@ export class ManageTheGMHComponent implements OnInit {
   displayFn(c: CategoryGMH): string {
     return c && c.CategoryName ? c.CategoryName : '';
   }
+
 }

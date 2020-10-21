@@ -17,7 +17,7 @@ namespace DAL
         public int ProductCodeToGMH { get; set; }
         public int ProductCode { get; set; }
         public int GmhCode { get; set; }
-        public byte[] Picture { get; set; }
+        public string Picture { get; set; }
         public Nullable<int> Amount { get; set; }
         public string FreeDescription { get; set; }
         public bool IsDisposable { get; set; }

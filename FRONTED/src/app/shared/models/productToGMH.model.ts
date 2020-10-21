@@ -3,7 +3,7 @@ export class productToGmh{
     public ProductCodeToGMH:number
     public ProductCode:number
     public GmhCode:number
-    public Picture:FormData[];
+    public Picture:FormData;
     public Amount:number
     public FreeDescription:string;
     public IsDisposable:boolean

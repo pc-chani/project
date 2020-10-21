@@ -125,10 +125,11 @@ export class OneGmhComponent implements OnInit {
     p.SecurityDepositAmount = this.newPForm.controls.SecurityDepositAmount.value;
     p.Status = this.newPForm.controls.Status.value;
     // p.Picture = this.newPForm.controls.Picture.value;
-    p.Picture = new Array<FormData>()
-    p.Picture.push(this.formData)
-
-    this.productsServices.addProduct(p).subscribe(
+   // p.Picture = new FormData()
+    
+   // p.Picture=this.formData
+   this.formData.append('product', JSON.stringify(p));
+    this.productsServices.addProduct(this.formData).subscribe(
       res => {
         if (res) {
           alert('נוסף בהצלחה');
@@ -140,13 +141,11 @@ export class OneGmhComponent implements OnInit {
         console.log(res)
       }
     )
-
     this.newProduct = false;
-
   }
   handleFileInput(etf) {
+    
     this.formData = new FormData();
-
     for (const file of etf) {
       this.formData.append('Image', file, file.name);
     }
@@ -159,25 +158,20 @@ export class OneGmhComponent implements OnInit {
       reader.onload = e => this.urls.push( reader.result);
       reader.readAsDataURL(file);
       }
-      console.log(this.urls);
-      
-      this.upload()
+      console.log(this.urls);    
+     // this.upload()
     }
   }
-  upload() {
-
-    this.productsServices.postImage(this.formData).subscribe(
-      res => console.log(res)
-    );
-  }
+ // upload() {
+   // this.productsServices.postImage(this.formData).subscribe(
+     // res => console.log(res)
+    //);
+  //}
   onSelect(event) {
     this.selectedDate = event;
   }
-
   dateClass = (d: Date): MatCalendarCellCssClasses => {
-
     return (d.getDate() === 1) ? 'special-date' : '';
-
   }
   dateFilter = (d: Date) => {
     let d1 = d.toDateString().slice(4, 15)
