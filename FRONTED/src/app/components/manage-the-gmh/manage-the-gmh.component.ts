@@ -108,9 +108,7 @@ export class ManageTheGMHComponent implements OnInit {
   displayFn(c: CategoryGMH): string {
     return c && c.CategoryName ? c.CategoryName : '';
   }
-<<<<<<< HEAD
 
-=======
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res;
@@ -118,5 +116,4 @@ export class ManageTheGMHComponent implements OnInit {
       err => { console.log(err); }
     });
   }
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
 }
