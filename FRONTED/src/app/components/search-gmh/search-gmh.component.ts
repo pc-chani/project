@@ -6,16 +6,13 @@ import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-<<<<<<< HEAD
 
-=======
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/Product.model';
 import { map, startWith } from 'rxjs/operators';
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
 
 @Component({
   selector: 'app-search-gmh',
@@ -60,7 +57,6 @@ filter()
   );
 }
 
-<<<<<<< HEAD
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -74,13 +70,11 @@ filter()
 
 
   }
-=======
   private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();
     return this.products.filter(c => c.Productname.toLowerCase().indexOf(filterValue) === 0);
   }
   
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res;

@@ -1,25 +1,9 @@
-<<<<<<< HEAD
 <div class="content">
     <form [formGroup]="searchForm" (submit)="search()">
         <div class="form-group">
             <label> טקסט לחיפוש:</label>
             <input class="txt" type="search" class="form-control" formControlName="textSearch">
             <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> שדה נדרש</div>
-=======
-<input type="search">
-
-<script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8jpgtKXljRdzM5zWFhqKbDnCknpsBnV8&libraries=places"></script>
-
-    <div class="content">
-    <form [formGroup]="searchForm" (submit)="search()">
-        
-        <div class="form-group">
-            <input type="text" placeholder="-בחר-" aria-label="Number" matInput formControlName="textSearch" [matAutocomplete]="auto">
-            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let f of filteredProducts | async" [value]="f"> {{f.Productname}} </mat-option>
-            </mat-autocomplete>
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
         </div>
 
         <div class="form-group">
@@ -36,41 +20,16 @@
                 <option *ngFor="let b of tatCategories">{{b.CategoryName}}</option>
             </select>
         </div>
-<<<<<<< HEAD
         <div class="form-group">
             <label>אזור ישוב:</label>
             <p (click)="getCurrentLocation()"><input type="radio" name="r">מיקום נוכחי </p>
             <input type="radio" name="r"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
                 (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏">
         </div>
-=======
-
-        <div class="form-group">
-            <div class="place">       
-            <label>אזור ישוב:</label>
-            <select formControlName="location" class="form-control">
-                <option>מיקום נוכחי</option>
-                <option>בחר ישוב</option>
-            </select>
-        
-            <div class="place">
-                <input *ngIf="searchForm.controls['location'].value == 'בחר ישוב'" ngx-google-places-autocomplete
-                #placesRef="ngx-places" (onAddressChange)="handleDestinationChange($event)" placeholder="הקש כתובת">        
-            </div>
-        </div>
-        </div>
-
-
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
         <div>
             <input type="submit" class="btn btn-success" value="חפש" [disabled]="!searchForm.valid"
                 style="margin-right: 35%;">
         </div>
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> 7a9962fe476766eaed7549deb95487391dff7851
     </form>
 </div>
 
