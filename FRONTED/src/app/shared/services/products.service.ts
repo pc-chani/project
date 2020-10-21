@@ -13,8 +13,10 @@ export class ProductsService {
 
   constructor(private http:HttpClient) { }
 
-  getProducts(mygmh:GMH):Observable<productToGmh[]> {
-    return this.http.post<productToGmh[]>(environment.url+'products/getProducts',mygmh);
+
+
+  getProductsForGMH(mygmh:GMH):Observable<productToGmh[]> {
+    return this.http.post<productToGmh[]>(environment.url+'products/getProductsForGMH',mygmh);
   }
   getProduct(ptg:productToGmh):Observable<Product>{
     return this.http.post<Product>(environment.url+'products/getProduct',ptg);
@@ -36,5 +38,12 @@ export class ProductsService {
 
 getImage(): Observable<Blob> {
   return this.http.get( environment.url+'products/getImg', { responseType: 'blob' })      
+}
+getProducts():Observable<Product[]> {
+  return this.http.get<Product[]>(environment.url+'products/getProducts');
+}
+
+getProductsAccordingToGmhCategory(myGmh:GMH):Observable<Product[]> {
+  return this.http.post<Product[]>(environment.url+'products/getProductsAccordingToGmhCategory',myGmh);
 }
 }

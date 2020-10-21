@@ -14,4 +14,5 @@ export class CategoriesService {
   getCategories():Observable<CategoryGMH[]> {
     return this.http.get<CategoryGMH[]>(environment.url+'categories/getCategories');
     }
+    
 }

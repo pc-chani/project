@@ -16,10 +16,23 @@ namespace API.Controllers
     [RoutePrefix("api/products")]
     public class productsController : ApiController
     {
-        [Route("getProducts"), HttpPost]
-        public IHttpActionResult getProducts(DTO.GMH gMH)
+        [Route("getProducts")]
+        public IHttpActionResult getProducts()
         {
-                return Ok(BL.productsBL.getProducts(gMH));
+            return Ok(BL.productsBL.getProducts());
+        }
+
+        [Route("getProductsAccordingToGmhCategory"), HttpPost]
+        public IHttpActionResult getProductsAccordingToGmhCategory(DTO.GMH gMH)
+        {
+            return Ok(BL.productsBL.getProductsAccordingToGmhCategory(gMH));
+        }
+        
+
+        [Route("getProductsForGMH"), HttpPost]
+        public IHttpActionResult getProductsForGMH(DTO.GMH gMH)
+        {
+                return Ok(BL.productsBL.getProductsForGMH(gMH));
         }
         [Route("getProduct"), HttpPost]
         public IHttpActionResult getProduct(DTO.ProductToGMH p)
