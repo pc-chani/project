@@ -1,49 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../models/Product.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GMH } from '../models/Gmh.model';
 import { productToGmh } from '../models/productToGMH.model';
+import { Lending } from '../models/Lending.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-
-
-  getProductsForGMH(mygmh:GMH):Observable<productToGmh[]> {
-    return this.http.post<productToGmh[]>(environment.url+'products/getProductsForGMH',mygmh);
+  getProductsForGMH(mygmh: GMH): Observable<productToGmh[]> {
+    return this.http.post<productToGmh[]>(environment.url + 'products/getProductsForGMH', mygmh);
   }
-  getProduct(ptg:productToGmh):Observable<Product>{
-    return this.http.post<Product>(environment.url+'products/getProduct',ptg);
+  getProduct(ptg: productToGmh): Observable<Product> {
+    return this.http.post<Product>(environment.url + 'products/getProduct', ptg);
   }
-  saveChange(product:productToGmh):Observable<boolean>{
-    return this.http.post<boolean>(environment.url+'products/saveChange',product);
+  saveChange(product: productToGmh): Observable<boolean> {
+    return this.http.post<boolean>(environment.url + 'products/saveChange', product);
   }
-  addProduct( fd:FormData):Observable<boolean>{
-    console.log(fd);
-    
-       return this.http.post<boolean>(environment.url+'products/add',fd);
+  addProduct(fd: FormData): Observable<boolean> {
+    return this.http.post<boolean>(environment.url + 'products/postImg', fd)
   }
-  delete( p:productToGmh):Observable<boolean>{
-    return this.http.post<boolean>(environment.url+'products/delete',p);
-}
-//postImage(fd : FormData): Observable<string>{
-//  return this.http.post<string>(environment.url+'products/postImg', fd );
-//}
+  delete(p: productToGmh): Observable<boolean> {
+    if(p!=null)
+    return this.http.post<boolean>(environment.url + 'products/delete', p);
+  }
 
-getImage(): Observable<Blob> {
-  return this.http.get( environment.url+'products/getImg', { responseType: 'blob' })      
-}
-getProducts():Observable<Product[]> {
-  return this.http.get<Product[]>(environment.url+'products/getProducts');
-}
+  getImage(): Observable<Blob> {
+    return this.http.get(environment.url + 'products/getImg', { responseType: 'blob' })
+  }
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(environment.url + 'products/getProducts');
+  }
 
-getProductsAccordingToGmhCategory(myGmh:GMH):Observable<Product[]> {
-  return this.http.post<Product[]>(environment.url+'products/getProductsAccordingToGmhCategory',myGmh);
-}
+  getProductsAccordingToGmhCategory(myGmh: GMH): Observable<Product[]> {
+    return this.http.post<Product[]>(environment.url + 'products/getProductsAccordingToGmhCategory', myGmh);
+  }
+  getLendigs(p: productToGmh): Observable<Lending[]> {
+    return this.http.post<Lending[]>(environment.url + 'lendings/getLendings', p);
+
+  }
 }

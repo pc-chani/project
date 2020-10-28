@@ -32,13 +32,13 @@ export class ManageTheGMHComponent implements OnInit {
     );
     this.gmhForm = new FormGroup({
       GmhName: new FormControl(),
-      CategoriesChoose: new FormControl(''),
+      Categories: new FormControl(''),
       commits: new FormControl()
     })
     this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim()
     console.log(this.myGmhim)
-    this.filteredCategories = this.gmhForm.controls.CategoriesChoose.valueChanges
+    this.filteredCategories = this.gmhForm.controls.Categories.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.CategoryName),
@@ -89,10 +89,11 @@ export class ManageTheGMHComponent implements OnInit {
     let g = new GMH();
     g.GmhName = this.gmhForm.controls.GmhName.value;
     g.Adress = this.currentUser.Adress;
-    g.CategoryName = this.gmhForm.controls.CategoriesChoose.value;
+    g.CategoryName = this.gmhForm.controls.Categories.value;
+  
    
    this.categories.forEach(element => {
-    if (element.CategoryName == this.gmhForm.controls.CategoriesChoose.value)
+    if (element.CategoryName=== this.gmhForm.controls.Categories.value.CategoryName)
       g.CategoryCode = element.CategoryCode;
   });
     g.Phone = this.currentUser.Phone;

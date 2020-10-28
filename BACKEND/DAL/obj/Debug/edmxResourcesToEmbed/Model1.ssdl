@@ -56,7 +56,7 @@
     <Property Name="ProductCodeToGMH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductCode" Type="int" Nullable="false" />
     <Property Name="GmhCode" Type="int" Nullable="false" />
-    <Property Name="Picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="150" />
     <Property Name="Amount" Type="int" />
     <Property Name="FreeDescription" Type="nvarchar" MaxLength="100" />
     <Property Name="IsDisposable" Type="bit" Nullable="false" />
@@ -123,12 +123,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LENDINGS__Produc__4BAC3F29">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+  <Association Name="FK__LENDINGS__Produc__14270015">
+    <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="1" />
     <End Role="LENDINGS" Type="Self.LENDINGS" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="ProductCode" />
+      <Principal Role="PRODUCTtoGMH">
+        <PropertyRef Name="ProductCodeToGMH" />
       </Principal>
       <Dependent Role="LENDINGS">
         <PropertyRef Name="ProductCode" />
@@ -240,8 +240,8 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="GMH" EntitySet="GMH" />
     </AssociationSet>
-    <AssociationSet Name="FK__LENDINGS__Produc__4BAC3F29" Association="Self.FK__LENDINGS__Produc__4BAC3F29">
-      <End Role="Products" EntitySet="Products" />
+    <AssociationSet Name="FK__LENDINGS__Produc__14270015" Association="Self.FK__LENDINGS__Produc__14270015">
+      <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
       <End Role="LENDINGS" EntitySet="LENDINGS" />
     </AssociationSet>
     <AssociationSet Name="FK__LENDINGS__UserCo__4AB81AF0" Association="Self.FK__LENDINGS__UserCo__4AB81AF0">

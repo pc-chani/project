@@ -10,7 +10,7 @@ namespace API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+           // config.Formatters.XmlFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("multipart/form-data"));
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.EnableCors();

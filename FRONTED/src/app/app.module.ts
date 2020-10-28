@@ -22,7 +22,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule , } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule ,
     MatDatepickerModule,
     MatNativeDateModule ,
-    
+  //  MatRangeDatepickerModule,
+   // MatRangeNativeDateModule 
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

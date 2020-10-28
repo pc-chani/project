@@ -24,6 +24,7 @@
         <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__Produ__76969D2E" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__Produc__14270015" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

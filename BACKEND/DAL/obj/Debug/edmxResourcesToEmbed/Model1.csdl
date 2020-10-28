@@ -41,6 +41,7 @@
     <NavigationProperty Name="Product" Relationship="Self.FK__LENDINGS__Produc__4BAC3F29" FromRole="LENDINGS" ToRole="Products" />
     <NavigationProperty Name="USER" Relationship="Self.FK__LENDINGS__UserCo__4AB81AF0" FromRole="LENDINGS" ToRole="USERS" />
     <NavigationProperty Name="OPINIONS" Relationship="Self.FK__OPINIONS__Landin__4E88ABD4" FromRole="LENDINGS" ToRole="OPINIONS" />
+    <NavigationProperty Name="PRODUCTtoGMH" Relationship="Charity_DBModel.FK__LENDINGS__Produc__14270015" FromRole="LENDING" ToRole="PRODUCTtoGMH" />
   </EntityType>
   <EntityType Name="OPINION">
     <Key>
@@ -71,7 +72,7 @@
     <Property Name="ProductCodeToGMH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductCode" Type="Int32" Nullable="false" />
     <Property Name="GmhCode" Type="Int32" Nullable="false" />
-    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Amount" Type="Int32" />
     <Property Name="FreeDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsDisposable" Type="Boolean" Nullable="false" />
@@ -79,6 +80,7 @@
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GMH" Relationship="Self.FK__PRODUCTto__GmhCo__75A278F5" FromRole="PRODUCTtoGMH" ToRole="GMH" />
     <NavigationProperty Name="Product" Relationship="Self.FK__PRODUCTto__Produ__76969D2E" FromRole="PRODUCTtoGMH" ToRole="Products" />
+    <NavigationProperty Name="LENDINGS" Relationship="Charity_DBModel.FK__LENDINGS__Produc__14270015" FromRole="PRODUCTtoGMH" ToRole="LENDING" />
   </EntityType>
   <EntityType Name="RequestForLoan">
     <Key>
@@ -294,5 +296,21 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="RequestForLoan" EntitySet="RequestForLoans" />
     </AssociationSet>
+    <AssociationSet Name="FK__LENDINGS__Produc__14270015" Association="Charity_DBModel.FK__LENDINGS__Produc__14270015">
+      <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
+      <End Role="LENDING" EntitySet="LENDINGS" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__LENDINGS__Produc__14270015">
+    <End Type="Charity_DBModel.PRODUCTtoGMH" Role="PRODUCTtoGMH" Multiplicity="1" />
+    <End Type="Charity_DBModel.LENDING" Role="LENDING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTtoGMH">
+        <PropertyRef Name="ProductCodeToGMH" />
+      </Principal>
+      <Dependent Role="LENDING">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

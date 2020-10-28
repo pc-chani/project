@@ -69,7 +69,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return BL.Converters.LendingConverter.convertToDTOList( db.LENDINGS.Where(l => l.ProductCode == p.ProductCode).ToList());
+                return BL.Converters.LendingConverter.convertToDTOList( db.LENDINGS.Where(l => l.ProductCode == p.ProductCodeToGMH).ToList());
             }
         }
     }

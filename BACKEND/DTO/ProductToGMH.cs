@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    [Serializable]
-   
     public class ProductToGMH
     {
         public int ProductCodeToGMH { get; set; }

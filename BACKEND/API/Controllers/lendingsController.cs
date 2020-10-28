@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
-    [RoutePrefix("api/addLending")]
+    [RoutePrefix("api/lendings")]
     public class lendingsController : ApiController
     {
         [Route("addLending"), HttpPost]

@@ -1,16 +1,20 @@
 <div class="content">
     <table *ngFor="let p of products" class="table table-hover">
         <tbody>
-            <tr>
+            <tr >
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
-                <td *ngIf="!p.IsDisposable">
+                <td *ngIf="!p.IsDisposable" >
                     <mat-label> בחר תאריך </mat-label>
-                    <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter">
+                    <!-- <mat-date-range-input [rangePicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
+                        <input matStartDate placeholder="Start date">
+                        <input matEndDate placeholder="End date">
+                      </mat-date-range-input>
+                      <mat-date-range-picker [dateClass]="dateClass"  #picker></mat-date-range-picker>-->
+                  <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
-                    <mat-datepicker [dateClass]="dateClass" #picker>
-                    </mat-datepicker>
+                    <mat-datepicker [dateClass]="dateClass" #picker ></mat-datepicker>
                 <td><img src="assets\a.png" (click)="deleteProduct(p)"></td>
                 <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
                 <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
@@ -18,12 +22,12 @@
             <tr *ngIf="show && p==currentProduct">
                 <div><img src="assets\close.png" (click)="close()">
                     <p>שם<input type="text" value="{{currentProduct.Name}}"></p>
-                    <p>תמונה<input type="image" value="{{currentProduct.Picture}}"></p>
+                   <!-- <p>תמונה<input type="image" value="{{currentProduct.Picture}}"></p>
                     <p> <input type="file" (change)="handleFileInput($event.target.files)"
                             accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
                         <img [src]="imageSrc" height="100" width="150">
                         <img [src]="currentProduct.Picture" height="100" width="150">
-                    </p>
+                    </p>-->
                     <p>פקדון<input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
                     <p>מצב<input type="text" value="{{currentProduct.Status}}"></p>
                     <p><input type="button" class="btn btn-primary" (click)="saveChange()" value="שמור שינויים"></p>
@@ -35,11 +39,11 @@
     <form [formGroup]="newPForm" *ngIf="newProduct">
         <div class="form-group">
             <label> שם:</label>
-            <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="textSearch"
-                [matAutocomplete]="auto">
+            <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
+                [matAutocomplete]="auto" [value]="displayFn">
             <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let p of filteredPs | async" [value]="p.ProductName">
-                    {{p.ProductName}}
+                <mat-option *ngFor="let p of filteredPs | async" [value]="p">
+                    {{p.Productname}}
                 </mat-option>
             </mat-autocomplete>
             <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>

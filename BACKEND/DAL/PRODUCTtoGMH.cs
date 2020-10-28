@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class PRODUCTtoGMH
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PRODUCTtoGMH()
+        {
+            this.LENDINGS = new HashSet<LENDING>();
+        }
+    
         public int ProductCodeToGMH { get; set; }
         public int ProductCode { get; set; }
         public int GmhCode { get; set; }
@@ -26,5 +32,7 @@ namespace DAL
     
         public virtual GMH GMH { get; set; }
         public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LENDING> LENDINGS { get; set; }
     }
 }

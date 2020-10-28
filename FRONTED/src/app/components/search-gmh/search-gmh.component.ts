@@ -52,7 +52,7 @@ filter()
     this.filteredProducts = this.searchForm.controls.textSearch.valueChanges
   .pipe(
     startWith(''),
-    map(value => typeof value === 'string' ? value : value.Productname),
+    map(value => typeof value === 'string' ? value : value.ProductName),
     map(name => name ? this._filter(name) : this.products.slice())
   );
 }

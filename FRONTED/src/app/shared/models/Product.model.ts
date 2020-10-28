@@ -1,5 +1,5 @@
 export class Product {
     ProductCode: number
-    Productname: string
+    Productname:string
     CategoryCode: number
 }

@@ -31,5 +31,6 @@ namespace DAL
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OPINION> OPINIONS { get; set; }
+        public virtual PRODUCTtoGMH PRODUCTtoGMH { get; set; }
     }
 }
