@@ -11,7 +11,6 @@ namespace DTO
         public int ProductCodeToGMH { get; set; }
         public int ProductCode { get; set; }
         public int GmhCode { get; set; }
-        public string Picture { get; set; }
         public Nullable<int> Amount { get; set; }
         public string FreeDescription { get; set; }
         public bool IsDisposable { get; set; }

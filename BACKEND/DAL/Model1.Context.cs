@@ -33,5 +33,6 @@ namespace DAL
         public virtual DbSet<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
         public virtual DbSet<RequestForLoan> RequestForLoans { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
     }
 }

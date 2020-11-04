@@ -7,9 +7,10 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellCssClasses, MatDatepicker } from '@angular/material/datepicker';
 import { Product } from 'src/app/shared/models/Product.model';
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-one-gmh',
@@ -34,10 +35,9 @@ export class OneGmhComponent implements OnInit {
   formData: FormData = new FormData();
   constructor(private router: Router, private route: ActivatedRoute,
     private gmhService: GmhService, private productsServices: ProductsService,
-    private http: HttpClient) {
+    private http: HttpClient, private sanitizer:DomSanitizer) {
     ;
   }
-
   ngOnInit(): void {
     this.newPForm = new FormGroup({
       Name: new FormControl('', Validators.required),
@@ -61,10 +61,12 @@ export class OneGmhComponent implements OnInit {
       err => console.log(err),
     );
   }
-  setProducts(){
+  setProducts() {
     this.productsServices.getProductsForGMH(this.myGmh).subscribe(
       res => {
         this.products = res;
+        console.log(res);
+        
         this.products.forEach(p => {
           this.productsServices.getProduct(p).subscribe(
             res => { p.Name = res.Productname; },
@@ -73,10 +75,19 @@ export class OneGmhComponent implements OnInit {
           this.productsServices.getLendigs(p).subscribe(
             res => { p.Lendings = res; }
           )
+          this.productsServices.getImage(p).subscribe(
+            res => {
+              p.Images=new Array<string>();
+              res.forEach(r => p.Images.push(r.Path));
+            }
+          )
         })
       },
     );
   }
+  photo(url) { 
+   return this.sanitizer.bypassSecurityTrustResourceUrl(url); 
+}
   filter() {
     this.filteredPs = this.newPForm.controls.Name.valueChanges
       .pipe(
@@ -85,12 +96,10 @@ export class OneGmhComponent implements OnInit {
         map(name => name ? this._filter(name) : this.ps.slice())
       );
   }
-
   private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();
     return this.ps.filter(c => c.Productname.toLowerCase().indexOf(filterValue) === 0);
   }
-
   displayFn(c: Product): string {
     return c && c.Productname ? c.Productname : '';
   }
@@ -109,6 +118,10 @@ export class OneGmhComponent implements OnInit {
   showdetails(p) {
     this.show = true;
     this.currentProduct = p;
+    // if(this.currentProduct.Images!=undefined)
+    //this.currentProduct.Images.forEach(i => {
+    //this.myImages.push(i.Path)
+    //})
   }
   add() {
     this.newProduct = true
@@ -126,7 +139,7 @@ export class OneGmhComponent implements OnInit {
     p.ProductCode = 2002;//צריך להחליט מה עושים
     p.FreeDescription = this.newPForm.controls.FreeDescription.value;
     p.IsDisposable = this.newPForm.controls.IsDisposable.value;
-    if(p.IsDisposable==null) p.IsDisposable=false;    
+    if (p.IsDisposable == null) p.IsDisposable = false;
     p.SecurityDepositAmount = this.newPForm.controls.SecurityDepositAmount.value;
     p.Status = this.newPForm.controls.Status.value;
     this.formData.append('product', JSON.stringify(p));
@@ -181,8 +194,8 @@ export class OneGmhComponent implements OnInit {
     this.currentProduct = p;
     let d1 = d.toDateString().slice(4, 15);
     let dates: string[] = new Array<string>()
-   // console.log(this.currentProduct);
-    
+    // console.log(this.currentProduct);
+
     this.currentProduct.Lendings.forEach(l => {
       dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
     });

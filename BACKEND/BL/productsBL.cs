@@ -11,7 +11,6 @@ namespace BL
 {
    public class productsBL
     {
-
         public static PRODUCT[] getProducts()
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
@@ -21,24 +20,19 @@ namespace BL
             }
 
         }
-
         public static ProductToGMH[] getProductsForGMH(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 return BL.Converters.ProductToGmhConverter.convertToDTOarray(db.PRODUCTtoGMHs.Where(p=>p.GmhCode==gmh.GmhCode).ToArray());
             }
-
-        }
-        
-
-            public static PRODUCT[] getProductsAccordingToGmhCategory(GMH gmh)
+        }   
+        public static PRODUCT[] getProductsAccordingToGmhCategory(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 return BL.Converters.ProductConverter.convertToDTOarray(db.Products.Where(p => p.CategoryCode == gmh.CategoryCode).ToArray());
             }
-
         }
         public static PRODUCT getProduct(ProductToGMH pTgmh)
         {
@@ -54,35 +48,42 @@ namespace BL
                 return true;
             }
         }
-        public static bool add(ProductToGMH pTgmh)
+        public static bool add(ProductToGMH pTgmh, List<string> photos)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.PRODUCTtoGMHs.Add(Converters.ProductToGmhConverter.convertToDal( pTgmh));
+                db.PRODUCTtoGMHs.Add(Converters.ProductToGmhConverter.convertToDal(pTgmh));
+                photos.ForEach(p =>
+                {
+                    DAL.Image image = new DAL.Image();
+                    image.Path = p;
+                    image.ProductCodeToGMH = pTgmh.ProductCodeToGMH;
+                    db.Images.Add(image);
+                });
                 try
                 {
                     db.SaveChanges();
                     return true;
                 }
-                     catch (DbEntityValidationException ex) {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                 catch (DbEntityValidationException ex) {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
                     {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            System.Diagnostics.Debug.WriteLine(
-                            "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
+                        System.Diagnostics.Debug.WriteLine(
+                        "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                     }
-                    System.Diagnostics.Debug.WriteLine("no");
-                    return false; }
+                }
+                System.Diagnostics.Debug.WriteLine("no");
+                return false; }
             }
         }
-
         public static bool delete(ProductToGMH p)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-
+                db.LENDINGS.RemoveRange(db.LENDINGS.Where(l => l.ProductCode == p.ProductCodeToGMH));
+                db.Images.RemoveRange(db.Images.Where(i => i.ProductCodeToGMH == p.ProductCodeToGMH));
                 DAL.PRODUCTtoGMH p1 = db.PRODUCTtoGMHs.SingleOrDefault(pt => pt.ProductCodeToGMH == p.ProductCodeToGMH);
                 db.PRODUCTtoGMHs.Remove(p1);
                 try
@@ -106,12 +107,11 @@ namespace BL
                 }
             }
         }
-
-        public static bool remove(ProductToGMH pTgmh)
+        public static List<Images> getImages(ProductToGMH pTgmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return true;
+                return BL.Converters.ImagesConverter.convertToDTOList(db.Images.Where(i => i.ProductCodeToGMH == pTgmh.ProductCodeToGMH).ToList());
             }
         }
     }

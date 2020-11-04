@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="categories.cs" />
+    <Compile Include="Converters\ImagesConverter.cs" />
     <Compile Include="Converters\ProductToGmhConverter.cs" />
     <Compile Include="donationsBL.cs" />
     <Compile Include="gmhBL.cs" />

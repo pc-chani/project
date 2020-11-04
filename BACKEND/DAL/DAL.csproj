@@ -58,6 +58,9 @@
     <Compile Include="GMH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Image.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="LENDING.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

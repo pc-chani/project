@@ -18,12 +18,12 @@ namespace DAL
         public PRODUCTtoGMH()
         {
             this.LENDINGS = new HashSet<LENDING>();
+            this.Images = new HashSet<Image>();
         }
     
         public int ProductCodeToGMH { get; set; }
         public int ProductCode { get; set; }
         public int GmhCode { get; set; }
-        public string Picture { get; set; }
         public Nullable<int> Amount { get; set; }
         public string FreeDescription { get; set; }
         public bool IsDisposable { get; set; }
@@ -34,5 +34,7 @@ namespace DAL
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LENDING> LENDINGS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

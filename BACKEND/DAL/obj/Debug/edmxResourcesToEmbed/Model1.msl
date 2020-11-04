@@ -61,7 +61,6 @@
           <ScalarProperty Name="ProductCodeToGMH" ColumnName="ProductCodeToGMH" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="GmhCode" ColumnName="GmhCode" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="FreeDescription" ColumnName="FreeDescription" />
           <ScalarProperty Name="IsDisposable" ColumnName="IsDisposable" />
@@ -93,6 +92,15 @@
           <ScalarProperty Name="E_mail" ColumnName="E-mail" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="Charity_DBModel.Image">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="ProductCodeToGMH" ColumnName="ProductCodeToGMH" />
+          <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

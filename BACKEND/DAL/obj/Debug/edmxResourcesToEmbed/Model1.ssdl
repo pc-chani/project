@@ -21,6 +21,14 @@
     <Property Name="e-mail" Type="nvarchar" MaxLength="50" />
     <Property Name="commits" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ImageCode" />
+    </Key>
+    <Property Name="ImageCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductCodeToGMH" Type="int" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityType Name="LENDINGS">
     <Key>
       <PropertyRef Name="LendingCode" />
@@ -56,7 +64,6 @@
     <Property Name="ProductCodeToGMH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductCode" Type="int" Nullable="false" />
     <Property Name="GmhCode" Type="int" Nullable="false" />
-    <Property Name="Picture" Type="nvarchar" MaxLength="150" />
     <Property Name="Amount" Type="int" />
     <Property Name="FreeDescription" Type="nvarchar" MaxLength="100" />
     <Property Name="IsDisposable" Type="bit" Nullable="false" />
@@ -120,6 +127,18 @@
       </Principal>
       <Dependent Role="GMH">
         <PropertyRef Name="UserCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__ProductC__29221CFB">
+    <End Role="PRODUCTtoGMH" Type="Self.PRODUCTtoGMH" Multiplicity="1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTtoGMH">
+        <PropertyRef Name="ProductCodeToGMH" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="ProductCodeToGMH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -222,6 +241,7 @@
   <EntityContainer Name="Charity_DBModelStoreContainer">
     <EntitySet Name="CategoryGMH" EntityType="Self.CategoryGMH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GMH" EntityType="Self.GMH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LENDINGS" EntityType="Self.LENDINGS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OPINIONS" EntityType="Self.OPINIONS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -239,6 +259,10 @@
     <AssociationSet Name="FK__GMH__UserCode__398D8EEE" Association="Self.FK__GMH__UserCode__398D8EEE">
       <End Role="USERS" EntitySet="USERS" />
       <End Role="GMH" EntitySet="GMH" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__ProductC__29221CFB" Association="Self.FK__Images__ProductC__29221CFB">
+      <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
+      <End Role="Images" EntitySet="Images" />
     </AssociationSet>
     <AssociationSet Name="FK__LENDINGS__Produc__14270015" Association="Self.FK__LENDINGS__Produc__14270015">
       <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />

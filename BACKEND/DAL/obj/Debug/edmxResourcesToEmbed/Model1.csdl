@@ -72,7 +72,6 @@
     <Property Name="ProductCodeToGMH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductCode" Type="Int32" Nullable="false" />
     <Property Name="GmhCode" Type="Int32" Nullable="false" />
-    <Property Name="Picture" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Amount" Type="Int32" />
     <Property Name="FreeDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IsDisposable" Type="Boolean" Nullable="false" />
@@ -81,6 +80,7 @@
     <NavigationProperty Name="GMH" Relationship="Self.FK__PRODUCTto__GmhCo__75A278F5" FromRole="PRODUCTtoGMH" ToRole="GMH" />
     <NavigationProperty Name="Product" Relationship="Self.FK__PRODUCTto__Produ__76969D2E" FromRole="PRODUCTtoGMH" ToRole="Products" />
     <NavigationProperty Name="LENDINGS" Relationship="Charity_DBModel.FK__LENDINGS__Produc__14270015" FromRole="PRODUCTtoGMH" ToRole="LENDING" />
+    <NavigationProperty Name="Images" Relationship="Charity_DBModel.FK__Images__ProductC__29221CFB" FromRole="PRODUCTtoGMH" ToRole="Image" />
   </EntityType>
   <EntityType Name="RequestForLoan">
     <Key>
@@ -300,6 +300,11 @@
       <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
       <End Role="LENDING" EntitySet="LENDINGS" />
     </AssociationSet>
+    <EntitySet Name="Images" EntityType="Charity_DBModel.Image" />
+    <AssociationSet Name="FK__Images__ProductC__29221CFB" Association="Charity_DBModel.FK__Images__ProductC__29221CFB">
+      <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK__LENDINGS__Produc__14270015">
     <End Type="Charity_DBModel.PRODUCTtoGMH" Role="PRODUCTtoGMH" Multiplicity="1" />
@@ -310,6 +315,27 @@
       </Principal>
       <Dependent Role="LENDING">
         <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageCode" />
+    </Key>
+    <Property Name="ImageCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductCodeToGMH" Type="Int32" Nullable="false" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PRODUCTtoGMH" Relationship="Charity_DBModel.FK__Images__ProductC__29221CFB" FromRole="Image" ToRole="PRODUCTtoGMH" />
+  </EntityType>
+  <Association Name="FK__Images__ProductC__29221CFB">
+    <End Type="Charity_DBModel.PRODUCTtoGMH" Role="PRODUCTtoGMH" Multiplicity="1" />
+    <End Type="Charity_DBModel.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTtoGMH">
+        <PropertyRef Name="ProductCodeToGMH" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="ProductCodeToGMH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

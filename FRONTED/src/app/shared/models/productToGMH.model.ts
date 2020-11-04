@@ -5,11 +5,16 @@ export class productToGmh {
     public ProductCodeToGMH: number
     public ProductCode: number
     public GmhCode: number
-    // public Picture:FormData;
+    public Images: string[]
     public Amount: number
     public FreeDescription: string;
     public IsDisposable: boolean
     public SecurityDepositAmount: number
     public Status: string
     public Lendings: Lending[]
+}
+export class Images{
+    public ImageCode :number
+    public ProductCodeToGMH :number
+    public Path:string
 }

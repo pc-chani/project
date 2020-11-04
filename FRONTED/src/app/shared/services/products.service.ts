@@ -4,7 +4,7 @@ import { Product } from '../models/Product.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GMH } from '../models/Gmh.model';
-import { productToGmh } from '../models/productToGMH.model';
+import { Images, productToGmh } from '../models/productToGMH.model';
 import { Lending } from '../models/Lending.model';
 
 @Injectable({
@@ -31,8 +31,8 @@ export class ProductsService {
     return this.http.post<boolean>(environment.url + 'products/delete', p);
   }
 
-  getImage(): Observable<Blob> {
-    return this.http.get(environment.url + 'products/getImg', { responseType: 'blob' })
+  getImage(p:productToGmh): Observable<Images[]> {
+    return this.http.post<Images[]>(environment.url + 'products/getImg',p);
   }
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.url + 'products/getProducts');

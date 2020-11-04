@@ -6,11 +6,11 @@
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
                 <td *ngIf="!p.IsDisposable" >
                     <mat-label> בחר תאריך </mat-label>
-                    <!-- <mat-date-range-input [rangePicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
+                    <mat-date-range-input [rangePicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
                         <input matStartDate placeholder="Start date">
                         <input matEndDate placeholder="End date">
                       </mat-date-range-input>
-                      <mat-date-range-picker [dateClass]="dateClass"  #picker></mat-date-range-picker>-->
+                      <mat-date-range-picker [dateClass]="dateClass"  #picker></mat-date-range-picker>
                   <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
@@ -22,12 +22,12 @@
             <tr *ngIf="show && p==currentProduct">
                 <div><img src="assets\close.png" (click)="close()">
                     <p>שם<input type="text" value="{{currentProduct.Name}}"></p>
-                   <!-- <p>תמונה<input type="image" value="{{currentProduct.Picture}}"></p>
+                   <p>תמונה</p>
                     <p> <input type="file" (change)="handleFileInput($event.target.files)"
                             accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
                         <img [src]="imageSrc" height="100" width="150">
-                        <img [src]="currentProduct.Picture" height="100" width="150">
-                    </p>-->
+                       <!----> <iframe *ngFor="let url of currentProduct.Images" [src]="photo(url)" class="rounded mb-3" width="180" mat-card-image></iframe>>
+                    </p>
                     <p>פקדון<input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
                     <p>מצב<input type="text" value="{{currentProduct.Status}}"></p>
                     <p><input type="button" class="btn btn-primary" (click)="saveChange()" value="שמור שינויים"></p>

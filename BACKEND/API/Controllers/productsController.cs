@@ -21,14 +21,11 @@ namespace API.Controllers
         {
             return Ok(BL.productsBL.getProducts());
         }
-
         [Route("getProductsAccordingToGmhCategory"), HttpPost]
         public IHttpActionResult getProductsAccordingToGmhCategory(DTO.GMH gMH)
         {
             return Ok(BL.productsBL.getProductsAccordingToGmhCategory(gMH));
-        }
-        
-
+        }     
         [Route("getProductsForGMH"), HttpPost]
         public IHttpActionResult getProductsForGMH(DTO.GMH gMH)
         {
@@ -43,21 +40,13 @@ namespace API.Controllers
         public IHttpActionResult saveChange(DTO.ProductToGMH p)
         {
             return Ok(BL.productsBL.saveChange(p));
-        }
-        [Route("add"), HttpPost]
-        public IHttpActionResult add(DTO.ProductToGMH p)
-        {
-            //   System.Diagnostics.Debug.WriteLine(httpRequest.Params["product"]);
-            return Ok(BL.productsBL.add(p));
-        }
+        }   
         [Route("delete"), HttpPost]
         public IHttpActionResult delete(DTO.ProductToGMH p)
         {
             return Ok(BL.productsBL.delete(p));
-        }
-        //trying func
+        }       
         [Route("postImg"), HttpPost]
-
         public IHttpActionResult postImg()
         {
             var httpRequest = HttpContext.Current.Request;
@@ -75,6 +64,7 @@ namespace API.Controllers
             string imageName = null;
             //Upload Image
             int c = httpRequest.Files.Count;
+            List<string> photos = new List<string>();
             for (int i = 0; i <c; i++)
             {
                 var postedFile = httpRequest.Files["Image"+i];
@@ -85,12 +75,17 @@ namespace API.Controllers
                     imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
                     var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
                     postedFile.SaveAs(filePath);
-                      p.Picture = filePath;
+                    photos.Add(filePath);
                 }
             }
-            return Ok(BL.productsBL.add(p));
+            return Ok(BL.productsBL.add(p,photos));
         
         }
-       
+        [Route("getImg"), HttpPost]
+        public IHttpActionResult getImg(DTO.ProductToGMH p)
+        {
+            return Ok(BL.productsBL.getImages(p));
+        }
+
     }
 }
