@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-one-gmh',
@@ -78,7 +79,7 @@ export class OneGmhComponent implements OnInit {
           this.productsServices.getImage(p).subscribe(
             res => {
               p.Images=new Array<string>();
-              res.forEach(r => p.Images.push(r.Path));
+              res.forEach(r => p.Images.push('https://localhost:44360/'+'image/'+ r.Path));
             }
           )
         })
@@ -92,7 +93,7 @@ export class OneGmhComponent implements OnInit {
     this.filteredPs = this.newPForm.controls.Name.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.ProductName),
+        map(value => typeof value === 'string' ? value : value.Productname),
         map(name => name ? this._filter(name) : this.ps.slice())
       );
   }

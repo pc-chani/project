@@ -18,7 +18,6 @@ namespace BL
                 return (BL.Converters.ProductConverter.convertToDTOList((db.Products.Select(p => p).ToList())).ToArray());
       
             }
-
         }
         public static ProductToGMH[] getProductsForGMH(GMH gmh)
         {

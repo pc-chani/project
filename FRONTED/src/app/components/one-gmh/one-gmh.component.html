@@ -1,35 +1,37 @@
 <div class="content">
     <table *ngFor="let p of products" class="table table-hover">
         <tbody>
-            <tr >
+            <tr>
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
-                <td *ngIf="!p.IsDisposable" >
+                <td *ngIf="!p.IsDisposable">
                     <mat-form-field appearance="fill">
                         <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker1">
-                          <input matStartDate placeholder="Start date">
-                          <input matEndDate placeholder="End date">
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date">
+                            <input matEndDate placeholder="End date">
                         </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker1></mat-date-range-picker>
-                      </mat-form-field>
-                  <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                    <!-- <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
-                    <mat-datepicker [dateClass]="dateClass" #picker ></mat-datepicker>
+                    <mat-datepicker [dateClass]="dateClass" #picker ></mat-datepicker>-->
+                <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
                 <td><img src="assets\a.png" (click)="deleteProduct(p)"></td>
                 <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
-                <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
+
             </tr>
             <tr *ngIf="show && p==currentProduct">
                 <div><img src="assets\close.png" (click)="close()">
                     <p>שם<input type="text" value="{{currentProduct.Name}}"></p>
-                   <p>תמונה</p>
-                    <p> <input type="file" (change)="handleFileInput($event.target.files)"
-                            accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
-                        <img [src]="imageSrc" height="100" width="150">
-                       <!----> <iframe *ngFor="let url of currentProduct.Images" [src]="photo(url)" class="rounded mb-3" width="180" mat-card-image></iframe>>
+                    <p>תמונה</p>
+                    <p>  <input type="file" (change)="handleFileInput($event.target.files)" multiple
+                        accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+                        <!----> <img *ngFor="let url of currentProduct.Images" [src]="url"
+                            class="rounded mb-3" width="180" mat-card-image>
+                            <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
                     </p>
                     <p>פקדון<input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
                     <p>מצב<input type="text" value="{{currentProduct.Status}}"></p>
@@ -62,7 +64,7 @@
                 <input type="file" (change)="handleFileInput($event.target.files)" multiple
                     accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
             </div>
-            
+
             <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
         </div>
         <div class="form-group">
@@ -70,7 +72,7 @@
             <input class="txt" type="number" class="form-control" formControlName="Amount">
             <div class="error" *ngIf="newPForm.controls['Amount'].errors!=null"> שדה נדרש </div>
         </div>
-       
+
         <div class="form-group">
             <label> :האם חד פעמי? </label>
             <input class="txt" type="checkbox" class="form-control" formControlName="IsDisposable">

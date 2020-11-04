@@ -36,7 +36,7 @@ export class SearchGMHComponent implements OnInit {
       textSearch: new FormControl(''),
       category: new FormControl('', Validators.required),
       tatCategory: new FormControl({ value: '', disabled: true }, Validators.required),
-      location: new FormControl('', Validators.required),
+     // location: new FormControl('', Validators.required),
     });
     this.getCategoryGmh();
     this.productsService.getProducts().subscribe(

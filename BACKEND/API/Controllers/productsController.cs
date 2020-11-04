@@ -75,7 +75,7 @@ namespace API.Controllers
                     imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
                     var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
                     postedFile.SaveAs(filePath);
-                    photos.Add(filePath);
+                    photos.Add(postedFile.FileName);
                 }
             }
             return Ok(BL.productsBL.add(p,photos));
