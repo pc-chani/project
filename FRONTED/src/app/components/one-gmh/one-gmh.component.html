@@ -5,12 +5,15 @@
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
                 <td *ngIf="!p.IsDisposable" >
-                    <mat-label> בחר תאריך </mat-label>
-                    <mat-date-range-input [rangePicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
-                        <input matStartDate placeholder="Start date">
-                        <input matEndDate placeholder="End date">
-                      </mat-date-range-input>
-                      <mat-date-range-picker [dateClass]="dateClass"  #picker></mat-date-range-picker>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker1">
+                          <input matStartDate placeholder="Start date">
+                          <input matEndDate placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker1></mat-date-range-picker>
+                      </mat-form-field>
                   <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
