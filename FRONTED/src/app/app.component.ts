@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { User } from './shared/models/User.model';
 import { UserService } from './shared/services/user.service';
+import getBrowserFingerprint from 'get-browser-fingerprint';
+
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,9 @@ export class AppComponent {
   
   constructor( public userService: UserService) { }
   ngOnInit(): void {
+    const fingerprint = getBrowserFingerprint();
+console.log(fingerprint);
+
     this.currentUser=this.userService.CurrentUser;
     console.log(this.currentUser);
   }

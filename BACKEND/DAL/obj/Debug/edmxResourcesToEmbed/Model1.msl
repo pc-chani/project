@@ -69,17 +69,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RequestForLoans">
-      <EntityTypeMapping TypeName="Charity_DBModel.RequestForLoan">
-        <MappingFragment StoreEntitySet="RequestForLoan">
-          <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
-          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
-          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="USERS">
       <EntityTypeMapping TypeName="Charity_DBModel.USER">
         <MappingFragment StoreEntitySet="USERS">
@@ -101,6 +90,21 @@
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="ProductCodeToGMH" ColumnName="ProductCodeToGMH" />
           <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Donations">
+      <EntityTypeMapping TypeName="Charity_DBModel.Donation">
+        <MappingFragment StoreEntitySet="Donations">
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="donorName" ColumnName="donorName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MasterCategory" ColumnName="MasterCategory" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="donationName" ColumnName="donationName" />
+          <ScalarProperty Name="donationCode" ColumnName="donationCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -32,14 +32,14 @@
         </table>
         <img src="assets\add.png" (click)="new()">
         <form [formGroup]="gmhForm" *ngIf="newgmh">
-            <div class="form-group">
+            <div class="form-group"><img src="assets\close.png" (click)="closeNew()">
                 <label> שם:</label>
                 <input class="txt" type="text" class="form-control" formControlName="GmhName">
                 <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
             </div>
             <div class="form-group">
-                <label> קטגוריה:</label> <input type="radio" name="rad">
-                <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Categories"
+                <label> קטגוריה:</label> <input type="radio" name="rad" #r1 >
+                <input type="text" placeholder="בחר " [disabled]="r1.checked" aria-label="Number" matInput formControlName="Categories"
                     [matAutocomplete]="auto" [value]="displayFn">
                 <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
                     <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
@@ -48,7 +48,7 @@
                 </mat-autocomplete>
                
                 <div class="error" *ngIf="gmhForm.controls['Categories'].errors!=null">*</div>
-                <input type="radio" name="rad"> <input type="text" placeholder="הוסף קטגוריה">
+                <input type="radio" name="rad" #r2> <input type="text" [disabled]="r2.checked" placeholder="הוסף קטגוריה" formControlName="newCategory" [checked]="true">
             </div>
             <div class="form-group">
                 <label> הערות:</label>

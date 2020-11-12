@@ -1,10 +1,21 @@
+<td>{{gmh.GmhName}}</td>
+<td>{{gmh.Adress}}</td>
+<table class="table table-hover">
+       
+   <tr *ngFor="let p of productsToGmh">
+       <td>{{p.Name}}</td>
+       <td>{{p.ProductCodeToGMH}}</td>
+       <td>{{p.ProductCode}}</td>
+       <td>{{p.GmhCode}}</td>
+       <td>{{p.Picture}}</td>
+      <!--
+      <td *ngIf>{{p.Amount}}</td>    
+      -->
+       <td>{{p.Amount}}</td> 
+       <td>{{p.FreeDescription}}</td>
+       <td>{{p.IsDisposable}}</td>
+       <td>{{p.SecurityDepositAmount}}</td>
+       <td>{{p.Status}}</td>
+   </tr>
 
-    <table class="table table-hover">
-        <tr *ngFor="let g of gmhs">
-            <td>{{g.GmhName}}</td>
-            <td>{{g.Adress}}</td>
-            <td>{{g.Picture}}</td>
-            <td>{{g.FreeDescription}}</td>
-        
-        </tr>
-    </table>
+</table>

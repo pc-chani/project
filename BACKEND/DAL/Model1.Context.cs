@@ -31,8 +31,8 @@ namespace DAL
         public virtual DbSet<OPINION> OPINIONS { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
-        public virtual DbSet<RequestForLoan> RequestForLoans { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
     }
 }

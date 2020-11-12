@@ -19,7 +19,6 @@ namespace DAL
         {
             this.GMHs = new HashSet<GMH>();
             this.LENDINGS = new HashSet<LENDING>();
-            this.RequestForLoans = new HashSet<RequestForLoan>();
         }
     
         public int UserCode { get; set; }
@@ -36,7 +35,5 @@ namespace DAL
         public virtual ICollection<GMH> GMHs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LENDING> LENDINGS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestForLoan> RequestForLoans { get; set; }
     }
 }

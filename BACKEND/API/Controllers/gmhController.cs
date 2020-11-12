@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -15,6 +16,7 @@ namespace API.Controllers
         [Route("add"), HttpPost]
         public IHttpActionResult add(DTO.GMH gMH)
         {
+
             return Ok(BL.gmhBL.addGMH(gMH));
    
         }
@@ -51,10 +53,18 @@ namespace API.Controllers
 
         [Route("searchGMH"), HttpPost]
 
-        public IHttpActionResult searchGMH(DTO.CategoryGMH gmhForSEarch)
+        public IHttpActionResult searchGMH()
         {
 
-            return Ok(BL.gmhBL.searchGMH(gmhForSEarch));
+            var httpRequest = HttpContext.Current.Request;
+            return Ok(BL.gmhBL.searchGMH(
+                httpRequest["text"],
+                Convert.ToInt32(httpRequest["category"]),
+                Convert.ToInt32(httpRequest["tatCategory"]),
+                Convert.ToDouble(httpRequest["CurrentLocation1"]),
+                Convert.ToDouble(httpRequest["CurrentLocation2"]),
+                httpRequest["location"]
+                ));
         }
     }
     

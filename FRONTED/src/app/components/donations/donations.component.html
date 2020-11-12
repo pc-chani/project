@@ -1,13 +1,29 @@
-<!--<div class="content">
+<div class="content">
     <div>
-        <table  class="table table-hover">      
-           <tbody>
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td>{{}} </td>
-                    <td>{{}} </td>             
+                    <td>כותרת </td>
+                    <td>תאור</td>
+                    <td>תמונה</td>
+
+                    <td>מאת </td>
+                    <td>כתובת </td>
+                    <td>יצירת קשר </td>
+                </tr>
+            </thead>
+            <tbody *ngFor="let d of donations">
+                <tr>
+                    <td>{{d.donationName}} </td>
+                    <td>{{d.Description}} </td>
+                    <td><img *ngIf="d.Picture!=null" [src]="d.Picture" class="rounded mb-3" width="180" mat-card-image></td>
+
+                    <td>{{d.donorName}} </td>
+                    <td>{{d.Adress}} </td>
+                    <td>{{d.Phone}} </td>
+
                 </tr>
             </tbody>
         </table>
     </div>
-</div>!-->
-<div id="map"></div>
+</div>

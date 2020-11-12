@@ -19,7 +19,6 @@ namespace DAL
         {
             this.LENDINGS = new HashSet<LENDING>();
             this.PRODUCTtoGMHs = new HashSet<PRODUCTtoGMH>();
-            this.RequestForLoans = new HashSet<RequestForLoan>();
         }
     
         public int ProductCode { get; set; }
@@ -31,7 +30,5 @@ namespace DAL
         public virtual ICollection<LENDING> LENDINGS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestForLoan> RequestForLoans { get; set; }
     }
 }

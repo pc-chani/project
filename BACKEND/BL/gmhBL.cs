@@ -131,18 +131,120 @@ namespace BL
             }
         }
 
-        public static List<GMH> searchGMH(CategoryGMH gmhForSEarch)
+       // public static List<GMH> searchGMH(CategoryGMH gmhForSEarch)
+       // {
+       //     using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+       //     {
+       //         List<GMH> a=new List<GMH>();
+       //
+       //
+       //         if (db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode) != null)
+       //              a = BL.Converters.GMHConverter.convertToDTOList(db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode).ToList());
+       //             // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
+       //             return a;
+       //         
+       //
+       //     }
+       // }
+
+        public static List<GMH> searchGMH( string text, int category, int tatCategory, double CurrentLocation1, double CurrentLocation2, string location)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {
-                List<GMH> a=new List<GMH>();
+            {         
+                List<GMH> a = new List<GMH>();
+                if (text != "")               
+                    foreach (var product in db.Products)
+                    {
+                        System.Diagnostics.Debug.WriteLine("textBox");
+
+                        if (product.Productname.Equals(text))
+                        {
+                            foreach (var productToGmh in db.PRODUCTtoGMHs)
+                            {
+                                
+                                if (productToGmh.ProductCode == product.ProductCode)
+                                {
+                                    foreach (var gmh in db.GMHs)
+                                    {
+                                        if( gmh.GmhCode==productToGmh.GmhCode)
+                                        
+                                            if (CurrentLocation1 != 0) {
+                                                if (BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)) < 50)
+                                                {
+                                                    a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
+                                                    System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
+                                                }
+                                                    System.Diagnostics.Debug.WriteLine("textBox 0");
+                                               // System.Diagnostics.Debug.WriteLine("!!***** "+ BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + "," + CurrentLocation2)));
+
+                                            }
+                                            else if (BL.GoogleMaps.GetDistance(gmh.Adress, location) < 50)
+                                                    a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
 
 
-                if (db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode) != null)
-                     a = BL.Converters.GMHConverter.convertToDTOList(db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode).ToList());
-                    // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
-                    return a;
+                                        
+                                    }
+                                }                               
+                                
+                            }
+                        }
+                            
+                    }
+
                 
+
+               if (db.GMHs.Where(s => s.CategoryCode == tatCategory) != null)
+                    foreach (var item in db.GMHs)
+                    {
+                        System.Diagnostics.Debug.WriteLine("category");
+
+                        if (CurrentLocation1 != 0) {
+                            System.Diagnostics.Debug.WriteLine("category 0");
+
+                            if (item.CategoryCode == tatCategory && (BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2))) < 50)
+                            {
+                                a.Add(BL.Converters.GMHConverter.convertToDTO(item));
+                                System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
+                            }
+                            }
+                            else {
+                            System.Diagnostics.Debug.WriteLine("category 1");
+                            if (item.CategoryCode == tatCategory && ((BL.GoogleMaps.GetDistance(item.Adress, location)) < 50)) { 
+                                a.Add(BL.Converters.GMHConverter.convertToDTO(item));
+                            }
+                            System.Diagnostics.Debug.WriteLine(BL.GoogleMaps.GetDistance(item.Adress, location) + "," + item.Adress);
+
+                        }
+                    }
+
+                if (db.GMHs.Where(s => s.CategoryCode == category) != null)
+                    foreach (var item in db.GMHs)
+                    {
+                        System.Diagnostics.Debug.WriteLine("category");
+
+                        if (CurrentLocation1 != 0)
+                        {
+                            System.Diagnostics.Debug.WriteLine("category 0");
+
+                            if (item.CategoryCode == category && (BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2))) < 50)
+                            {
+                                a.Add(BL.Converters.GMHConverter.convertToDTO(item));
+                                System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
+                            }
+                            }
+                            else
+                        {
+                            System.Diagnostics.Debug.WriteLine("category 1");
+                            if (item.CategoryCode == category && ((BL.GoogleMaps.GetDistance(item.Adress, location)) < 50))
+                            {
+                                a.Add(BL.Converters.GMHConverter.convertToDTO(item));
+                            }
+                            System.Diagnostics.Debug.WriteLine(BL.GoogleMaps.GetDistance(item.Adress, location)+","+item.Adress);
+
+                        }
+                    }
+                return a;
+
 
             }
         }

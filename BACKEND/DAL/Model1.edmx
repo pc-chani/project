@@ -13,6 +13,20 @@
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MasterCategoryCode" Type="int" />
         </EntityType>
+        <EntityType Name="Donations">
+          <Key>
+            <PropertyRef Name="donationCode" />
+          </Key>
+          <Property Name="donationCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donationName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Category" Type="int" />
+          <Property Name="MasterCategory" Type="int" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="donorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="GMH">
           <Key>
             <PropertyRef Name="GmhCode" />
@@ -75,16 +89,6 @@
           <Property Name="SecurityDepositAmount" Type="int" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="RequestForLoan">
-          <Key>
-            <PropertyRef Name="RequestCode" />
-          </Key>
-          <Property Name="RequestCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserCode" Type="int" Nullable="false" />
-          <Property Name="ProductCode" Type="int" Nullable="false" />
-          <Property Name="RequestDate" Type="date" Nullable="false" />
-          <Property Name="Amount" Type="int" />
-        </EntityType>
         <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="UserCode" />
@@ -108,6 +112,30 @@
             </Principal>
             <Dependent Role="CategoryGMH1">
               <PropertyRef Name="MasterCategoryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donations__Categ__756D6ECB">
+          <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
+          <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryGMH">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donations__Maste__76619304">
+          <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
+          <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryGMH">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="MasterCategory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,43 +247,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RequestFo__Produ__44FF419A">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductCode" />
-            </Principal>
-            <Dependent Role="RequestForLoan">
-              <PropertyRef Name="ProductCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RequestFo__UserC__440B1D61">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
-          <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USERS">
-              <PropertyRef Name="UserCode" />
-            </Principal>
-            <Dependent Role="RequestForLoan">
-              <PropertyRef Name="UserCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Charity_DBModelStoreContainer">
           <EntitySet Name="CategoryGMH" EntityType="Self.CategoryGMH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donations" EntityType="Self.Donations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GMH" EntityType="Self.GMH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LENDINGS" EntityType="Self.LENDINGS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OPINIONS" EntityType="Self.OPINIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTtoGMH" EntityType="Self.PRODUCTtoGMH" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RequestForLoan" EntityType="Self.RequestForLoan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CategoryG__Maste__5AEE82B9" Association="Self.FK__CategoryG__Maste__5AEE82B9">
             <End Role="CategoryGMH" EntitySet="CategoryGMH" />
             <End Role="CategoryGMH1" EntitySet="CategoryGMH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donations__Categ__756D6ECB" Association="Self.FK__Donations__Categ__756D6ECB">
+            <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+            <End Role="Donations" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donations__Maste__76619304" Association="Self.FK__Donations__Maste__76619304">
+            <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+            <End Role="Donations" EntitySet="Donations" />
           </AssociationSet>
           <AssociationSet Name="FK__GMH__CategoryCod__3A81B327" Association="Self.FK__GMH__CategoryCod__3A81B327">
             <End Role="CategoryGMH" EntitySet="CategoryGMH" />
@@ -293,14 +305,6 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMH" />
           </AssociationSet>
-          <AssociationSet Name="FK__RequestFo__Produ__44FF419A" Association="Self.FK__RequestFo__Produ__44FF419A">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="RequestForLoan" EntitySet="RequestForLoan" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RequestFo__UserC__440B1D61" Association="Self.FK__RequestFo__UserC__440B1D61">
-            <End Role="USERS" EntitySet="USERS" />
-            <End Role="RequestForLoan" EntitySet="RequestForLoan" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -317,6 +321,8 @@
           <NavigationProperty Name="CategoryGMH2" Relationship="Self.FK__CategoryG__Maste__5AEE82B9" FromRole="CategoryGMH1" ToRole="CategoryGMH" />
           <NavigationProperty Name="GMHs" Relationship="Self.FK__GMH__CategoryCod__3A81B327" FromRole="CategoryGMH" ToRole="GMH" />
           <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__412EB0B6" FromRole="CategoryGMH" ToRole="Products" />
+          <NavigationProperty Name="Donations" Relationship="Charity_DBModel.FK__Donations__Categ__4F47C5E3" FromRole="CategoryGMH" ToRole="Donation" />
+          <NavigationProperty Name="Donations1" Relationship="Charity_DBModel.FK__Donations__Maste__503BEA1C" FromRole="CategoryGMH" ToRole="Donation" />
         </EntityType>
         <EntityType Name="GMH">
           <Key>
@@ -369,7 +375,6 @@
           <NavigationProperty Name="CategoryGMH" Relationship="Self.FK__Products__Catego__412EB0B6" FromRole="Products" ToRole="CategoryGMH" />
           <NavigationProperty Name="LENDINGS" Relationship="Self.FK__LENDINGS__Produc__4BAC3F29" FromRole="Products" ToRole="LENDINGS" />
           <NavigationProperty Name="PRODUCTtoGMHs" Relationship="Self.FK__PRODUCTto__Produ__76969D2E" FromRole="Products" ToRole="PRODUCTtoGMH" />
-          <NavigationProperty Name="RequestForLoans" Relationship="Self.FK__RequestFo__Produ__44FF419A" FromRole="Products" ToRole="RequestForLoan" />
         </EntityType>
         <EntityType Name="PRODUCTtoGMH">
           <Key>
@@ -388,18 +393,6 @@
           <NavigationProperty Name="LENDINGS" Relationship="Charity_DBModel.FK__LENDINGS__Produc__14270015" FromRole="PRODUCTtoGMH" ToRole="LENDING" />
           <NavigationProperty Name="Images" Relationship="Charity_DBModel.FK__Images__ProductC__29221CFB" FromRole="PRODUCTtoGMH" ToRole="Image" />
         </EntityType>
-        <EntityType Name="RequestForLoan">
-          <Key>
-            <PropertyRef Name="RequestCode" />
-          </Key>
-          <Property Name="RequestCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserCode" Type="Int32" Nullable="false" />
-          <Property Name="ProductCode" Type="Int32" Nullable="false" />
-          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Amount" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__RequestFo__Produ__44FF419A" FromRole="RequestForLoan" ToRole="Products" />
-          <NavigationProperty Name="USER" Relationship="Self.FK__RequestFo__UserC__440B1D61" FromRole="RequestForLoan" ToRole="USERS" />
-        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="UserCode" />
@@ -415,7 +408,6 @@
           <Property Name="Permission" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="GMHs" Relationship="Self.FK__GMH__UserCode__398D8EEE" FromRole="USERS" ToRole="GMH" />
           <NavigationProperty Name="LENDINGS" Relationship="Self.FK__LENDINGS__UserCo__4AB81AF0" FromRole="USERS" ToRole="LENDINGS" />
-          <NavigationProperty Name="RequestForLoans" Relationship="Self.FK__RequestFo__UserC__440B1D61" FromRole="USERS" ToRole="RequestForLoan" />
         </EntityType>
         <Association Name="FK__CategoryG__Maste__5AEE82B9">
           <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
@@ -525,30 +517,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RequestFo__Produ__44FF419A">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductCode" />
-            </Principal>
-            <Dependent Role="RequestForLoan">
-              <PropertyRef Name="ProductCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RequestFo__UserC__440B1D61">
-          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
-          <End Role="RequestForLoan" Type="Self.RequestForLoan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USERS">
-              <PropertyRef Name="UserCode" />
-            </Principal>
-            <Dependent Role="RequestForLoan">
-              <PropertyRef Name="UserCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Charity_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CategoryGMHs" EntityType="Self.CategoryGMH" />
           <EntitySet Name="GMHs" EntityType="Self.GMH" />
@@ -556,7 +524,6 @@
           <EntitySet Name="OPINIONS" EntityType="Self.OPINION" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="PRODUCTtoGMHs" EntityType="Self.PRODUCTtoGMH" />
-          <EntitySet Name="RequestForLoans" EntityType="Self.RequestForLoan" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
           <AssociationSet Name="FK__CategoryG__Maste__5AEE82B9" Association="Self.FK__CategoryG__Maste__5AEE82B9">
             <End Role="CategoryGMH" EntitySet="CategoryGMHs" />
@@ -594,14 +561,6 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RequestFo__Produ__44FF419A" Association="Self.FK__RequestFo__Produ__44FF419A">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="RequestForLoan" EntitySet="RequestForLoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RequestFo__UserC__440B1D61" Association="Self.FK__RequestFo__UserC__440B1D61">
-            <End Role="USERS" EntitySet="USERS" />
-            <End Role="RequestForLoan" EntitySet="RequestForLoans" />
-          </AssociationSet>
           <AssociationSet Name="FK__LENDINGS__Produc__14270015" Association="Charity_DBModel.FK__LENDINGS__Produc__14270015">
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
             <End Role="LENDING" EntitySet="LENDINGS" />
@@ -610,6 +569,15 @@
           <AssociationSet Name="FK__Images__ProductC__29221CFB" Association="Charity_DBModel.FK__Images__ProductC__29221CFB">
             <End Role="PRODUCTtoGMH" EntitySet="PRODUCTtoGMHs" />
             <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <EntitySet Name="Donations" EntityType="Charity_DBModel.Donation" />
+          <AssociationSet Name="FK__Donations__Categ__4F47C5E3" Association="Charity_DBModel.FK__Donations__Categ__4F47C5E3">
+            <End Role="CategoryGMH" EntitySet="CategoryGMHs" />
+            <End Role="Donation" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donations__Maste__503BEA1C" Association="Charity_DBModel.FK__Donations__Maste__503BEA1C">
+            <End Role="CategoryGMH" EntitySet="CategoryGMHs" />
+            <End Role="Donation" EntitySet="Donations" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__LENDINGS__Produc__14270015">
@@ -642,6 +610,46 @@
             </Principal>
             <Dependent Role="Image">
               <PropertyRef Name="ProductCodeToGMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="donationCode" />
+          </Key>
+          <Property Name="donationCode" Type="Int32" Nullable="false" />
+          <Property Name="donationName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="Int32" />
+          <Property Name="MasterCategory" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="donorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryGMH" Relationship="Charity_DBModel.FK__Donations__Categ__4F47C5E3" FromRole="Donation" ToRole="CategoryGMH" />
+          <NavigationProperty Name="CategoryGMH1" Relationship="Charity_DBModel.FK__Donations__Maste__503BEA1C" FromRole="Donation" ToRole="CategoryGMH" />
+          <Property Name="Picture" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Donations__Categ__4F47C5E3">
+          <End Type="Charity_DBModel.CategoryGMH" Role="CategoryGMH" Multiplicity="0..1" />
+          <End Type="Charity_DBModel.Donation" Role="Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryGMH">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donations__Maste__503BEA1C">
+          <End Type="Charity_DBModel.CategoryGMH" Role="CategoryGMH" Multiplicity="0..1" />
+          <End Type="Charity_DBModel.Donation" Role="Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryGMH">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="MasterCategory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -719,17 +727,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RequestForLoans">
-            <EntityTypeMapping TypeName="Charity_DBModel.RequestForLoan">
-              <MappingFragment StoreEntitySet="RequestForLoan">
-                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
-                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="Charity_DBModel.USER">
               <MappingFragment StoreEntitySet="USERS">
@@ -751,6 +748,21 @@
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="ProductCodeToGMH" ColumnName="ProductCodeToGMH" />
                 <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donations">
+            <EntityTypeMapping TypeName="Charity_DBModel.Donation">
+              <MappingFragment StoreEntitySet="Donations">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="donorName" ColumnName="donorName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MasterCategory" ColumnName="MasterCategory" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="donationName" ColumnName="donationName" />
+                <ScalarProperty Name="donationCode" ColumnName="donationCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

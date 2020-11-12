@@ -22,12 +22,17 @@ import { map, startWith } from 'rxjs/operators';
 export class SearchGMHComponent implements OnInit {
   searchForm: FormGroup;
   categories: CategoryGMH[];
-  masterCategory: any;
+  masterCategory: CategoryGMH;
+  tatC:CategoryGMH;
   tatCategories: CategoryGMH[];
-  gmhForSearch: any;
   gmhs: GMH[];
   filteredProducts: Observable<Product[]>;
   products: Array<Product>
+  formData;
+  currLat;
+  currLng;
+  adress;
+  openGmhDetails;
 
   constructor(private userService: UserService,private productsService: ProductsService, private router: Router, private gmhService: GmhService) { }
 
@@ -35,8 +40,8 @@ export class SearchGMHComponent implements OnInit {
     this.searchForm = new FormGroup({
       textSearch: new FormControl(''),
       category: new FormControl('', Validators.required),
-      tatCategory: new FormControl({ value: '', disabled: true }, Validators.required),
-     // location: new FormControl('', Validators.required),
+      tatCategory: new FormControl({ value: ''}, Validators.required),
+      location: new FormControl('', Validators.required),
     });
     this.getCategoryGmh();
     this.productsService.getProducts().subscribe(
@@ -84,6 +89,7 @@ filter()
   }
 
   handleDestinationChange(a: Address) {
+    this.adress=a;
     console.log(a)
   }
 
@@ -102,11 +108,22 @@ filter()
   }
 
   search() {
-    this.tatCategories.forEach(element => {
-      if (element.CategoryName == this.searchForm.controls.tatCategory.value)
-        this.gmhForSearch = element;
-    });
-    this.gmhService.search(this.gmhForSearch).subscribe(res => {
+    this.openGmhDetails=null
+    this.formData = new FormData();
+    if(this.searchForm.controls.textSearch.value!="")
+    this.formData.append('text', this.searchForm.controls.textSearch.value.Productname)
+    else   this.formData.append('text', "")
+    this.formData.append('category', this.masterCategory.CategoryCode)
+    this.tatCategories.forEach(element => {  if (element.CategoryName == this.searchForm.controls.tatCategory.value) this.tatC = element;});
+    this.formData.append('tatCategory', this.tatC.CategoryCode)
+    if (this.searchForm.controls.location.value == "מיקום נוכחי") { this.formData.append('CurrentLocation1', this.currLat); this.formData.append('CurrentLocation2', this.currLng) }
+    else { this.formData.append('CurrentLocation1', 0); this.formData.append('CurrentLocation2', 0) }
+    if(this.searchForm.controls.location.value == "מיקום נוכחי")
+    this.formData.append('location', "")
+    else 
+    this.formData.append('location', this.adress.formatted_address)
+
+    this.gmhService.search(this.formData).subscribe(res => {
       this.gmhs = res;
       this.gmhs.forEach(e => {
         this.gmhService.getUser(e).subscribe(res => {

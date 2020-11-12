@@ -1,0 +1,67 @@
+<div class="content">
+    <form [formGroup]="donationForm" (submit)="addDonation()">
+        
+    <div style="background-color: burlywood;">פרטי התרומה
+        <div class="form-group">
+            <label> שם התרומה:</label>
+            <input class="txt" type="text" class="form-control" formControlName="donationName">
+            <div class="error" *ngIf="donationForm.controls['donationName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> קטגוריה:</label> <input type="radio" name="rad">
+            <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Categories"
+                [matAutocomplete]="auto" [value]="displayFn" (change)="getCategoriesForGmach()">
+            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
+                    {{c.CategoryName}}
+                </mat-option>
+            </mat-autocomplete>
+            <div class="error" *ngIf="donationForm.controls['Categories'].errors!=null">*</div>
+            <input type="radio" name="rad"> <input type="text" placeholder="הוסף קטגוריה">
+        </div>
+        <div class="form-group">
+            <label> תת קטגוריה:</label>
+            <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="tatCategories"
+                [matAutocomplete]="auto" [value]="displayFn">
+            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let tc of filteredTatCategories | async" [value]="tc">
+                    {{tc.CategoryName}}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+        <div class="form-group">
+            <label> תת קטגוריה:</label>
+            <input type="file" (change)="handleFileInput($event.target.files)"
+            accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+            <!----> 
+        </div>
+        <div class="form-group">
+            <label> הערות:</label>
+            <input class="txt" type="text" class="form-control" formControlName="comments">
+            <div class="error" *ngIf="donationForm.controls['comments'].errors!=null">*</div>
+        </div>
+    </div>
+        <div style="background-color: cadetblue;">פרטי המוסר
+        <div class="form-group">
+            <label> שם התורם:</label>
+            <input class="txt" type="text" class="form-control" formControlName="donorName">
+            <div class="error" *ngIf="donationForm.controls['donorName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> כתובת:</label>
+            <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="adress"
+                (onAddressChange)="handleDestinationChange($event)" placeholder="Address" class="form-control">‏
+
+
+            <div class="error" *ngIf="donationForm.controls['adress'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> ליצירת קשר:</label>
+            <input class="txt" type="text" class="form-control" formControlName="phone">
+            <div class="error" *ngIf="donationForm.controls['phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <input type="submit" class="btn btn-success" value="הוספה" [disabled]="!donationForm.valid"
+            style="margin-right: 35%;">
+        </div>
+</form>
+</div>

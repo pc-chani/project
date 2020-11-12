@@ -29,7 +29,6 @@ C:\Users\user\Desktop\GMHproject\BACKEND\DAL\bin\Debug\EntityFramework.dll
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\bin\Debug\EntityFramework.xml
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\user\Desktop\GMHproject\BACKEND\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\user\Desktop\GMHproject\BACKEND\DAL\obj\Debug\DAL.dll
@@ -46,3 +45,4 @@ C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DAL\obj\De
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DAL\obj\Debug\DAL.dll
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DAL\obj\Debug\DAL.pdb
+C:\Users\user\Desktop\GMHproject\BACKEND\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,9 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="categories.cs" />
+    <Compile Include="Converters\DonationConverter.cs" />
     <Compile Include="Converters\ImagesConverter.cs" />
     <Compile Include="Converters\ProductToGmhConverter.cs" />
     <Compile Include="donationsBL.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="gmhBL.cs" />
     <Compile Include="googlemaps.cs" />
     <Compile Include="lendingsBL.cs" />

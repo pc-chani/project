@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="Charity_DBModel.OPINION" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Charity_DBModel.Product" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Charity_DBModel.PRODUCTtoGMH" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.RequestForLoan" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Charity_DBModel.USER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Charity_DBModel.FK__CategoryG__Maste__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__GMH__CategoryCod__3A81B327" ManuallyRouted="false" />
@@ -22,11 +21,12 @@
         <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__UserCo__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__OPINIONS__Landin__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__Produ__76969D2E" ManuallyRouted="false" />
-        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__440B1D61" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__Produc__14270015" />
         <EntityTypeShape EntityType="Charity_DBModel.Image" Width="1.5" PointX="7.5" PointY="5.5" />
         <AssociationConnector Association="Charity_DBModel.FK__Images__ProductC__29221CFB" />
+        <EntityTypeShape EntityType="Charity_DBModel.Donation" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Categ__4F47C5E3" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Maste__503BEA1C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

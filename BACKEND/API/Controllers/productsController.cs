@@ -41,6 +41,13 @@ namespace API.Controllers
         {
             return Ok(BL.productsBL.saveChange(p));
         }   
+        [Route ("addProduct"),HttpPost]
+        public IHttpActionResult addProduct(DTO.PRODUCT p)
+        {
+
+            return Ok(BL.productsBL.addProduct(p));
+
+        }
         [Route("delete"), HttpPost]
         public IHttpActionResult delete(DTO.ProductToGMH p)
         {
@@ -54,9 +61,9 @@ namespace API.Controllers
             var product = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["product"]);
             var dictionary = (Dictionary<string, object>)product;
             DTO.ProductToGMH p=new DTO.ProductToGMH();
-            p.Amount = (int?)dictionary.ElementAt(0).Value;
-            p.GmhCode= (int)dictionary.ElementAt(1).Value;
-            p.ProductCode= (int)dictionary.ElementAt(2).Value;
+            p.ProductCode = (int)dictionary.ElementAt(0).Value;
+            p.Amount = (int?)dictionary.ElementAt(1).Value;
+            p.GmhCode = (int)dictionary.ElementAt(2).Value;      
             p.FreeDescription = (string)dictionary.ElementAt(3).Value;
             p.IsDisposable= (bool)dictionary.ElementAt(4).Value;
             p.SecurityDepositAmount = (int?)dictionary.ElementAt(5).Value;
@@ -85,6 +92,39 @@ namespace API.Controllers
         public IHttpActionResult getImg(DTO.ProductToGMH p)
         {
             return Ok(BL.productsBL.getImages(p));
+        }
+        [Route("edit"), HttpPost]
+        public IHttpActionResult edit()
+        {
+            var httpRequest = HttpContext.Current.Request;
+            // System.Diagnostics.Debug.WriteLine(httpRequest.Params["product"]);
+            var product = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["product"]);
+            var dictionary = (Dictionary<string, object>)product;
+            DTO.ProductToGMH p = new DTO.ProductToGMH();
+            p.ProductCodeToGMH = (int)dictionary.ElementAt(0).Value;
+            p.ProductCode = (int)dictionary.ElementAt(1).Value;
+            p.FreeDescription = (string)dictionary.ElementAt(2).Value;
+            p.IsDisposable = (bool)dictionary.ElementAt(3).Value;
+            p.SecurityDepositAmount = (int?)dictionary.ElementAt(4).Value;
+            p.Status = (string)dictionary.ElementAt(5).Value;
+            string imageName = null;
+            //Upload Image
+            int c = httpRequest.Files.Count;
+            List<string> photos = new List<string>();
+            for (int i = 0; i < c; i++)
+            {
+                var postedFile = httpRequest.Files["Image" + i];
+                //Create custom filename
+                if (postedFile != null)
+                {
+                    imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
+                    imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+                    var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
+                    postedFile.SaveAs(filePath);
+                    photos.Add(postedFile.FileName);
+                }
+            }
+            return Ok(BL.productsBL.edit(p,photos));
         }
 
     }

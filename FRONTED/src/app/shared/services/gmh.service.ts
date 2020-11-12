@@ -6,10 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CategoryGMH } from '../models/CategoryGMH.model';
 
-var map;
-var service;
-var infowindow
-
 @Injectable({
   providedIn: 'root'
 })
@@ -43,7 +39,6 @@ private myGmhim:GMH[];
 
 
   getCategoryGmach():Observable<CategoryGMH[]>{
-    console.log(this.http.get<CategoryGMH[]>(environment.url+'gmh/getCategories'));
     return this.http.get<CategoryGMH[]>(environment.url+'gmh/getCategories')
   }
 

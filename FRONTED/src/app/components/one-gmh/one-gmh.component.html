@@ -3,39 +3,52 @@
         <tbody>
             <tr>
                 <td (click)="showdetails(p)">{{p.Name}} </td>
-                <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}"></td>
+                <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}" min="0" #num
+                        (change)="changeAmount(p,num.value)"></td>
                 <td *ngIf="!p.IsDisposable">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" on-mouseover="myP(p)">
                         <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate placeholder="Start date">
-                            <input matEndDate placeholder="End date">
+                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter">
+                            <input matStartDate placeholder="Start date" (dateChange)="setStartDate($event.value)">
+                            <input matEndDate placeholder="End date" (dateChange)="setEndDate($event.value)">
                         </mat-date-range-input>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
+                        <mat-date-range-picker #picker [dateClass]="dateClass"></mat-date-range-picker>
                     </mat-form-field>
-                    <!-- <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter.bind(this,p)">
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                    </mat-datepicker-toggle>
-                    <mat-datepicker [dateClass]="dateClass" #picker ></mat-datepicker>-->
-                <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>
-                <td><img src="assets\a.png" (click)="deleteProduct(p)"></td>
+                <td><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange(p)"></td>
                 <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
+                <td><img src="assets\a.png" (click)="deleteProduct(p)"></td>
+
 
             </tr>
-            <tr *ngIf="show && p==currentProduct">
-                <div><img src="assets\close.png" (click)="close()">
-                    <p>שם<input type="text" value="{{currentProduct.Name}}"></p>
-                    <p>תמונה</p>
-                    <p>  <input type="file" (change)="handleFileInput($event.target.files)" multiple
-                        accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
-                        <!----> <img *ngFor="let url of currentProduct.Images" [src]="url"
-                            class="rounded mb-3" width="180" mat-card-image>
+            <tr *ngIf="show && p==CurrentProduct">
+                <div>
+                    <form [formGroup]="editPForm">
+                        <img src="assets\close.png" (click)="close()">
+                        <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
+                            [matAutocomplete]="auto" [value]="displayFn">
+                        <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let p of filteredPs | async" [value]="p">
+                                {{p.Productname}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>
+                        <p>תמונה</p>
+                        <p> <input type="file" (change)="handleFileInput($event.target.files)" multiple
+                                accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+                            <!----> <img *ngFor="let url of CurrentProduct.Images" [src]="url" class="rounded mb-3"
+                                width="180" mat-card-image>
                             <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
-                    </p>
-                    <p>פקדון<input type="number" value="{{currentProduct.SecurityDepositAmount}}"></p>
-                    <p>מצב<input type="text" value="{{currentProduct.Status}}"></p>
-                    <p><input type="button" class="btn btn-primary" (click)="saveChange()" value="שמור שינויים"></p>
+                        </p>
+                        <p>חד פעמי?<input type="checkbox" [checked]="CurrentProduct.FreeDescription"
+                                formControlName="IsDisposable"></p>
+                        <p>הערות<input type="text" value="{{CurrentProduct.FreeDescription}}"
+                                formControlName="FreeDescription"></p>
+                        <p>פקדון<input type="number" value="{{CurrentProduct.SecurityDepositAmount}}"
+                                formControlName="SecurityDepositAmount"></p>
+                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status"></p>
+                        <p><input type="button" class="btn btn-primary" (click)="edit()" value="שמור שינויים"></p>
+                    </form>
                 </div>
             </tr>
         </tbody>
@@ -89,9 +102,9 @@
             <div class="error" *ngIf="newPForm.controls['Status'].errors!=null"> שדה נדרש </div>
         </div>
         <div>
-            <input type="button" class="btn btn-success" value="הוסף" (click)="addProduct()"
+            <input type="button" class="btn btn-success" value="הוסף" (click)="setProduct()"
                 [disabled]="!newPForm.valid" style="margin-right: 35%;">
         </div>
     </form>
-    <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->
+    <a [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה לגמחים</a>
 </div>

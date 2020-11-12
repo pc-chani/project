@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryGMH.cs" />
+    <Compile Include="Donations.cs" />
     <Compile Include="GMH.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="LENDING.cs" />

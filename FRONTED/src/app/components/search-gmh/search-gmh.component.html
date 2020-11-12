@@ -2,7 +2,14 @@
     <form [formGroup]="searchForm" (submit)="search()">
         <div class="form-group">
             <label> טקסט לחיפוש:</label>
-            <input class="txt" type="search" class="form-control" formControlName="textSearch">
+            <input type="text" placeholder="בחר " matInput formControlName="textSearch"
+            [matAutocomplete]="auto" [value]="displayFn">
+            <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
+                <mat-option *ngFor="let p of filteredProducts | async" [value]="p" >
+                    {{p.Productname}}
+                </mat-option>
+            </mat-autocomplete>
+            <input class="txt" type="search" class="form-control" >
             <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> שדה נדרש</div>
         </div>
 
@@ -24,7 +31,7 @@
             <label>אזור ישוב:</label>
             <p (click)="getCurrentLocation()"><input type="radio" name="r">מיקום נוכחי </p>
             <input type="radio" name="r"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
-                (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏">
+                (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏" formControlName="location">
         </div>
         <div>
             <input type="submit" class="btn btn-success" value="חפש" [disabled]="!searchForm.valid"

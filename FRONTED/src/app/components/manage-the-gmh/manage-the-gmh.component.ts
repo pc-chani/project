@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ɵɵqueryRefresh } from '@angular/core';
 import { GmhService } from 'src/app/shared/services/gmh.service';
 import { User } from 'src/app/shared/models/User.model';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -8,6 +8,7 @@ import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+
 @Component({
   selector: 'app-manage-the-gmh',
   templateUrl: './manage-the-gmh.component.html',
@@ -15,6 +16,7 @@ import {map, startWith} from 'rxjs/operators';
   
 })
 export class ManageTheGMHComponent implements OnInit {
+  @ViewChild('r1', { static: true }) input: ElementRef;
   currentUser: User
   myGmhim: GMH[]
   currentgmh: GMH = undefined
@@ -32,7 +34,8 @@ export class ManageTheGMHComponent implements OnInit {
     );
     this.gmhForm = new FormGroup({
       GmhName: new FormControl(),
-      Categories: new FormControl(''),
+      Categories: new FormControl({ value: '', disabled: true }),
+      newCategory:new FormControl({ value: '', disabled: true }),
       commits: new FormControl()
     })
     this.currentUser = this.userService.CurrentUser;
@@ -64,10 +67,12 @@ export class ManageTheGMHComponent implements OnInit {
     )
   }
   delete(gmh) {
+    if(confirm("Are you sure to delete")) {
     this.gmhService.delete(gmh).subscribe(
       res => console.log(res),
       err => console.log(err)
     );
+    }
   }
   close() {
     this.open = false;
@@ -85,12 +90,17 @@ export class ManageTheGMHComponent implements OnInit {
   new() {
     this.newgmh = true;
   }
+  closeNew(){
+    this.newgmh=false
+  }
   addGmh() {
     let g = new GMH();
     g.GmhName = this.gmhForm.controls.GmhName.value;
     g.Adress = this.currentUser.Adress;
+    if(this.input)
     g.CategoryName = this.gmhForm.controls.Categories.value;
-  
+  else
+  g.CategoryName=this.gmhForm.controls.newCategory.value;
    
    this.categories.forEach(element => {
     if (element.CategoryName=== this.gmhForm.controls.Categories.value.CategoryName)
@@ -104,6 +114,8 @@ export class ManageTheGMHComponent implements OnInit {
       res => console.log(res)
 
     )
+    this.getMyGmhim();
+    this.closeNew();
     //this.getCategoryGmh();
   }
   displayFn(c: CategoryGMH): string {
