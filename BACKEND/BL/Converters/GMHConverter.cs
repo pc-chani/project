@@ -15,7 +15,7 @@ namespace BL.Converters
                 GmhName = g.GmhName,
                 GmhCode = g.GmhCode,
                 Adress = g.Adress,
-                commits = g.commits,
+                comments = g.comments,
                 e_mail = g.e_mail,
                 Phone = g.Phone,
                 CategoryCode=g.CategoryCode,

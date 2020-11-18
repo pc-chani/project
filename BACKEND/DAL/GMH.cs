@@ -27,7 +27,7 @@ namespace DAL
         public int CategoryCode { get; set; }
         public string Phone { get; set; }
         public string e_mail { get; set; }
-        public string commits { get; set; }
+        public string comments { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
         public virtual USER USER { get; set; }

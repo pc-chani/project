@@ -12,5 +12,5 @@ export class GMH{
 
     Phone:string
     e_mail:string
-    commits:string
+    comments:string
 }

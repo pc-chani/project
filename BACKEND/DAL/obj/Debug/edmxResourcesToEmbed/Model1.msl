@@ -13,6 +13,7 @@
     <EntitySetMapping Name="GMHs">
       <EntityTypeMapping TypeName="Charity_DBModel.GMH">
         <MappingFragment StoreEntitySet="GMH">
+          <ScalarProperty Name="comments" ColumnName="comments" />
           <ScalarProperty Name="GmhCode" ColumnName="GmhCode" />
           <ScalarProperty Name="GmhName" ColumnName="GmhName" />
           <ScalarProperty Name="Adress" ColumnName="Adress" />
@@ -20,7 +21,6 @@
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="e_mail" ColumnName="e-mail" />
-          <ScalarProperty Name="commits" ColumnName="commits" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

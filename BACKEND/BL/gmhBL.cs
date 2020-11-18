@@ -46,6 +46,29 @@ namespace BL
                 //List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
                 //pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
                 db.PRODUCTtoGMHs.RemoveRange(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode));
+                List<DAL.LENDING> list = new List<DAL.LENDING>();
+                List<DAL.Image> list1 = new List<DAL.Image>();
+
+                foreach (var l in db.LENDINGS)
+                {
+                    foreach (var p in db.PRODUCTtoGMHs)
+                    {
+                        if (l.ProductCode == p.ProductCodeToGMH && p.GmhCode == gmh.GmhCode)
+                            list.Add(l);
+                    }
+
+                }
+                foreach (var i in db.Images)
+                {
+                    foreach (var p in db.PRODUCTtoGMHs)
+                    {
+                        if (i.ProductCodeToGMH == p.ProductCodeToGMH && p.GmhCode == gmh.GmhCode)
+                            list1.Add(i);
+                    }
+
+                }
+                db.LENDINGS.RemoveRange(list);
+                db.Images.RemoveRange(list1);
                 db.GMHs.Remove((db.GMHs.SingleOrDefault(g => g.GmhCode == gmh.GmhCode)));
                 try
                 {
@@ -74,16 +97,21 @@ namespace BL
         public static GMH[] getMyGmhim(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {
-                
-                    return BL.Converters.GMHConverter.convertToDTOarray((db.GMHs.Where(g => g.UserCode == user.UserCode).ToArray()));
-                
+            {               
+                    return BL.Converters.GMHConverter.convertToDTOarray((db.GMHs.Where(g => g.UserCode == user.UserCode).ToArray()));                
             }
         }
         public static bool saveChange(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
+                object a = db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode);
+                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).GmhName = gmh.GmhName;
+                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).Phone = gmh.Phone;
+                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).e_mail = gmh.e_mail;
+                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).comments = gmh.comments;
+                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.
+                GmhCode).Adress = gmh.Adress;
                 try
                 {
                     db.SaveChanges();

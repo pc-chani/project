@@ -18,5 +18,11 @@ namespace API.Controllers
             return Ok(BL.categories.GetCategories());
 
         }
+        [Route("addCategory")]
+        public IHttpActionResult addCategory(DTO.CategoryGMH c)
+        {
+            return Ok(BL.categories.addCategory(c));
+
+        }
     }
 }

@@ -40,8 +40,7 @@ export class OneGmhComponent implements OnInit {
   formData: FormData = new FormData();
   startDate; endDate;
   constructor(private router: Router, private route: ActivatedRoute,
-    private gmhService: GmhService, private productsServices: ProductsService,
-    private http: HttpClient, private sanitizer: DomSanitizer) {
+    private gmhService: GmhService, private productsServices: ProductsService) {
     ;
   }
   ngOnInit(): void {
@@ -59,7 +58,7 @@ export class OneGmhComponent implements OnInit {
       GmhCode: new FormControl(),
       Amount: new FormControl(),
       FreeDescription: new FormControl(),
-      IsDisposable: new FormControl({ checked: false }, Validators.required),
+      IsDisposable: new FormControl({ checked: false }),
       SecurityDepositAmount: new FormControl(),
       Status: new FormControl(),
     })

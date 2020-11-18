@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   registerForm: FormGroup;
+  adress
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
@@ -29,13 +30,14 @@ export class RegisterComponent implements OnInit {
     }, { validators: CheckPassword('password', 'confirm') });
   }
   handleDestinationChange(a: Address) {
+    this.adress=a.formatted_address
     console.log(a)
   }
   addUser() {
     let user = new User();
     user.FirstName = this.registerForm.controls.firstName.value;
     user.LastName = this.registerForm.controls.lastName.value;
-    user.Adress = this.registerForm.controls.adress.value;
+    user.Adress = this.adress
     user.Cell_Phone = this.registerForm.controls.cell_phone.value;
     user.Phone = this.registerForm.controls.phone.value;
     user.E_mail = this.registerForm.controls.e_mail.value;

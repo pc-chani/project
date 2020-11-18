@@ -15,7 +15,7 @@ namespace DTO
         public int CategoryCode { get; set; }
         public string Phone { get; set; }
         public string e_mail { get; set; }
-        public string commits { get; set; }
+        public string comments { get; set; }
 
     }
 }

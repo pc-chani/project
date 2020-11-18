@@ -4,8 +4,8 @@
     <div>
         <table *ngFor="let g of myGmhim" class="table table-hover">
             <tbody>
-                <tr>
-                    <td>{{g.GmhName}} </td>
+                <tr >
+                    <td (click)="edit(g)">{{g.GmhName}} </td>
                     <td>{{g.Adress}}</td>
                     <td>{{g.Phone}}</td>
                     <td>{{g.e_mail}}</td>
@@ -19,14 +19,22 @@
                     <td><input type="button" value='ניהול הגמ"ח' [routerLink]="['/one-gmh',g.GmhCode]"></td>
                 </tr>
                 <tr *ngIf="open && g==currentgmh">פרטי הגמח:<img src="assets\close.png" (click)="close()">
-                    <p>שם:<input type="text" value="{{currentgmh.GmhName}}"></p>
-                    <p>טלפון:<input type="text" value="{{currentgmh.Phone}}"></p>
-                    <p>אימיל:<input type="text" value="{{currentgmh.e_mail}}"></p>
-                    <p>כתובת:<input type="text" value="{{currentgmh.Adress}}"></p>
-                    <p>שם:<input type="text" value="{{currentgmh.User.FirstName}}"> <input type="text"
-                            value="{{currentgmh.User.LastName}}"></p>
-                    <p>הערות:<input type="text" value="{{currentgmh.commits}}"></p>
-                    <p><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange()"></p>
+                    <div>
+                        <form [formGroup]="editGmhForm">
+                            <p>הגמח :<input type="text" formControlName="GmhhName"></p>
+                            <p>טלפון:<input type="text" formControlName="Phone"></p>
+                            <p>אימיל:<input type="text" formControlName="E_mail"></p>
+                            <p>כתובת:
+                                <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+                                    (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
+                            </p>
+                            <!--<p>שם:<input type="text" formControlName="Phone"> <input type="text"
+                                   ></p>להחליף לשם אחד?-->
+                            <p>הערות:<input type="text" formControlName="Comments"></p>
+                            <p><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange()">
+                            </p>
+                        </form>
+                    </div>
                 </tr>
             </tbody>
         </table>
@@ -38,26 +46,42 @@
                 <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
             </div>
             <div class="form-group">
-                <label> קטגוריה:</label> <input type="radio" name="rad" #r1 >
-                <input type="text" placeholder="בחר " [disabled]="r1.checked" aria-label="Number" matInput formControlName="Categories"
-                    [matAutocomplete]="auto" [value]="displayFn">
-                <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
+                <label> קטגוריה:</label>
+                <input type="radio" name="rad" #r1 [checked]="true" (click)="choosecategory()">
+                <input type="text" placeholder="בחר "  aria-label="Number" matInput
+                    formControlName="category" [matAutocomplete]="auto" [value]="displayFn">
+                <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                    (optionSelected)="getTatCategoriesForGmh($event)">
                     <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
                         {{c.CategoryName}}
                     </mat-option>
                 </mat-autocomplete>
-               
-                <div class="error" *ngIf="gmhForm.controls['Categories'].errors!=null">*</div>
-                <input type="radio" name="rad" #r2> <input type="text" [disabled]="r2.checked" placeholder="הוסף קטגוריה" formControlName="newCategory" [checked]="true">
+
+                <div class="error" *ngIf="gmhForm.controls['tatCategory'].errors!=null">*</div>
+                <input type="radio" name="rad" #r2 (click)="newcategory()"> <input type="text" placeholder="הוסף קטגוריה"
+                    formControlName="newCategory">
+            </div>
+            <div class="form-group">
+                <label> תת קטגוריה:</label>
+                <input type="radio" name="ra" #r3 [checked]="true" (click)="choosetatcategory()">
+                <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
+                    [value]="displayFn" formControlName="tatCategory">
+                <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let tc of filteredTatCategories | async" [value]="tc">
+                        {{tc.CategoryName}}
+                    </mat-option>
+                </mat-autocomplete>
+                <input type="radio" name="ra" #r4 (click)="newtatcategory()"> <input type="text" placeholder="הוסף קטגוריה"
+                    formControlName="newTatCategory" [checked]="true">
             </div>
             <div class="form-group">
                 <label> הערות:</label>
-                <input class="txt" type="text" class="form-control" formControlName="commits">
-                <div class="error" *ngIf="gmhForm.controls['commits'].errors!=null">*</div>
+                <input class="txt" type="text" class="form-control" formControlName="comments">
+                <div class="error" *ngIf="gmhForm.controls['comments'].errors!=null">*</div>
             </div>
             <div>
-                <input type="button" class="btn btn-success" value="הוסף" (click)="addGmh()" [disabled]="!gmhForm.valid"
-                    style="margin-right: 35%;">
+                <input type="button" class="btn btn-success" value="הוסף" (click)="setCategoty()"
+                    [disabled]="!gmhForm.valid" style="margin-right: 35%;">
             </div>
         </form>
         <!-- <td><input type="button" class="btn btn-primary" value="שמור שינויים"></td>-->

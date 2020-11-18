@@ -3,6 +3,7 @@ import { User } from 'src/app/shared/models/User.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CheckPassword } from 'src/app/validators/valid';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
   selector: 'app-add-gmh',
@@ -11,6 +12,7 @@ import { CheckPassword } from 'src/app/validators/valid';
 })
 export class AddGMHComponent implements OnInit {
   registerForm: FormGroup;
+  adrres: string;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class AddGMHComponent implements OnInit {
     let user = new User();
     user.FirstName = this.registerForm.controls.firstName.value;
     user.LastName = this.registerForm.controls.lastName.value;
-    user.Adress = this.registerForm.controls.adress.value;
+    user.Adress = this.adrres;
     user.Cell_Phone = this.registerForm.controls.cell_phone.value;
     user.Phone = this.registerForm.controls.phone.value;
     user.E_mail = this.registerForm.controls.e_mail.value;
@@ -44,6 +46,10 @@ export class AddGMHComponent implements OnInit {
       res => { console.log(res); },
       err => { console.log(err); }
     )
+  }
+  handleDestinationChange(a: Address) {
+    this.adrres=a.formatted_address;
+    console.log(a)
   }
   getUser() {
     this.userService.getUser().subscribe(

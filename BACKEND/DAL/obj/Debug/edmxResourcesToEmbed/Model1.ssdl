@@ -33,7 +33,7 @@
     <Property Name="CategoryCode" Type="int" Nullable="false" />
     <Property Name="Phone" Type="nvarchar" MaxLength="10" />
     <Property Name="e-mail" Type="nvarchar" MaxLength="50" />
-    <Property Name="commits" Type="nvarchar" MaxLength="50" />
+    <Property Name="comments" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Images">
     <Key>

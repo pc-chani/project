@@ -16,8 +16,8 @@ export class AppComponent {
   
   constructor( public userService: UserService) { }
   ngOnInit(): void {
-    const fingerprint = getBrowserFingerprint();
-console.log(fingerprint);
+   // const fingerprint = getBrowserFingerprint();
+//console.log(fingerprint);
 
     this.currentUser=this.userService.CurrentUser;
     console.log(this.currentUser);

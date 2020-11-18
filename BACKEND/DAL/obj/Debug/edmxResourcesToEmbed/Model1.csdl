@@ -25,10 +25,10 @@
     <Property Name="CategoryCode" Type="Int32" Nullable="false" />
     <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="commits" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CategoryGMH" Relationship="Self.FK__GMH__CategoryCod__3A81B327" FromRole="GMH" ToRole="CategoryGMH" />
     <NavigationProperty Name="USER" Relationship="Self.FK__GMH__UserCode__398D8EEE" FromRole="GMH" ToRole="USERS" />
     <NavigationProperty Name="PRODUCTtoGMHs" Relationship="Self.FK__PRODUCTto__GmhCo__75A278F5" FromRole="GMH" ToRole="PRODUCTtoGMH" />
+    <Property Name="comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="LENDING">
     <Key>
