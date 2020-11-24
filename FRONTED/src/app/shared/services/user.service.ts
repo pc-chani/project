@@ -25,10 +25,7 @@ export class UserService {
   setLogoff(){
     this.currentUser=undefined;
   }
-  checkUser(email:string,password:string,user:User):Observable<boolean>{//post 
-user.Password=password
-user.E_mail=email
-
+  checkUser(user:User):Observable<boolean>{//post 
     return this.http.post<boolean>(environment.url+'user/checkUser',user);
   }
   addUser(user:User): Observable<boolean>{//post

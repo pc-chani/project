@@ -1,7 +1,6 @@
 export class User {
     UserCode: number
-    FirstName: string
-    LastName: string
+    Name: string
     Adress: string
     Phone: string
     Cell_Phone: string

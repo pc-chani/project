@@ -17,8 +17,7 @@ export class AddGMHComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      Name: new FormControl('', Validators.required),
       adress: new FormControl('', Validators.required),
       cell_phone: new FormControl('', Validators.pattern('[0-9]{9}')),
       phone: new FormControl('', Validators.pattern('[0-9]{10}')),
@@ -31,8 +30,7 @@ export class AddGMHComponent implements OnInit {
   }
   addUser() {
     let user = new User();
-    user.FirstName = this.registerForm.controls.firstName.value;
-    user.LastName = this.registerForm.controls.lastName.value;
+    user.Name = this.registerForm.controls.Name.value;
     user.Adress = this.adrres;
     user.Cell_Phone = this.registerForm.controls.cell_phone.value;
     user.Phone = this.registerForm.controls.phone.value;

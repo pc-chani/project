@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GmhService } from 'src/app/shared/services/gmh.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/Product.model';
 import { map, startWith } from 'rxjs/operators';
 import getBrowserFingerprint from 'get-browser-fingerprint';
-
+import { Searches } from 'src/app/shared/models/Searches.model';
 @Component({
   selector: 'app-search-gmh',
   templateUrl: './search-gmh.component.html',
@@ -96,9 +96,24 @@ export class SearchGMHComponent implements OnInit {
       err => { console.log(err); }
     });
   }
-  search() {
+  saveSearch() {
     const fingerprint = getBrowserFingerprint();
-    console.log(fingerprint);
+    let s = new Searches();
+    s.fingerPrint = fingerprint;
+    if (this.currLat != 0) s.Adress = (this.currLat + " " + this.currLng).toString();
+    else if (this.adress != undefined) s.Adress = this.adress;
+    if (this.searchForm.controls.tatCategory.value.value != "") s.Category = this.searchForm.controls.tatCategory.value.value;
+    else if (this.searchForm.controls.category.value.value != undefined) s.Category = this.searchForm.controls.category.value.value;
+    else if (this.searchForm.controls.textSearch.value.Productname != ""){
+      s.Category = this.products.find(p => p.Productname == this.searchForm.controls.textSearch.value.Productname).CategoryCode;
+    }
+console.log(s);
+
+    this.gmhService.saveSearch(s).subscribe(
+      res => console.log(res)
+    )
+  }
+  search() {
     this.openGmhDetails = null
     this.formData = new FormData();
     if (this.searchForm.controls.textSearch.value != null)
@@ -112,27 +127,30 @@ export class SearchGMHComponent implements OnInit {
       this.formData.append('tatCategory', this.tatC.CategoryCode)
     }
     else this.formData.append('tatCategory', 0);
+    
     if (this.adress == undefined) {
-       this.formData.append('CurrentLocation1', this.currLat); 
-       this.formData.append('CurrentLocation2', this.currLng)
-       this.formData.append('location', "")
-      }
+      this.formData.append('CurrentLocation1', this.currLat);
+      this.formData.append('CurrentLocation2', this.currLng)
+      this.formData.append('location', "")
+    }
     else {
       this.formData.append('location', this.adress.formatted_address);
-      this.formData.append('CurrentLocation1', 0); 
+      this.formData.append('CurrentLocation1', 0);
       this.formData.append('CurrentLocation2', 0)
     }
-      this.gmhService.search(this.formData).subscribe(res => {
-        this.gmhs = res;
-        this.gmhs.forEach(e => {
-          this.gmhService.getUser(e).subscribe(res => {
-            e.User = res;
-            err => { console.log(err); }
-          });
+    this.gmhService.search(this.formData).subscribe(res => {
+      this.gmhs = res;
+      this.gmhs.forEach(e => {
+        this.gmhService.getUser(e).subscribe(res => {
+          e.User = res;
+          
+          err => { console.log(err); }
         });
-        console.log(res);
-        err => { console.log(err); }
       });
+      console.log(res);
+      this.saveSearch();
+      err => { console.log(err); }
+    });
   }
   showGMHS(a) {
     console.log(a);

@@ -14,7 +14,7 @@ namespace BL
         {           
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.GMHs.Add(Converters.GMHConverter.convertToDal(gmh));
+                db.GMH.Add(Converters.GMHConverter.convertToDal(gmh));
                 try
                 {
                     db.SaveChanges();
@@ -45,13 +45,13 @@ namespace BL
             { 
                 //List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
                 //pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
-                db.PRODUCTtoGMHs.RemoveRange(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode));
-                List<DAL.LENDING> list = new List<DAL.LENDING>();
-                List<DAL.Image> list1 = new List<DAL.Image>();
+                db.PRODUCTtoGMH.RemoveRange(db.PRODUCTtoGMH.Where(p => p.GmhCode == gmh.GmhCode));
+                List<DAL.LENDINGS> list = new List<DAL.LENDINGS>();
+                List<DAL.Images> list1 = new List<DAL.Images>();
 
                 foreach (var l in db.LENDINGS)
                 {
-                    foreach (var p in db.PRODUCTtoGMHs)
+                    foreach (var p in db.PRODUCTtoGMH)
                     {
                         if (l.ProductCode == p.ProductCodeToGMH && p.GmhCode == gmh.GmhCode)
                             list.Add(l);
@@ -60,7 +60,7 @@ namespace BL
                 }
                 foreach (var i in db.Images)
                 {
-                    foreach (var p in db.PRODUCTtoGMHs)
+                    foreach (var p in db.PRODUCTtoGMH)
                     {
                         if (i.ProductCodeToGMH == p.ProductCodeToGMH && p.GmhCode == gmh.GmhCode)
                             list1.Add(i);
@@ -69,7 +69,7 @@ namespace BL
                 }
                 db.LENDINGS.RemoveRange(list);
                 db.Images.RemoveRange(list1);
-                db.GMHs.Remove((db.GMHs.SingleOrDefault(g => g.GmhCode == gmh.GmhCode)));
+                db.GMH.Remove((db.GMH.SingleOrDefault(g => g.GmhCode == gmh.GmhCode)));
                 try
                 {
                     db.SaveChanges();
@@ -98,20 +98,19 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {               
-                    return BL.Converters.GMHConverter.convertToDTOarray((db.GMHs.Where(g => g.UserCode == user.UserCode).ToArray()));                
+                    return BL.Converters.GMHConverter.convertToDTOarray((db.GMH.Where(g => g.UserCode == user.UserCode).ToArray()));                
             }
         }
         public static bool saveChange(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                object a = db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode);
-                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).GmhName = gmh.GmhName;
-                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).Phone = gmh.Phone;
-                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).e_mail = gmh.e_mail;
-                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).comments = gmh.comments;
-                db.GMHs.FirstOrDefault(g => gmh.GmhCode == g.
-                GmhCode).Adress = gmh.Adress;
+                object a = db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode);
+                db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).GmhName = gmh.GmhName;
+                db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).Phone = gmh.Phone;
+                db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).e_mail = gmh.e_mail;
+                db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).comments = gmh.comments;
+                db.GMH.FirstOrDefault(g => gmh.GmhCode == g.GmhCode).Adress = gmh.Adress;
                 try
                 {
                     db.SaveChanges();
@@ -141,7 +140,7 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMHs.Where(s => s.MasterCategoryCode == masterGmachCode.CategoryCode).ToList());
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == masterGmachCode.CategoryCode).ToList());
                 // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
                 return (a.ToArray<CategoryGMH>());
 
@@ -152,7 +151,7 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMHs.Where(s => s.MasterCategoryCode == null).ToList());
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == null).ToList());
                 System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
                 return (a.ToArray<CategoryGMH>());
 
@@ -180,6 +179,7 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {         
                 List<GMH> a = new List<GMH>();
+
                 if (text != "")               
                     foreach (var product in db.Products)
                     {
@@ -187,16 +187,17 @@ namespace BL
 
                         if (product.Productname.Equals(text))
                         {
-                            foreach (var productToGmh in db.PRODUCTtoGMHs)
+                            foreach (var productToGmh in db.PRODUCTtoGMH)
                             {
                                 
                                 if (productToGmh.ProductCode == product.ProductCode)
                                 {
-                                    foreach (var gmh in db.GMHs)
+                                    foreach (var gmh in db.GMH)
                                     {
                                         if( gmh.GmhCode==productToGmh.GmhCode)
                                         
                                             if (CurrentLocation1 != 0) {
+
                                                 if (BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)) < 50)
                                                 {
                                                     a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
@@ -221,8 +222,8 @@ namespace BL
 
                 
 
-               if (db.GMHs.Where(s => s.CategoryCode == tatCategory) != null)
-                    foreach (var item in db.GMHs)
+               if (db.GMH.Where(g => g.CategoryCode == tatCategory) != null)
+                    foreach (var item in db.GMH)
                     {
                         System.Diagnostics.Debug.WriteLine("category");
 
@@ -245,8 +246,8 @@ namespace BL
                         }
                     }
 
-                if (db.GMHs.Where(s => s.CategoryCode == category) != null)
-                    foreach (var item in db.GMHs)
+                if (db.GMH.Where(g => g.CategoryCode == category) != null)
+                    foreach (var item in db.GMH)
                     {
                         System.Diagnostics.Debug.WriteLine("category");
 
@@ -259,17 +260,18 @@ namespace BL
                                 a.Add(BL.Converters.GMHConverter.convertToDTO(item));
                                 System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
                             }
-                            }
-                            else
+                        }
+                        else
                         {
                             System.Diagnostics.Debug.WriteLine("category 1");
                             if (item.CategoryCode == category && ((BL.GoogleMaps.GetDistance(item.Adress, location)) < 50))
                             {
                                 a.Add(BL.Converters.GMHConverter.convertToDTO(item));
                             }
-                            System.Diagnostics.Debug.WriteLine(BL.GoogleMaps.GetDistance(item.Adress, location)+","+item.Adress);
+                            System.Diagnostics.Debug.WriteLine(BL.GoogleMaps.GetDistance(item.Adress, location) + "," + item.Adress);
 
                         }
+
                     }
                 return a;
 

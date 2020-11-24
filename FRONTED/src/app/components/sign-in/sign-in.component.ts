@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/User.model';
 import { AppComponent } from 'src/app/app.component';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router,private cookieService: CookieService) { }
   signInForm: FormGroup;
   ngOnInit(): void {
     this.signInForm = new FormGroup({
@@ -22,10 +24,13 @@ export class SignInComponent implements OnInit {
   }
   checkUser() {
     let user = new User();
-    let E_mail: string = this.signInForm.controls.e_mail.value;
-    let passsword: string = this.signInForm.controls.password.value;
-    this.userService.checkUser(E_mail, passsword, user).subscribe(
+    user.E_mail = this.signInForm.controls.e_mail.value;
+   user.Password = this.signInForm.controls.password.value;
+    this.userService.checkUser(user).subscribe(
       res => { this.userService.setCurrentUser(res);
+        this.cookieService.set('userName', this.userService.CurrentUser.Name);
+        localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+
          console.log(res); 
         if (res != undefined)
          this.router.navigate(['/manageTheGMH'])

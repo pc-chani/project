@@ -52,4 +52,7 @@ export class ProductsService {
   addLending(l:Lending):Observable<boolean>{
     return this.http.post<boolean>(environment.url + 'lendings/addLending', l);
   }
+  removeLending(l:Lending):Observable<boolean>{
+    return this.http.post<boolean>(environment.url + 'lendings/deleteLending', l);
+  }
 }

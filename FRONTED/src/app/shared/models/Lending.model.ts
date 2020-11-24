@@ -3,6 +3,6 @@ export class Lending {
     UserCode: number
     ProductCode: number
     Amount: number
-    LendingDate: Date
-    ReturnDate: Date
+    LendingDate: string
+    ReturnDate: string
 }

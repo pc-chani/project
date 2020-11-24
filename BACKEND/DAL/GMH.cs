@@ -17,7 +17,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GMH()
         {
-            this.PRODUCTtoGMHs = new HashSet<PRODUCTtoGMH>();
+            this.PRODUCTtoGMH = new HashSet<PRODUCTtoGMH>();
         }
     
         public int GmhCode { get; set; }
@@ -30,8 +30,8 @@ namespace DAL
         public string comments { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
-        public virtual USER USER { get; set; }
+        public virtual USERS USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
+        public virtual ICollection<PRODUCTtoGMH> PRODUCTtoGMH { get; set; }
     }
 }

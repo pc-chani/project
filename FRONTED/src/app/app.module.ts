@@ -21,9 +21,10 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule, MatDateRangePicker, MatRangeDateSelectionModel , } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, } from '@angular/material/core';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -56,7 +57,7 @@ import { AddDonationComponent } from './components/add-donation/add-donation.com
     MatNativeDateModule ,
    
   ],
-  providers: [UserService],
+  providers: [UserService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,8 +17,8 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCTtoGMH()
         {
-            this.LENDINGS = new HashSet<LENDING>();
-            this.Images = new HashSet<Image>();
+            this.Images = new HashSet<Images>();
+            this.LENDINGS = new HashSet<LENDINGS>();
         }
     
         public int ProductCodeToGMH { get; set; }
@@ -31,10 +31,10 @@ namespace DAL
         public string Status { get; set; }
     
         public virtual GMH GMH { get; set; }
-        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LENDING> LENDINGS { get; set; }
+        public virtual ICollection<Images> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<LENDINGS> LENDINGS { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

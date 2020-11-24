@@ -41,7 +41,7 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                DAL.LENDING l1 = db.LENDINGS.SingleOrDefault(le => le.ProductCode == l.ProductCode);
+                DAL.LENDINGS l1 = db.LENDINGS.SingleOrDefault(le => le.ProductCode == l.ProductCode && le.LendingDate == l.LendingDate);
                 db.LENDINGS.Remove(l1);
                 try
                 {

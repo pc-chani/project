@@ -18,4 +18,12 @@ namespace DTO
         public string comments { get; set; }
 
     }
+    public class NeedsGmhim
+    {
+        public int id { get; set; }
+        public int category { get; set; }
+        public string Adress { get; set; }
+        public string city { get; set; }
+
+    }
 }

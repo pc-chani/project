@@ -8,7 +8,7 @@ namespace BL.Converters
 {
     public class LendingConverter
     {
-        public static DTO.LENDING convertToDTO(DAL.LENDING l)
+        public static DTO.LENDING convertToDTO(DAL.LENDINGS l)
         {
             return new DTO.LENDING
             {
@@ -20,9 +20,9 @@ namespace BL.Converters
             UserCode=l.UserCode
             };
         }
-        public static DAL.LENDING convertToDAL(DTO.LENDING l)
+        public static DAL.LENDINGS convertToDAL(DTO.LENDING l)
         {
-            return new DAL.LENDING
+            return new DAL.LENDINGS
             {
                 Amount = l.Amount,
                 LendingCode = l.LendingCode,
@@ -32,7 +32,7 @@ namespace BL.Converters
                 UserCode = l.UserCode
             };
         }
-        public static List<DTO.LENDING> convertToDTOList(List<DAL.LENDING> lList)
+        public static List<DTO.LENDING> convertToDTOList(List<DAL.LENDINGS> lList)
         {
             return lList.Select(l => convertToDTO(l)).ToList();
         }

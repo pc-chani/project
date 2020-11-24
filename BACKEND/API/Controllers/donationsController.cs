@@ -28,14 +28,16 @@ namespace API.Controllers
             var donation = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["donation"]);
             var dictionary = (Dictionary<string, object>)donation;
             DTO.Donations d = new DTO.Donations();
-            d.Adress = (string)dictionary.ElementAt(0).Value;
-            d.MasterCategory = (int?)dictionary.ElementAt(1).Value;
-            d.Description = (string)dictionary.ElementAt(2).Value;
+            d.Adress = (string)dictionary["Adress"];
+            d.MasterCategory = (int?)dictionary["MasterCategory"];
+            d.Description = (string)dictionary["Description"];
 
-            d.Phone = (string)dictionary.ElementAt(3).Value;
-            d. donationName= (string)dictionary.ElementAt(4).Value;
-            d.donorName = (string)dictionary.ElementAt(5).Value;
-         //   d.Phone = (string)dictionary.ElementAt(6).Value;
+            d.Phone = (string)dictionary["Phone"];
+            d. donationName= (string)dictionary["donationName"];
+
+            d.donorName = (string)dictionary["donorName"];
+            d.donorEmail= (string)dictionary["donorEmail"];
+
             string imageName = null;
             //Upload Image          
                 var postedFile = httpRequest.Files["Image"];
@@ -54,6 +56,16 @@ namespace API.Controllers
         public IHttpActionResult DeleteDonation(DTO.Donations d)
         {
             return Ok(BL.donationsBL.RemoveDonation(d));
+        }
+        [Route("GetDonationsAcorddingToCatrogoty")]
+        public IHttpActionResult GetDonationsAcorddingToCatrogoty(DTO.CategoryGMH c)
+        {
+            return Ok(BL.donationsBL.GetDonationsAcordingToCatrogoty(c));
+        }
+        [Route("GetDonationsAcorddingToAdress")]
+        public IHttpActionResult GetDonationsAcorddingToAdress(string adress)
+        {
+            return Ok(BL.donationsBL.GetDonationsAcordingToAdress(adress));
         }
     }
 }

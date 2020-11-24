@@ -19,7 +19,10 @@ namespace BL
                 try
                 {
                     db.SaveChanges();
-                    return db.Donations.Last().donationCode;
+                    int code = db.Donations.Last().donationCode;
+                    BL.EmailService.SendMail("תרומתך התקבלה", code+"מספר התרומה",d.donorEmail);
+                    return code;
+                      
                //שליחת מייל
                 }
                 catch (DbEntityValidationException ex)
@@ -70,6 +73,21 @@ namespace BL
                     return false;
                 }
             }
+        }
+        public static List<Donations> GetDonationsAcordingToCatrogoty(CategoryGMH c)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                return BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d=> d.Category==c.CategoryCode).ToList());
+            }
+        }
+        public static List<Donations> GetDonationsAcordingToAdress(string adress)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                return BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => (BL.GoogleMaps.GetDistance(d.Adress,adress)<20)).ToList());
+            }
+
         }
     }
 }

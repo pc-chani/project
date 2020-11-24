@@ -8,7 +8,7 @@ namespace BL.Converters
 {
     public class UserConverter
     {
-        public static DTO.User convertToDTO(DAL.USER u)
+        public static DTO.User convertToDTO(DAL.USERS u)
         {
             return new DTO.User
             {
@@ -16,29 +16,27 @@ namespace BL.Converters
                Adress=u.Adress,
                Cell_Phone=u.Cell_Phone,
                E_mail=u.E_mail,
-               FirstName=u.FirstName,
-               LastName=u.LastName,
+               Name=u.Name,
                Password=u.Password,
                Permission=u.Permission,
                Phone=u.Phone
             };
         }
-        public static DAL.USER convertToDal(DTO.User u)
+        public static DAL.USERS convertToDal(DTO.User u)
         {
-            return new DAL.USER
+            return new DAL.USERS
             {
                 UserCode = u.UserCode,
                 Adress = u.Adress,
                 Cell_Phone = u.Cell_Phone,
                 E_mail = u.E_mail,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
+                Name=u.Name,
                 Password = u.Password,
                 Permission = u.Permission,
                 Phone = u.Phone
             };
         }
-        public static List<DTO.User> convertToDTOList(List<DAL.USER> uList)
+        public static List<DTO.User> convertToDTOList(List<DAL.USERS> uList)
         {
             return uList.Select(u => convertToDTO(u)).ToList();
         }

@@ -7,6 +7,12 @@
     align-items: center;
   }
   .special-date {
-    background-color: red !important ;
+    background-color: rgb(130, 146, 238) !important ;
     color: brown;
+    border-radius: 20px;
+  }
+  .special-date1{
+    background-color: rgb(238, 130, 180) !important ;
+    color: rgb(212, 97, 97);
+    border-radius: 20px;
   }

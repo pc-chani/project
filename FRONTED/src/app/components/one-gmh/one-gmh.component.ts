@@ -12,6 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Lending } from 'src/app/shared/models/Lending.model';
+import { DatePipe } from '@angular/common';
 'use strict';
 export var currentProduct: productToGmh
 @Component({
@@ -26,26 +27,25 @@ export class OneGmhComponent implements OnInit {
   products: productToGmh[];
   show = false
   newProduct = false
- 
   newPForm: FormGroup
   editPForm: FormGroup
-
+  comment: boolean = false;
   imageSrc;
   urls = [];
   selectedDate;
   dates: Array<string> = [];
-  da: Array<Date> = []
   ps: Array<Product>
   filteredPs: Observable<Product[]>;
   formData: FormData = new FormData();
   startDate; endDate;
-  constructor(private router: Router, private route: ActivatedRoute,
-    private gmhService: GmhService, private productsServices: ProductsService) {
+  max;
+  constructor(private route: ActivatedRoute,
+    private gmhService: GmhService, private productsServices: ProductsService, private datepipe: DatePipe) {
     ;
   }
   ngOnInit(): void {
     this.editPForm = new FormGroup({
-      Name: new FormControl(),
+      Name: new FormControl(Validators.required),
       FreeDescription: new FormControl(),
       IsDisposable: new FormControl(),
       SecurityDepositAmount: new FormControl(),
@@ -73,15 +73,14 @@ export class OneGmhComponent implements OnInit {
       err => console.log(err),
     );
   }
-  get CurrentProduct(){
+  get CurrentProduct() {
     return currentProduct;
   }
   setProducts() {
     this.productsServices.getProductsForGMH(this.myGmh).subscribe(
       res => {
         this.products = res;
-        console.log(res);
-
+        //console.log(res);
         this.products.forEach(p => {
           this.productsServices.getProduct(p).subscribe(
             res => { p.Name = res.Productname; },
@@ -90,9 +89,7 @@ export class OneGmhComponent implements OnInit {
           this.productsServices.getLendings(p).subscribe(
             res => {
               p.Lendings = res;
-              res.forEach(r => this.da.push(r.LendingDate, r.ReturnDate))
             }
-
           )
           this.productsServices.getImage(p).subscribe(
             res => {
@@ -134,8 +131,7 @@ export class OneGmhComponent implements OnInit {
     this.show = false;
   }
   showdetails(p) {
-    console.log(p);
-
+    // console.log(p);
     this.show = true;
     currentProduct = p;
     this.editPForm.controls.Name.setValue(p.Name);
@@ -158,28 +154,46 @@ export class OneGmhComponent implements OnInit {
   saveChange(p) {
     currentProduct = p;
     if (!p.IsDisposable) {
-      let l = new Lending();
-      l.LendingDate = this.startDate;
-      l.ReturnDate = this.endDate;
-      l.UserCode = this.myGmh.UserCode;
-      l.ProductCode = p.ProductCodeToGMH;
-      this.productsServices.addLending(l).subscribe(
-        res => console.log(res)
-
-      )
+      if (this.dates.includes(this.startDate.toDateString().slice(4, 15))) {
+        let l = new Lending()
+        l.ProductCode = currentProduct.ProductCodeToGMH
+        l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
+        this.productsServices.removeLending(l).subscribe(
+          res => {
+            console.log(res);
+            if (res) this.setProducts()
+          }
+        )
+      }
+      else {
+        let l = new Lending();
+        l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
+        l.ReturnDate = this.datepipe.transform(this.endDate, 'MM/dd/yyyy');
+        l.UserCode = this.myGmh.UserCode;
+        l.ProductCode = p.ProductCodeToGMH;
+        console.log(l);
+        this.productsServices.addLending(l).subscribe(
+          res => {
+            console.log(res)
+            this.setProducts();
+          }
+        )
+      }
     }
     else {
       this.productsServices.changeAmount(p).subscribe(
-        res => console.log(res)
-
+        res => {
+          console.log(res)
+          this.setProducts();
+        }
       )
     }
-    this.setProducts()
+
   }
-  edit() {
-    let p = new productToGmh();
+
+  edit(p) {
+    //  let p = new productToGmh();
     p.ProductCodeToGMH = currentProduct.ProductCodeToGMH
-    p.ProductCode = 2002;//צריך להחליט מה עושים
     p.FreeDescription = this.editPForm.controls.FreeDescription.value;
     p.IsDisposable = this.editPForm.controls.IsDisposable.value;
     if (p.IsDisposable == null) p.IsDisposable = false;
@@ -188,7 +202,7 @@ export class OneGmhComponent implements OnInit {
     this.formData.append('product', JSON.stringify(p));
     this.productsServices.edit(this.formData).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
         if (res) {
           alert('השינויים נשמרו בהצלחה');
           this.setProducts();
@@ -201,11 +215,30 @@ export class OneGmhComponent implements OnInit {
     this.show = false;
     this.editPForm.reset()
   }
+  setP() {
+    let p = new productToGmh();
+    if (this.ps.includes(this.editPForm.controls.Name.value)) {
+      p.ProductCode = this.editPForm.controls.Name.value.ProductCode
+      this.edit(p)
+    }
+    else {
+      let pr = new Product();
+      pr.Productname = this.editPForm.controls.Name.value;
+      pr.CategoryCode = this.myGmh.CategoryCode;
+      this.productsServices.addPr(pr).subscribe(
+        res => {
+          p.ProductCode = res;
+          //console.log(res);
+         this.edit(p)
+        }
+      )
+    }
+  }
   setProduct() {
     let p = new productToGmh();
     if (this.ps.includes(this.newPForm.controls.Name.value)) {
-      p.ProductCode = this.newPForm.controls.Name.value.ProductCode
-      this.addProduct(p)
+      p.ProductCode = this.newPForm.controls.Name.value.ProductCode    
+        this.addProduct(p)
     }
     else {
       let pr = new Product();
@@ -214,8 +247,7 @@ export class OneGmhComponent implements OnInit {
       this.productsServices.addPr(pr).subscribe(
         res => {
           p.ProductCode = res;
-          console.log(res);
-          this.addProduct(p);
+            this.addProduct(p)
         }
       )
     }
@@ -252,7 +284,7 @@ export class OneGmhComponent implements OnInit {
       this.formData.append('Image' + i, file);
       i++;
     }
-    console.log(etf);
+    //console.log(etf);
     if (etf && etf[0]) {
       for (const f of etf) {
         const file = f;
@@ -260,56 +292,65 @@ export class OneGmhComponent implements OnInit {
         reader.onload = e => this.urls.push(reader.result);
         reader.readAsDataURL(file);
       }
-      console.log(this.urls);
+      //console.log(this.urls);
     }
   }
   onSelect(event) {
+    console.log(event);
     this.selectedDate = event;
   }
   dateClass = (d: Date): MatCalendarCellCssClasses => {
     let d1 = d.toDateString().slice(4, 15);
-    let dates: string[] = new Array<string>()
+    this.dates = new Array<string>()
     if (currentProduct.Lendings != undefined)
       currentProduct.Lendings.forEach(l => {
-        dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
+        this.dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
       });
-    if (dates != undefined)
-      for (let i = 0; i < dates.length; i += 2)
-        if (new Date(d1) >= new Date(dates[i]) && new Date(d1) <= new Date(dates[i + 1])) {
+    if (this.dates != undefined)
+      for (let i = 0; i < this.dates.length; i += 2)
+        if (new Date(d1) >= new Date(this.dates[i]) && new Date(d1) <= new Date(this.dates[i + 1])) {
           {
-             return 'special-date'; console.log(1);
+            return 'special-date';
           }
         }
     return '';
   }
   setStartDate(d) {
+    this.max = new Date(3000, 10, 10)
     this.startDate = d;
-    console.log(this.startDate, this.endDate);
+    this.dates.forEach(d1 => {
+      if (new Date(d1) > new Date(d) && new Date(d1) < new Date(this.max))
+        this.max = new Date(d1)
+    });
+    // console.log(this.startDate, this.endDate);
   }
   setEndDate(d) {
-    this.endDate = d;
-    console.log(this.startDate, this.endDate);
+    this.endDate = d
+    this.comment = true
+    if (this.endDate != null) {
+      this.max = new Date(3000, 10, 10)
+
+    }
+    //   console.log(this.startDate, this.endDate);
   }
   rangeFilter(date: Date): boolean {
     let d1 = date.toDateString().slice(4, 15);
-    let dates: string[] = new Array<string>()
-    console.log(currentProduct);
-
- currentProduct.Lendings.forEach(l => {
-   dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
- });
- if (dates != undefined)
-   for (let i = 0; i < dates.length; i += 2)
-     if (new Date(d1) >= new Date(dates[i]) && new Date(d1) <= new Date(dates[i + 1])) {
-       return false;
-     }
- //  console.log(d);  
-
+    this.dates = new Array<string>()
+    // console.log(currentProduct);
+    currentProduct.Lendings.forEach(l => {
+      this.dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
+    });
+    if (this.dates != undefined)
+      for (let i = 0; i < this.dates.length; i += 2) {
+        if ((new Date(d1) > new Date(this.dates[i]) && new Date(d1) < new Date(this.dates[i + 1])) || (!this.dates.includes(d1) && new Date(d1) < new Date())) {
+          return false;
+        }
+      }
+    //  console.log(d);  
     return true
   }
   myP(p) {
     //console.log(p);  
     currentProduct = p;
   }
- 
 }

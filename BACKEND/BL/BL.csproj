@@ -57,12 +57,14 @@
     <Compile Include="Converters\DonationConverter.cs" />
     <Compile Include="Converters\ImagesConverter.cs" />
     <Compile Include="Converters\ProductToGmhConverter.cs" />
+    <Compile Include="Converters\SearchesConverter.cs" />
     <Compile Include="donationsBL.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="gmhBL.cs" />
     <Compile Include="googlemaps.cs" />
     <Compile Include="lendingsBL.cs" />
     <Compile Include="productsBL.cs" />
+    <Compile Include="searchesBL.cs" />
     <Compile Include="UserBL.cs" />
     <Compile Include="Converters\CategoryGMHConvereter.cs" />
     <Compile Include="Converters\GMHConverter.cs" />

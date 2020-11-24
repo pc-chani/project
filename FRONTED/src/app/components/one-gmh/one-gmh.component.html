@@ -8,12 +8,14 @@
                 <td *ngIf="!p.IsDisposable">
                     <mat-form-field appearance="fill" on-mouseover="myP(p)">
                         <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter">
-                            <input matStartDate placeholder="Start date" (dateChange)="setStartDate($event.value)">
+                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" [max]="max">
+                            <!---->
+                            <input matStartDate placeholder="Start date" (dateChange)="setStartDate($event.value)" >
                             <input matEndDate placeholder="End date" (dateChange)="setEndDate($event.value)">
                         </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                         <mat-date-range-picker #picker [dateClass]="dateClass"></mat-date-range-picker>
+                    <input matInput type="text" *ngIf="comment">
                     </mat-form-field>
                 <td><input type="button" class="btn btn-primary" value="שמור שינויים" (click)="saveChange(p)"></td>
                 <td><img src="assets\editt.png" (click)="showdetails(p)"></td>
@@ -26,7 +28,7 @@
                     <form [formGroup]="editPForm">
                         <img src="assets\close.png" (click)="close()">
                         <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
-                            [matAutocomplete]="auto" [value]="displayFn">
+                            [matAutocomplete]="auto" [value]="displayFn" >
                         <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let p of filteredPs | async" [value]="p">
                                 {{p.Productname}}
@@ -47,7 +49,7 @@
                         <p>פקדון<input type="number" value="{{CurrentProduct.SecurityDepositAmount}}"
                                 formControlName="SecurityDepositAmount"></p>
                         <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status"></p>
-                        <p><input type="button" class="btn btn-primary" (click)="edit()" value="שמור שינויים"></p>
+                        <p><input type="button" class="btn btn-primary" (click)="setP()" value="שמור שינויים"></p>
                     </form>
                 </div>
             </tr>

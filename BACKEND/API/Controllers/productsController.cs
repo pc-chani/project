@@ -101,12 +101,12 @@ namespace API.Controllers
             var product = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["product"]);
             var dictionary = (Dictionary<string, object>)product;
             DTO.ProductToGMH p = new DTO.ProductToGMH();
-            p.ProductCodeToGMH = (int)dictionary.ElementAt(0).Value;
-            p.ProductCode = (int)dictionary.ElementAt(1).Value;
-            p.FreeDescription = (string)dictionary.ElementAt(2).Value;
-            p.IsDisposable = (bool)dictionary.ElementAt(3).Value;
-            p.SecurityDepositAmount = (int?)dictionary.ElementAt(4).Value;
-            p.Status = (string)dictionary.ElementAt(5).Value;
+            p.ProductCodeToGMH = (int)dictionary["ProductCodeToGMH"];
+            p.ProductCode = (int)dictionary["ProductCode"];
+            p.FreeDescription = (string)dictionary["FreeDescription"];
+            p.IsDisposable = (bool)dictionary["IsDisposable"];
+            p.SecurityDepositAmount = (int?)dictionary["SecurityDepositAmount"];
+            p.Status = (string)dictionary["Status"] ;
             string imageName = null;
             //Upload Image
             int c = httpRequest.Files.Count;
@@ -126,6 +126,5 @@ namespace API.Controllers
             }
             return Ok(BL.productsBL.edit(p,photos));
         }
-
     }
 }

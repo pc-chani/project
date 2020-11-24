@@ -8,7 +8,7 @@ namespace BL.Converters
 {
    public class DonationConverter
     {
-        public static DTO.Donations convertToDTO(DAL.Donation d)
+        public static DTO.Donations convertToDTO(DAL.Donations d)
         {
             return new DTO.Donations
             {
@@ -18,15 +18,16 @@ namespace BL.Converters
                donationCode=d.donationCode,
                donationName=d.donationName,
                donorName=d.donorName,
+               donorEmail=d.donorEmail,
                MasterCategory=d.MasterCategory,
                Phone=d.Phone,
                Picture=d.Picture
 
             };
         }
-        public static DAL.Donation convertToDAL(DTO.Donations d)
+        public static DAL.Donations convertToDAL(DTO.Donations d)
         {
-            return new DAL.Donation
+            return new DAL.Donations
             {
                 Adress = d.Adress,
                 Category = d.Category,
@@ -40,7 +41,7 @@ namespace BL.Converters
 
             };
         }
-        public static List<DTO.Donations> convertToDTOList(List<DAL.Donation> dList)
+        public static List<DTO.Donations> convertToDTOList(List<DAL.Donations> dList)
         {
             return dList.Select(d => convertToDTO(d)).ToList();
         }

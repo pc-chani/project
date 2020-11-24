@@ -3,7 +3,7 @@ import { GmhService } from 'src/app/shared/services/gmh.service';
 import { User } from 'src/app/shared/models/User.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GMH } from 'src/app/shared/models/Gmh.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Observable } from 'rxjs';
@@ -38,6 +38,8 @@ export class ManageTheGMHComponent implements OnInit {
     //   res => this.categories = res,
     //   err => console.log(err)
     //);
+    this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
+    this.gmhService.setMyGmhim(this.myGmhim)
     this.gmhForm = new FormGroup({
       GmhName: new FormControl(),
       category: new FormControl(),
@@ -51,8 +53,8 @@ export class ManageTheGMHComponent implements OnInit {
 
     this.editGmhForm = new FormGroup({
       GmhhName: new FormControl(),
-      Phone: new FormControl(),
-      E_mail: new FormControl(),
+      Phone: new FormControl(Validators.pattern('[0-9]{9}')),
+      E_mail: new FormControl(Validators.email),
       Comments: new FormControl(),
       Adress: new FormControl(),
       userName: new FormControl()
@@ -69,11 +71,13 @@ export class ManageTheGMHComponent implements OnInit {
     this.gmhService.getMyGmhim(this.userService.CurrentUser).subscribe(
       res => {
         this.gmhService.setMyGmhim(res); this.myGmhim = res;
+        localStorage.setItem('gmhim', JSON.stringify(res));
+
         this.myGmhim.forEach(g =>
           this.gmhService.getUser(g).subscribe(
             res => g.User = res
           ))
-        console.log(res);
+        //console.log(res);
       },
       err => { console.log(err); }
     )
@@ -92,6 +96,7 @@ export class ManageTheGMHComponent implements OnInit {
   edit(g: GMH) {
     this.open = true
     this.currentgmh = g;
+    this.adress=this.currentgmh.Adress;
     this.editGmhForm.controls.GmhhName.setValue(g.GmhName)
     this.editGmhForm.controls.Adress.setValue(g.Adress)
     this.editGmhForm.controls.Phone.setValue(g.Phone)
@@ -246,6 +251,7 @@ export class ManageTheGMHComponent implements OnInit {
   newcategory() {
     this.gmhForm.controls["newCategory"].enable();
     this.gmhForm.controls["category"].disable();
+    this.gmhForm.controls["tatCategory"].disable();
     this.gmhForm.controls["category"].setValue('');
 
   }

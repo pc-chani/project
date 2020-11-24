@@ -10,7 +10,7 @@ namespace BL.Converters
 {
    public class ProductConverter
     {
-        public static DTO.PRODUCT convertToDTO(DAL.Product p)
+        public static DTO.PRODUCT convertToDTO(DAL.Products p)
         {
             return new DTO.PRODUCT
             {
@@ -19,21 +19,21 @@ namespace BL.Converters
                 Productname=p.Productname,
             };
         }
-        public static DAL.Product convertToDal(DTO.PRODUCT p)
+        public static DAL.Products convertToDal(DTO.PRODUCT p)
         {
-            return new DAL.Product
+            return new DAL.Products
             {
                 CategoryCode = p.CategoryCode,
                 ProductCode = p.ProductCode,
                 Productname = p.Productname,
             };
         }
-        public static List<DTO.PRODUCT> convertToDTOList(List<DAL.Product> pList)
+        public static List<DTO.PRODUCT> convertToDTOList(List<DAL.Products> pList)
         {
             return pList.Select(p => convertToDTO(p)).ToList();
         }
 
-        public static DTO.PRODUCT[] convertToDTOarray(DAL.Product[] pList)
+        public static DTO.PRODUCT[] convertToDTOarray(DAL.Products[] pList)
         {
             return pList.Select(p => convertToDTO(p)).ToArray();
         }

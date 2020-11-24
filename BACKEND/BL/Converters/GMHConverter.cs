@@ -30,12 +30,16 @@ namespace BL.Converters
                 GmhName = g.GmhName,
                 GmhCode = g.GmhCode,
                 Adress = g.Adress,
-                
                 CategoryCode = g.CategoryCode,
-            
-                
                 UserCode = g.UserCode
-
+            };
+        }
+        public static DAL.NeedsGmhim convertToDal(DTO.NeedsGmhim ng)
+        {
+            return new DAL.NeedsGmhim
+            {
+                ADRESS=ng.Adress,
+                CATEGORY=ng.category,             
             };
         }
         public static List<DTO.GMH> convertToDTOList(List<DAL.GMH> gList)

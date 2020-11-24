@@ -1,8 +1,7 @@
 <header style="padding: 10px;">
   <ul id="nav" class="nav nav-tabs">
-    
-    <p *ngIf="userService.CurrentUser==undefined" >שלום אורח/ת</p>
-    <p *ngIf="userService.CurrentUser!=undefined">שלום {{userService.CurrentUser.FirstName}}</p>
+    <p *ngIf="currentUser==undefined && cookieValue==undefined" >שלום אורח/ת</p>
+    <p *ngIf="currentUser!=undefined">שלום {{cookieValue}}</p>
   
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/signIn']" routerLinkActive="active">כניסה</a>
@@ -30,9 +29,9 @@
       <a class="nav-link" [routerLink]="['/searchGMH']"  routerLinkActive="active"> חיפוש גמ"ח </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" *ngIf="userService.CurrentUser==undefined" (click)="message()" [routerLink]="['/signIn']" routerLinkActive="active"> ניהול גמ"ח </a>
+      <a class="nav-link" *ngIf="currentUser==undefined" (click)="message()" [routerLink]="['/signIn']" routerLinkActive="active"> ניהול גמ"ח </a>
       <p *ngIf="show && userService.CurrentUser==undefined"  >עוד לא הזדהת/ה במערכת</p>
-      <a class="nav-link" *ngIf="userService.CurrentUser!=undefined"  [routerLink]="['/manageTheGMH']" routerLinkActive="active"> ניהול גמ"ח </a>
+      <a class="nav-link" *ngIf="currentUser!=undefined"  [routerLink]="['/manageTheGMH']" routerLinkActive="active"> ניהול גמ"ח </a>
     </li>
     <li class="nav-item">
       <a class="nav-link"> תרומה לגמ"ח</a>

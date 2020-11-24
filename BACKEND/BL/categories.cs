@@ -15,7 +15,7 @@ namespace BL
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                return BL.Converters.CategoryGMHConvereter.convertToDTOList((db.CategoryGMHs.Select(c=>c).ToList()));
+                return BL.Converters.CategoryGMHConvereter.convertToDTOList((db.CategoryGMH.Select(c=>c).ToList()));
 
             }
         }
@@ -26,7 +26,7 @@ namespace BL
             {
                if(c.MasterCategoryCode==0) c.MasterCategoryCode = 5;
                 
-                db.CategoryGMHs.Add( BL.Converters.CategoryGMHConvereter.convertToDAL(c));
+                db.CategoryGMH.Add( BL.Converters.CategoryGMHConvereter.convertToDAL(c));
                 
                 try
                 {
@@ -44,8 +44,8 @@ namespace BL
                     }
                     System.Diagnostics.Debug.WriteLine("no");
                 }
-                db.CategoryGMHs.ToArray().Last().MasterCategoryCode = null;
-                return db.CategoryGMHs.ToArray().Last().CategoryCode;
+                db.CategoryGMH.ToArray().Last().MasterCategoryCode = null;
+                return db.CategoryGMH.ToArray().Last().CategoryCode;
             }
 
         }

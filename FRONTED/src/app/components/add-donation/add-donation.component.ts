@@ -39,6 +39,7 @@ export class AddDonationComponent implements OnInit {
       tatCategories:new FormControl({ value: '', disabled: true }),
       comments:new FormControl(''),
       donorName: new FormControl('', Validators.required),
+      donorEmail: new FormControl('', Validators.email),
       adress: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.pattern('[0-9]{9,10}'))
     })
@@ -106,6 +107,8 @@ d.Description=this.donationForm.controls.comments.value;
 d.Phone=this.donationForm.controls.phone.value;
 d.donationName=this.donationForm.controls.donationName.value;
 d.donorName=this.donationForm.controls.donorName.value;
+d.donorEmail=this.donationForm.controls.donorEmail.value;
+
 this.formData.append('donation',JSON.stringify(d))
 this.donationService.addDonation(this.formData).subscribe(
   res=>{console.log(res)

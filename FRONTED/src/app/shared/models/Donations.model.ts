@@ -5,6 +5,7 @@ export class donation {
     public MasterCategory: number
     public Description: string
     public donorName: string
+    public donorEmail: string
     public Adress: string
     public Phone: string
     public Picture: string

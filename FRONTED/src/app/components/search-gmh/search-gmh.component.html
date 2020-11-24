@@ -2,14 +2,13 @@
     <form [formGroup]="searchForm" (submit)="search()">
         <div class="form-group">
             <label> טקסט לחיפוש:</label>
-            <input type="text" placeholder="בחר " matInput formControlName="textSearch"
+            <input type="text" placeholder="בחר " matInput formControlName="textSearch" class="form-control"
             [matAutocomplete]="auto" [value]="displayFn">
             <mat-autocomplete matAutocomplete  #auto="matAutocomplete" [displayWith]="displayFn" >
                 <mat-option *ngFor="let p of filteredProducts | async" [value]="p" >
                     {{p.Productname}}
                 </mat-option>
             </mat-autocomplete>
-            <input class="txt" type="search" class="form-control" >
             <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> שדה נדרש</div>
         </div>
 
@@ -40,4 +39,4 @@
     </form>
 </div>
 
-<app-gmh *ngIf="gmhs" (send)="showGMHS($event)" [gmh]="gmhs"></app-gmh>
+<!--<app-gmh *ngIf="gmhs" (send)="showGMHS($event)" [gmh]="gmhs"></app-gmh>-->

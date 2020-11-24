@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { from } from 'rxjs';
 import { User } from './shared/models/User.model';
 import { UserService } from './shared/services/user.service';
-import getBrowserFingerprint from 'get-browser-fingerprint';
+import { CookieService } from 'ngx-cookie-service'
+import { GmhService } from './shared/services/gmh.service';
 
 
 @Component({
@@ -11,18 +13,23 @@ import getBrowserFingerprint from 'get-browser-fingerprint';
 })
 export class AppComponent {
   title = 'app';
-  show=false;
-  currentUser:User=this.userService.CurrentUser;;
-  
-  constructor( public userService: UserService) { }
-  ngOnInit(): void {
-   // const fingerprint = getBrowserFingerprint();
-//console.log(fingerprint);
+  show = false;
+  currentUser: User = this.userService.CurrentUser;
+  cookieValue;
 
-    this.currentUser=this.userService.CurrentUser;
+  constructor(public userService: UserService, private cookieService: CookieService) { }
+  ngOnInit(): void {
+
+    this.cookieValue = this.cookieService.get('userName');
+    
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.userService.setCurrentUser(this.currentUser)
+    console.log(this.cookieValue);
+    if(this.currentUser!=null)
+    this.currentUser.Name = this.cookieValue;
     console.log(this.currentUser);
   }
-  message(){
-this.show=true
+  message() {
+    this.show = true
   }
 }

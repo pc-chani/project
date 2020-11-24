@@ -8,7 +8,7 @@ namespace BL.Converters
 {
     public class OpinionConverter
     {
-        public static DTO.OPINION convertToDTO(DAL.OPINION o)
+        public static DTO.OPINION convertToDTO(DAL.OPINIONS o)
         {
             return new DTO.OPINION
             {
@@ -18,9 +18,9 @@ namespace BL.Converters
              Rating=o.Rating
             };
         }
-        public static DAL.OPINION convertToDal(DTO.OPINION o)
+        public static DAL.OPINIONS convertToDal(DTO.OPINION o)
         {
-            return new DAL.OPINION
+            return new DAL.OPINIONS
             {
                 Comment = o.Comment,
                 LandingCode = o.LandingCode,
@@ -28,7 +28,7 @@ namespace BL.Converters
                 Rating = o.Rating
             };
         }
-        public static List<DTO.OPINION> convertToDTOList(List<DAL.OPINION> oList)
+        public static List<DTO.OPINION> convertToDTOList(List<DAL.OPINIONS> oList)
         {
             return oList.Select(o => convertToDTO(o)).ToList();
         }

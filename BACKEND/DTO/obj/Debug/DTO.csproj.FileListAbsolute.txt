@@ -12,7 +12,6 @@ C:\Users\p.c\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.dll
 C:\Users\p.c\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.pdb
 C:\Users\user\Desktop\GMHproject\BACKEND\DTO\bin\Debug\DTO.dll
 C:\Users\user\Desktop\GMHproject\BACKEND\DTO\bin\Debug\DTO.pdb
-C:\Users\user\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
 C:\Users\user\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.dll
 C:\Users\user\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.pdb
@@ -22,3 +21,4 @@ C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DTO\obj\De
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DTO\obj\Debug\DTO.dll
 C:\Users\ילדים\Desktop\הפרוייקט\תכלס\Project\BACKEND\DTO\obj\Debug\DTO.pdb
+C:\Users\user\Desktop\GMHproject\BACKEND\DTO\obj\Debug\DTO.csprojAssemblyReference.cache

@@ -1,14 +1,9 @@
 <div class="content">
     <form [formGroup]="registerForm" (submit)="addUser()">
         <div class="form-group">
-            <label> שם פרטי:</label>
-            <input class="txt" type="text" class="form-control" formControlName="firstName">
-            <div class="error" *ngIf="registerForm.controls['firstName'].errors!=null"> שדה נדרש</div>
-        </div>
-        <div class="form-group">
-            <label> שם משפחה:</label>
-            <input class="txt" type="text" class="form-control" formControlName="lastName">
-            <div class="error" *ngIf="registerForm.controls['lastName'].errors!=null"> שדה נדרש</div>
+            <label> שם :</label>
+            <input class="txt" type="text" class="form-control" formControlName="Name">
+            <div class="error" *ngIf="registerForm.controls['Name'].errors!=null"> שדה נדרש</div>
         </div>
         <div class="form-group">
             <label> כתובת:</label>

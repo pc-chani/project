@@ -18,10 +18,12 @@ namespace DAL
         public CategoryGMH()
         {
             this.CategoryGMH1 = new HashSet<CategoryGMH>();
-            this.GMHs = new HashSet<GMH>();
-            this.Products = new HashSet<Product>();
-            this.Donations = new HashSet<Donation>();
-            this.Donations1 = new HashSet<Donation>();
+            this.Donations = new HashSet<Donations>();
+            this.Donations1 = new HashSet<Donations>();
+            this.GMH = new HashSet<GMH>();
+            this.NeedsGmhim = new HashSet<NeedsGmhim>();
+            this.Products = new HashSet<Products>();
+            this.Searches = new HashSet<Searches>();
         }
     
         public int CategoryCode { get; set; }
@@ -32,12 +34,16 @@ namespace DAL
         public virtual ICollection<CategoryGMH> CategoryGMH1 { get; set; }
         public virtual CategoryGMH CategoryGMH2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GMH> GMHs { get; set; }
+        public virtual ICollection<Donations> Donations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Donations> Donations1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donation> Donations { get; set; }
+        public virtual ICollection<GMH> GMH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donation> Donations1 { get; set; }
+        public virtual ICollection<NeedsGmhim> NeedsGmhim { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Searches> Searches { get; set; }
     }
 }

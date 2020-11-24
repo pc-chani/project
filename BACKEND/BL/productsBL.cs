@@ -24,7 +24,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return BL.Converters.ProductToGmhConverter.convertToDTOarray(db.PRODUCTtoGMHs.Where(p=>p.GmhCode==gmh.GmhCode).ToArray());
+                return BL.Converters.ProductToGmhConverter.convertToDTOarray(db.PRODUCTtoGMH.Where(p=>p.GmhCode==gmh.GmhCode).ToArray());
             }
         }   
         public static PRODUCT[] getProductsAccordingToGmhCategory(GMH gmh)
@@ -72,7 +72,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.PRODUCTtoGMHs.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).Amount = pTgmh.Amount;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).Amount = pTgmh.Amount;
                 try
                 {
                     db.SaveChanges();
@@ -98,10 +98,10 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.PRODUCTtoGMHs.Add(Converters.ProductToGmhConverter.convertToDal(pTgmh));
+                db.PRODUCTtoGMH.Add(Converters.ProductToGmhConverter.convertToDal(pTgmh));
                 photos.ForEach(p =>
                 {
-                    DAL.Image image = new DAL.Image();
+                    DAL.Images image = new DAL.Images();
                     image.Path = p;
                     image.ProductCodeToGMH = pTgmh.ProductCodeToGMH;
                     db.Images.Add(image);
@@ -128,14 +128,15 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.PRODUCTtoGMHs.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).FreeDescription = pTgmh.FreeDescription;
-                db.PRODUCTtoGMHs.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).IsDisposable = pTgmh.IsDisposable;
-                db.PRODUCTtoGMHs.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).Status = pTgmh.Status;
-                db.PRODUCTtoGMHs.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).SecurityDepositAmount = pTgmh.SecurityDepositAmount;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).FreeDescription = pTgmh.FreeDescription;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).IsDisposable = pTgmh.IsDisposable;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).Status = pTgmh.Status;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).SecurityDepositAmount = pTgmh.SecurityDepositAmount;
+                db.PRODUCTtoGMH.FirstOrDefault(p => p.ProductCodeToGMH == pTgmh.ProductCodeToGMH).ProductCode = pTgmh.ProductCode;
 
                 photos.ForEach(p =>
                 {
-                    DAL.Image image = new DAL.Image();
+                    DAL.Images image = new DAL.Images();
                     image.Path = p;
                     image.ProductCodeToGMH = pTgmh.ProductCodeToGMH;
                     db.Images.Add(image);
@@ -166,9 +167,9 @@ namespace BL
             {
                 db.LENDINGS.RemoveRange(db.LENDINGS.Where(l => l.ProductCode == p.ProductCodeToGMH));
                 db.Images.RemoveRange(db.Images.Where(i => i.ProductCodeToGMH == p.ProductCodeToGMH));
-                DAL.PRODUCTtoGMH p1 = db.PRODUCTtoGMHs.SingleOrDefault(pt => pt.ProductCodeToGMH == p.ProductCodeToGMH);
+                DAL.PRODUCTtoGMH p1 = db.PRODUCTtoGMH.SingleOrDefault(pt => pt.ProductCodeToGMH == p.ProductCodeToGMH);
                 if(p1!=null)//לבינתיים
-                db.PRODUCTtoGMHs.Remove(p1);
+                db.PRODUCTtoGMH.Remove(p1);
                 try
                 {
                     db.SaveChanges();

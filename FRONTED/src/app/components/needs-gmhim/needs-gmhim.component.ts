@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./needs-gmhim.component.css']
 })
 export class NeedsGMHimComponent implements OnInit {
-
+needsGmhim;
   constructor() { }
 
   ngOnInit(): void {

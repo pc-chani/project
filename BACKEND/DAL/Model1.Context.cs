@@ -25,14 +25,17 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CategoryGMH> CategoryGMHs { get; set; }
-        public virtual DbSet<GMH> GMHs { get; set; }
-        public virtual DbSet<LENDING> LENDINGS { get; set; }
-        public virtual DbSet<OPINION> OPINIONS { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<PRODUCTtoGMH> PRODUCTtoGMHs { get; set; }
-        public virtual DbSet<USER> USERS { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
-        public virtual DbSet<Donation> Donations { get; set; }
+        public virtual DbSet<CategoryGMH> CategoryGMH { get; set; }
+        public virtual DbSet<Donations> Donations { get; set; }
+        public virtual DbSet<GMH> GMH { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<LENDINGS> LENDINGS { get; set; }
+        public virtual DbSet<NeedsGmhim> NeedsGmhim { get; set; }
+        public virtual DbSet<OPINIONS> OPINIONS { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<PRODUCTtoGMH> PRODUCTtoGMH { get; set; }
+        public virtual DbSet<RequestForLoan> RequestForLoan { get; set; }
+        public virtual DbSet<Searches> Searches { get; set; }
+        public virtual DbSet<USERS> USERS { get; set; }
     }
 }
