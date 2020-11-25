@@ -1,3 +1,4 @@
+<a [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים אישיים</a>
 <div class="content">
     <h1>היי {{currentUser.Name}} , הגמחים שלך:</h1>
     <h1>מכאן תוכל\י לנהל אותם בקלות</h1>
@@ -47,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label> קטגוריה:</label>
-                <input type="radio" name="rad" #r1 [checked]="true" (click)="choosecategory()">
+                <input type="radio" name="rad"  [checked]="true" (click)="choosecategory()">
                 <input type="text" placeholder="בחר "  aria-label="Number" matInput
                     formControlName="category" [matAutocomplete]="auto" [value]="displayFn">
                 <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
@@ -58,12 +59,12 @@
                 </mat-autocomplete>
 
                 <div class="error" *ngIf="gmhForm.controls['tatCategory'].errors!=null">*</div>
-                <input type="radio" name="rad" #r2 (click)="newcategory()"> <input type="text" placeholder="הוסף קטגוריה"
+                <input type="radio" name="rad" (click)="newcategory()"> <input type="text" placeholder="הוסף קטגוריה"
                     formControlName="newCategory">
             </div>
             <div class="form-group">
                 <label> תת קטגוריה:</label>
-                <input type="radio" name="ra" #r3 [checked]="true" (click)="choosetatcategory()">
+                <input type="radio" name="ra" [checked]="true" (click)="choosetatcategory()">
                 <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
                     [value]="displayFn" formControlName="tatCategory">
                 <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
@@ -71,7 +72,7 @@
                         {{tc.CategoryName}}
                     </mat-option>
                 </mat-autocomplete>
-                <input type="radio" name="ra" #r4 (click)="newtatcategory()"> <input type="text" placeholder="הוסף קטגוריה"
+                <input type="radio" name="ra" (click)="newtatcategory()"> <input type="text" placeholder="הוסף קטגוריה"
                     formControlName="newTatCategory" [checked]="true">
             </div>
             <div class="form-group">

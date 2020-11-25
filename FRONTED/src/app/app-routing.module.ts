@@ -11,19 +11,19 @@ import { RegisterComponent } from './components/register/register.component';
 import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.component';
 import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
+import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-owner-details.component';
 
 
 const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'needsGMHim', component: NeedsGMHimComponent },
-  
+  { path: 'editOwnerDetails', component: EditOwnerDetailsComponent },
   { path: 'searchGMH', component: SearchGMHComponent },
   { path: 'manageTheGMH', component: ManageTheGMHComponent },
   { path: 'donations', component: DonationsComponent },
   { path: 'addDonation', component: AddDonationComponent },
-
-  {path:'one-gmh/:id',component:OneGmhComponent},
+  { path: 'one-gmh/:id', component: OneGmhComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent }
 ];

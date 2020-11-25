@@ -19,8 +19,8 @@ namespace BL
                 try
                 {
                     db.SaveChanges();
-                    int code = db.Donations.Last().donationCode;
-                    BL.EmailService.SendMail("תרומתך התקבלה", code+"מספר התרומה",d.donorEmail);
+                    int code = db.Donations.ToArray().Last().donationCode;
+                 //   BL.EmailService.SendMail("תרומתך התקבלה", code+"מספר התרומה",d.donorEmail);
                     return code;
                       
                //שליחת מייל

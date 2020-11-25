@@ -35,6 +35,7 @@ namespace BL.Converters
                 donationCode = d.donationCode,
                 donationName = d.donationName,
                 donorName = d.donorName,
+                donorEmail=d.donorEmail,
                 MasterCategory = d.MasterCategory,
                 Phone = d.Phone,
                 Picture = d.Picture

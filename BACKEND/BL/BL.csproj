@@ -63,6 +63,7 @@
     <Compile Include="gmhBL.cs" />
     <Compile Include="googlemaps.cs" />
     <Compile Include="lendingsBL.cs" />
+    <Compile Include="needsGmhim.cs" />
     <Compile Include="productsBL.cs" />
     <Compile Include="searchesBL.cs" />
     <Compile Include="UserBL.cs" />

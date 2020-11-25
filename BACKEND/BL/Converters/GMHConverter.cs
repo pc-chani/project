@@ -42,6 +42,18 @@ namespace BL.Converters
                 CATEGORY=ng.category,             
             };
         }
+        public static DTO.NeedsGmhim convertToDTO(DAL.NeedsGmhim ng)
+        {
+            return new DTO.NeedsGmhim
+            {
+               Adress=ng.ADRESS,
+               category=ng.CATEGORY
+            };
+        }
+        public static List<DTO.NeedsGmhim> convertToDTOList(List<DAL.NeedsGmhim> ngList)
+        {
+            return ngList.Select(ng => convertToDTO(ng)).ToList();
+        }
         public static List<DTO.GMH> convertToDTOList(List<DAL.GMH> gList)
         {
             return gList.Select(g => convertToDTO(g)).ToList();

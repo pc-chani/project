@@ -14,3 +14,9 @@ export class GMH{
     e_mail:string
     comments:string
 }
+
+export class needsGmh{
+   id :number
+   category :number
+   Adress:string
+}

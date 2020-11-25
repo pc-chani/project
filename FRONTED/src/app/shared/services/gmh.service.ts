@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User.model';
 import { Observable } from 'rxjs';
-import { GMH } from '../models/Gmh.model';
+import { GMH, needsGmh } from '../models/Gmh.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CategoryGMH } from '../models/CategoryGMH.model';
@@ -52,7 +52,12 @@ export class GmhService {
    // console.log(this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch));
     return this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch)
   }
-
+  getNeedsGmhim():Observable<needsGmh[]>{
+    return this.http.get<needsGmh[]>(environment.url+'gmh/getNeedsGmhim')
+  }
+  filterNeedsGmhim(fd:FormData):Observable<needsGmh[]>{
+    return this.http.post<needsGmh[]>(environment.url+'gmh/filterNeedsGmhim',fd)
+  }
   //showGMHS(a: any, gmhs: GMH[]) {   }
 
 }

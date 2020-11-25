@@ -25,6 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, } from '@angular/material/core';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
 import { DatePipe } from '@angular/common';
+import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-owner-details.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { DatePipe } from '@angular/common';
     GMHComponent,
     OneGmhComponent,
     AddDonationComponent,
+    EditOwnerDetailsComponent,
     
   ],
   imports: [

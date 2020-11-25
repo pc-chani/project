@@ -25,8 +25,8 @@ export class AppComponent {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.userService.setCurrentUser(this.currentUser)
     console.log(this.cookieValue);
-    if(this.currentUser!=null)
-    this.currentUser.Name = this.cookieValue;
+  // if(this.currentUser!=null)
+   // this.currentUser.Name = this.cookieValue;
     console.log(this.currentUser);
   }
   message() {

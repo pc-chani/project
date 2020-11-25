@@ -36,23 +36,18 @@ namespace API.Controllers
             return Ok(BL.gmhBL.saveChange(gMH));
         }
         [Route("getCategories")]
-
         public IHttpActionResult getCategories()
         {
 
             return Ok(BL.gmhBL.getCategories());
         }
         [Route("getCategoriesForGmach"), HttpPost]
-
         public IHttpActionResult getCategoriesForGmach(DTO.CategoryGMH masterGmachCode)
         {
 
             return Ok(BL.gmhBL.getCategoriesForGmach(masterGmachCode));
         }
-
-
         [Route("searchGMH"), HttpPost]
-
         public IHttpActionResult searchGMH()
         {
 
@@ -66,8 +61,21 @@ namespace API.Controllers
                 httpRequest["location"]
                 ));
         }
-        
-
+        [Route("getNeedsGmhim")]
+        public IHttpActionResult getNeedsGmhim()
+        {
+            return Ok(BL.needsGmhim.GetNeedsGmhim());
+        }
+        [Route("filterNeedsGmhim")]
+        public IHttpActionResult filterNeedsGmhim()
+        {
+            var httpRequest = HttpContext.Current.Request;
+            return Ok(BL.needsGmhim.filterNeedsGmhim(
+                Convert.ToInt32(httpRequest["category"]),
+                Convert.ToInt32(httpRequest["tatcategory"]),
+                Convert.ToString(httpRequest["adress"])));
+        }
+ 
     }
 
 }

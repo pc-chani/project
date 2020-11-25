@@ -30,6 +30,8 @@ namespace API.Controllers
             DTO.Donations d = new DTO.Donations();
             d.Adress = (string)dictionary["Adress"];
             d.MasterCategory = (int?)dictionary["MasterCategory"];
+            d.Category = (int?)dictionary["Category"];
+
             d.Description = (string)dictionary["Description"];
 
             d.Phone = (string)dictionary["Phone"];
