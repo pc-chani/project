@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import { AppComponent, DialogOverviewExampleDialog } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserService } from './shared/services/user.service';
 import { HomeComponent } from './components/home/home.component';
@@ -20,14 +20,16 @@ import { GMHComponent } from './components/gmh/gmh.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, } from '@angular/material/core';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
 import { DatePipe } from '@angular/common';
 import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-owner-details.component';
-
-
+import { myDonationComponent } from './components/my-donation/my-donation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-
     OneGmhComponent,
     AddDonationComponent,
     EditOwnerDetailsComponent,
-    
+    myDonationComponent,
+DialogOverviewExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -54,12 +57,15 @@ import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-
     GooglePlaceModule,
     MatAutocompleteModule,
     NoopAnimationsModule,
-    MatFormFieldModule ,
+    MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule ,
-   
+    MatNativeDateModule,
+    MatDialogModule,
+    
+    MatButtonModule,
+   MatInputModule
   ],
-  providers: [UserService,DatePipe],
+  providers: [UserService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

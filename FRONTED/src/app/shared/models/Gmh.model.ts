@@ -17,6 +17,7 @@ export class GMH{
 
 export class needsGmh{
    id :number
-   category :number
+   categoryCode :number
+   categotyName:string
    Adress:string
 }

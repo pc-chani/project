@@ -19,6 +19,15 @@ namespace BL
 
             }
         }
+        public static string GetCategoryName(int c)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+
+                return (db.CategoryGMH.FirstOrDefault(c1 => c1.CategoryCode==c)).CategoryName;
+
+            }
+        }
 
         public static int addCategory(CategoryGMH c)
         {

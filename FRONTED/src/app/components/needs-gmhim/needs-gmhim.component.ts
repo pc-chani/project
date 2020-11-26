@@ -4,6 +4,7 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
+import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { GmhService } from 'src/app/shared/services/gmh.service';
 
 @Component({
@@ -20,11 +21,19 @@ filteredTatCategories:Observable<CategoryGMH[]>
 categoriesControl=new FormControl();
 tatcategoriesControl=new FormControl();
 adress;
-  constructor(private gmhService:GmhService) { }
+  constructor(private gmhService:GmhService,private categoriesService:CategoriesService) { }
 
   ngOnInit(): void {
     this.gmhService.getNeedsGmhim().subscribe(
-      res=> this.needsGmhim=res
+      res=> {this.needsGmhim=res;
+        this.needsGmhim.forEach(ng => {
+          this.categoriesService.getCategoryName(ng.category).subscribe(
+          res=>  ng.categoryName=res
+          )
+        });
+        console.log(this.needsGmhim);
+        
+      }
     )
     this.getCategoryGmh()
   }
@@ -64,8 +73,20 @@ adress;
       });
   }
   handleDestinationChange(a: Address) {
-  //  console.log(a)
+    var  value=a.address_components
+   console.log(value)
     this.adress = a.formatted_address;
+  }
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.adress = (position.coords.latitude," ",position.coords.longitude).toString();
+      });
+    }
+    else {
+      alert("Geolocation is not supported by this browser.");
+    }
+    
   }
   filterNeedsGmhim(){
     let fd=new FormData()
@@ -77,7 +98,13 @@ adress;
     fd.append('tatcategory',this.tatcategoriesControl.value.CategoryCode)
     fd.append('adress',this.adress)
     this.gmhService.filterNeedsGmhim(fd).subscribe(
-      res=>this.needsGmhim=res
+      res=>{this.needsGmhim=res
+        this.needsGmhim.forEach(ng => {
+          this.categoriesService.getCategoryName(ng.category).subscribe(
+          res=>  ng.categoryName=res
+          )
+        });
+      }
     )
     this.adress=""
   }

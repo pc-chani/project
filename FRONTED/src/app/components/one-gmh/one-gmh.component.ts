@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { GmhService } from 'src/app/shared/services/gmh.service';
 import { productToGmh } from 'src/app/shared/models/productToGMH.model';
@@ -9,8 +9,6 @@ import { MatCalendarCellCssClasses, MatDatepicker } from '@angular/material/date
 import { Product } from 'src/app/shared/models/Product.model';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Lending } from 'src/app/shared/models/Lending.model';
 import { DatePipe } from '@angular/common';
 'use strict';
@@ -19,7 +17,6 @@ export var currentProduct: productToGmh
   selector: 'app-one-gmh',
   templateUrl: './one-gmh.component.html',
   styleUrls: ['./one-gmh.component.css'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class OneGmhComponent implements OnInit {
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;

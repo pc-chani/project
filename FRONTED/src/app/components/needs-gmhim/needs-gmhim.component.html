@@ -18,11 +18,13 @@
             </mat-option>
         </mat-autocomplete>
         <label> כתובת:</label>
-        <input ngx-google-places-autocomplete #placesRef="ngx-places"
+        <p (click)="getCurrentLocation()"><input type="radio" name="r" class="formControl">מיקום נוכחי </p>
+        <input type="radio" name="r">
+        <input ngx-google-places-autocomplete #placesRef="ngx-places" class="formControl"
             (onAddressChange)="handleDestinationChange($event)" placeholder="Address">‏
-        <input type="submit" value="סנן">
+        <input type="submit" value="סנן" class="btn btn-primary">
     </form>
-        <table >
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <td>קטגוריה</td>
@@ -32,8 +34,8 @@
             </thead>
             <tbody *ngFor="let ng of needsGmhim">
                 <tr >
-                <td></td>
-                <td></td>
+                <td>{{ng.categoryName}}</td>
+                <td>{{ng.Adress}}</td>
             </tr>
             </tbody>
         </table>

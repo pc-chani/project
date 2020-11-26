@@ -12,6 +12,7 @@ import { NeedsGMHimComponent } from './components/needs-gmhim/needs-gmhim.compon
 import { OneGmhComponent } from './components/one-gmh/one-gmh.component';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
 import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-owner-details.component';
+import { myDonationComponent } from './components/my-donation/my-donation.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'manageTheGMH', component: ManageTheGMHComponent },
   { path: 'donations', component: DonationsComponent },
   { path: 'addDonation', component: AddDonationComponent },
+  { path: 'myDonation', component: myDonationComponent },
   { path: 'one-gmh/:id', component: OneGmhComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent }

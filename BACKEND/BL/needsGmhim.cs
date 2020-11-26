@@ -18,21 +18,32 @@ namespace BL
         }
         public static List<NeedsGmhim> filterNeedsGmhim(int c,int tc,string adress)
         {
+            List<DTO.NeedsGmhim> needsGmhims = new List<DTO.NeedsGmhim>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                if (c != 0)
-                {
-
-                }
                 if (tc != 0)
                 {
+             
+
+                    needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY==tc).ToList()));
+                }
+                else if (c != 0)
+                {
+                    needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY == c).ToList()));
 
                 }
-                if(adress!= "undefined")
+                if (adress!= "undefined")
                 {
-                    
+                    foreach (DAL.NeedsGmhim ng in db.NeedsGmhim)
+                    {
+                        if (BL.GoogleMaps.GetDistance(ng.ADRESS, adress) < 50)
+                            needsGmhims.Add(BL.Converters.GMHConverter.convertToDTO(ng));
+                    }
+                      
+
                 }
-                return BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.ToList());
+                object a= needsGmhims.Distinct().ToList();
+                return (List<NeedsGmhim>)a;
             }
         }
     }

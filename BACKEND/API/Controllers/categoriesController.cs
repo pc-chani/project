@@ -18,7 +18,13 @@ namespace API.Controllers
             return Ok(BL.categories.GetCategories());
 
         }
-        [Route("addCategory")]
+        [Route("getCategoryName"),HttpPost]
+        public IHttpActionResult getCategoryName([FromBody] int c)
+        {
+            return Ok(BL.categories.GetCategoryName(c));
+
+        }
+        [Route("addCategory"),HttpPost]
         public IHttpActionResult addCategory(DTO.CategoryGMH c)
         {
             return Ok(BL.categories.addCategory(c));
