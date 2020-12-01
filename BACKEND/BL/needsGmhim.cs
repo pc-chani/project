@@ -42,8 +42,7 @@ namespace BL
                       
 
                 }
-                object a= needsGmhims.Distinct().ToList();
-                return (List<NeedsGmhim>)a;
+                return needsGmhims.Distinct().ToList();
             }
         }
     }

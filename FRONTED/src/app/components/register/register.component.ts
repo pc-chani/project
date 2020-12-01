@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  show: boolean=false;
   
 
   constructor(private userService: UserService,private cookieService: CookieService) { }
@@ -54,13 +55,10 @@ export class RegisterComponent implements OnInit {
       err => { console.log(err); }
     )
   }
-  getUser() {
-    this.userService.getUser().subscribe(
-      res => { console.log(res); },
-      err => { console.log(err); }
-    )
-  }
  
+  toshow(){
+    this.show=!this.show
+      }
 }
 
 

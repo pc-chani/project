@@ -49,6 +49,14 @@ namespace BL
             }
         
         }
+        public static Donations GetDonation(int code)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                return BL.Converters.DonationConverter.convertToDTO(db.Donations.FirstOrDefault(d => d.donationCode==code));
+            }
+
+        }
         public static bool RemoveDonation(Donations d)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
@@ -74,20 +82,50 @@ namespace BL
                 }
             }
         }
-        public static List<Donations> GetDonationsAcordingToCatrogoty(CategoryGMH c)
+        public static List<Donations> filterDonations(int c,int tc,string adress)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d=> d.Category==c.CategoryCode).ToList());
+                List<Donations> donations = new List<Donations>();
+                    if (tc != 0)
+                    {
+
+
+                        donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.Category == tc).ToList()));
+                    }
+                    else if (c != 0)
+                    {
+                    donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.MasterCategory == c).ToList()));
+
+                }
+                if (adress != "undefined")
+                    {
+                        foreach (DAL.Donations d in db.Donations)
+                        {
+                            if (BL.GoogleMaps.GetDistance(d.Adress, adress) < 50)
+                                donations.Add(BL.Converters.DonationConverter.convertToDTO(d));
+                        }
+                }
+                return donations;
             }
         }
-        public static List<Donations> GetDonationsAcordingToAdress(string adress)
+        public static bool saveChanges(Donations d)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                return BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => (BL.GoogleMaps.GetDistance(d.Adress,adress)<20)).ToList());
+                db.Donations.FirstOrDefault(d1 => d1.donationCode == d.donationCode).donationName = d.donationName;
+                db.Donations.FirstOrDefault(d1 => d1.donationCode == d.donationCode).Description = d.Description;
+                db.Donations.FirstOrDefault(d1 => d1.donationCode == d.donationCode).Picture = d.Picture;
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
-
         }
     }
 }

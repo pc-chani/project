@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-   public class gmhBL
-{
+    public class gmhBL
+    {
         public static bool addGMH(GMH gmh)
-        {           
+        {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 db.GMH.Add(Converters.GMHConverter.convertToDal(gmh));
@@ -42,7 +42,7 @@ namespace BL
         {
 
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            { 
+            {
                 //List<ProductToGMH> pr =BL.Converters.ProductToGmhConverter.convertToDTOList(db.PRODUCTtoGMHs.Where(p => p.GmhCode == gmh.GmhCode).ToList());
                 //pr.ForEach(p => db.Products.Remove(db.Products.FirstOrDefault(p1=>p1.ProductCode== p.ProductCode)));
                 db.PRODUCTtoGMH.RemoveRange(db.PRODUCTtoGMH.Where(p => p.GmhCode == gmh.GmhCode));
@@ -97,8 +97,8 @@ namespace BL
         public static GMH[] getMyGmhim(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {               
-                    return BL.Converters.GMHConverter.convertToDTOarray((db.GMH.Where(g => g.UserCode == user.UserCode).ToArray()));                
+            {
+                return BL.Converters.GMHConverter.convertToDTOarray((db.GMH.Where(g => g.UserCode == user.UserCode).ToArray()));
             }
         }
         public static bool saveChange(GMH gmh)
@@ -157,30 +157,13 @@ namespace BL
 
             }
         }
-
-       // public static List<GMH> searchGMH(CategoryGMH gmhForSEarch)
-       // {
-       //     using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-       //     {
-       //         List<GMH> a=new List<GMH>();
-       //
-       //
-       //         if (db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode) != null)
-       //              a = BL.Converters.GMHConverter.convertToDTOList(db.GMHs.Where(s => s.CategoryCode == gmhForSEarch.CategoryCode).ToList());
-       //             // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
-       //             return a;
-       //         
-       //
-       //     }
-       // }
-
-        public static List<GMH> searchGMH( string text, int category, int tatCategory, double CurrentLocation1, double CurrentLocation2, string location)
+        public static List<GMH> searchGMH(string text, int category, int tatCategory, double CurrentLocation1, double CurrentLocation2, string location)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {         
+            {
                 List<GMH> a = new List<GMH>();
 
-                if (text != "")               
+                if (text != "")
                     foreach (var product in db.Products)
                     {
                         System.Diagnostics.Debug.WriteLine("textBox");
@@ -189,13 +172,13 @@ namespace BL
                         {
                             foreach (var productToGmh in db.PRODUCTtoGMH)
                             {
-                                
+
                                 if (productToGmh.ProductCode == product.ProductCode)
                                 {
                                     foreach (var gmh in db.GMH)
                                     {
-                                        if( gmh.GmhCode==productToGmh.GmhCode)
-                                        
+                                        if (gmh.GmhCode == productToGmh.GmhCode)
+
                                             if (CurrentLocation1 != 0) {
 
                                                 if (BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)) < 50)
@@ -203,26 +186,26 @@ namespace BL
                                                     a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
                                                     System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
                                                 }
-                                                    System.Diagnostics.Debug.WriteLine("textBox 0");
-                                               // System.Diagnostics.Debug.WriteLine("!!***** "+ BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + "," + CurrentLocation2)));
+                                                System.Diagnostics.Debug.WriteLine("textBox 0");
+                                                // System.Diagnostics.Debug.WriteLine("!!***** "+ BL.GoogleMaps.GetDistance(gmh.Adress, Convert.ToString(CurrentLocation1 + "," + CurrentLocation2)));
 
                                             }
                                             else if (BL.GoogleMaps.GetDistance(gmh.Adress, location) < 50)
-                                                    a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
+                                                a.Add(BL.Converters.GMHConverter.convertToDTO(gmh));
 
 
-                                        
+
                                     }
-                                }                               
-                                
+                                }
+
                             }
                         }
-                            
+
                     }
 
-                
 
-               if (db.GMH.Where(g => g.CategoryCode == tatCategory) != null)
+
+                if (db.GMH.Where(g => g.CategoryCode == tatCategory) != null)
                     foreach (var item in db.GMH)
                     {
                         System.Diagnostics.Debug.WriteLine("category");
@@ -235,10 +218,10 @@ namespace BL
                                 a.Add(BL.Converters.GMHConverter.convertToDTO(item));
                                 System.Diagnostics.Debug.WriteLine("!!***** " + BL.GoogleMaps.GetDistance(item.Adress, Convert.ToString(CurrentLocation1 + " " + CurrentLocation2)));
                             }
-                            }
-                            else {
+                        }
+                        else {
                             System.Diagnostics.Debug.WriteLine("category 1");
-                            if (item.CategoryCode == tatCategory && ((BL.GoogleMaps.GetDistance(item.Adress, location)) < 50)) { 
+                            if (item.CategoryCode == tatCategory && ((BL.GoogleMaps.GetDistance(item.Adress, location)) < 50)) {
                                 a.Add(BL.Converters.GMHConverter.convertToDTO(item));
                             }
                             System.Diagnostics.Debug.WriteLine(BL.GoogleMaps.GetDistance(item.Adress, location) + "," + item.Adress);
@@ -276,6 +259,20 @@ namespace BL
                 return a;
 
 
+            }
+        }
+        public static bool saveChangesInGmhim(User u)
+        {
+            List<GMH> myGmhim = new List<GMH>();
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                foreach (DAL.GMH g in db.GMH.Where(g => g.UserCode == u.UserCode).ToList())
+                {
+                    g.e_mail = u.E_mail;
+                    g.Phone = u.Phone;
+                    g.Adress = u.Adress;
+                }
+            return true;
             }
         }
     }

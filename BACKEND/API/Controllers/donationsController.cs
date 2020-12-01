@@ -20,6 +20,11 @@ namespace API.Controllers
         {          
           return Ok(BL.donationsBL.GetDonations());
         }
+        [Route("getDonation"),HttpPost]
+        public IHttpActionResult getDonation([FromBody] int code)
+        {
+            return Ok(BL.donationsBL.GetDonation(code));
+        }
         [Route("AddDonation")]
         public IHttpActionResult AddDonation()
         {
@@ -59,15 +64,40 @@ namespace API.Controllers
         {
             return Ok(BL.donationsBL.RemoveDonation(d));
         }
-        [Route("GetDonationsAcorddingToCatrogoty")]
-        public IHttpActionResult GetDonationsAcorddingToCatrogoty(DTO.CategoryGMH c)
+        [Route("filterDonations")]
+        public IHttpActionResult filterDonations()
         {
-            return Ok(BL.donationsBL.GetDonationsAcordingToCatrogoty(c));
+            var httpRequest = HttpContext.Current.Request;
+            return Ok(BL.donationsBL.filterDonations(
+                Convert.ToInt32(httpRequest["category"]),
+                Convert.ToInt32(httpRequest["tatcategory"]),
+                Convert.ToString(httpRequest["adress"])));
         }
-        [Route("GetDonationsAcorddingToAdress")]
-        public IHttpActionResult GetDonationsAcorddingToAdress(string adress)
+        [Route("saveChanges")]
+        public IHttpActionResult saveChanges()
         {
-            return Ok(BL.donationsBL.GetDonationsAcordingToAdress(adress));
+            var httpRequest = HttpContext.Current.Request;
+            // System.Diagnostics.Debug.WriteLine(httpRequest.Params["product"]);
+            var donation = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["donation"]);
+            var dictionary = (Dictionary<string, object>)donation;
+            DTO.Donations d = new DTO.Donations();
+            d.donationCode = (int)dictionary["donationCode"];
+            d.Description = (string)dictionary["Description"];
+            d.donationName = (string)dictionary["donationName"];
+            string imageName = null;
+            //Upload Image          
+            var postedFile = httpRequest.Files["Image"];
+            //Create custom filename
+            if (postedFile != null)
+            {
+                imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
+                imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+                var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
+                postedFile.SaveAs(filePath);
+                d.Picture = postedFile.FileName;
+            }
+            return Ok(BL.donationsBL.saveChanges(d));
         }
+
     }
 }

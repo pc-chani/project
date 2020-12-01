@@ -21,6 +21,7 @@ filteredTatCategories:Observable<CategoryGMH[]>
 categoriesControl=new FormControl();
 tatcategoriesControl=new FormControl();
 adress;
+displayedColumns=["category","adress"]
   constructor(private gmhService:GmhService,private categoriesService:CategoriesService) { }
 
   ngOnInit(): void {
@@ -31,8 +32,7 @@ adress;
           res=>  ng.categoryName=res
           )
         });
-        console.log(this.needsGmhim);
-        
+        console.log(this.needsGmhim);      
       }
     )
     this.getCategoryGmh()
@@ -108,4 +108,5 @@ adress;
     )
     this.adress=""
   }
+  
 }

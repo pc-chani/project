@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'manageTheGMH', component: ManageTheGMHComponent },
   { path: 'donations', component: DonationsComponent },
   { path: 'addDonation', component: AddDonationComponent },
-  { path: 'myDonation', component: myDonationComponent },
+  { path: 'myDonation/:id', component: myDonationComponent },
   { path: 'one-gmh/:id', component: OneGmhComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent }

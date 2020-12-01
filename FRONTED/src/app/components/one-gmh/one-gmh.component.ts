@@ -27,6 +27,7 @@ export class OneGmhComponent implements OnInit {
   newPForm: FormGroup
   editPForm: FormGroup
   comment: boolean = false;
+  comments
   imageSrc;
   urls = [];
   selectedDate;
@@ -59,8 +60,11 @@ export class OneGmhComponent implements OnInit {
       SecurityDepositAmount: new FormControl(),
       Status: new FormControl(),
     })
+    this.comments=new FormControl();
     const GmhCode = this.route.snapshot.paramMap.get('id');
     this.myGmh = this.gmhService.getOneGmh(parseInt(GmhCode));
+  //  console.log(this.myGmh);
+    
     this.setProducts();
     this.productsServices.getProductsAccordingToGmhCategory(this.myGmh).subscribe(
       res => {
@@ -77,7 +81,7 @@ export class OneGmhComponent implements OnInit {
     this.productsServices.getProductsForGMH(this.myGmh).subscribe(
       res => {
         this.products = res;
-        //console.log(res);
+      //  console.log(res);
         this.products.forEach(p => {
           this.productsServices.getProduct(p).subscribe(
             res => { p.Name = res.Productname; },
@@ -127,6 +131,9 @@ export class OneGmhComponent implements OnInit {
   close() {
     this.show = false;
   }
+  closeNew(){
+    this.newProduct=false;
+  }
   showdetails(p) {
     // console.log(p);
     this.show = true;
@@ -155,6 +162,7 @@ export class OneGmhComponent implements OnInit {
         let l = new Lending()
         l.ProductCode = currentProduct.ProductCodeToGMH
         l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
+        l.comment=this.comments.value;
         this.productsServices.removeLending(l).subscribe(
           res => {
             console.log(res);
@@ -187,7 +195,6 @@ export class OneGmhComponent implements OnInit {
     }
 
   }
-
   edit(p) {
     //  let p = new productToGmh();
     p.ProductCodeToGMH = currentProduct.ProductCodeToGMH
@@ -253,7 +260,7 @@ export class OneGmhComponent implements OnInit {
     p.Amount = this.newPForm.controls.Amount.value;
     p.GmhCode = this.myGmh.GmhCode;
     p.FreeDescription = this.newPForm.controls.FreeDescription.value;
-    p.IsDisposable = this.newPForm.controls.IsDisposable.value;
+    p.Amount = this.newPForm.controls.Amount.value;
     if (p.IsDisposable == null) p.IsDisposable = false;
     p.SecurityDepositAmount = this.newPForm.controls.SecurityDepositAmount.value;
     p.Status = this.newPForm.controls.Status.value;
@@ -326,7 +333,8 @@ export class OneGmhComponent implements OnInit {
     this.comment = true
     if (this.endDate != null) {
       this.max = new Date(3000, 10, 10)
-
+      if(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)))
+      this.comments.setValue(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)).comment)
     }
     //   console.log(this.startDate, this.endDate);
   }

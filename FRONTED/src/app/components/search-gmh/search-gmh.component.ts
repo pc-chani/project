@@ -43,7 +43,7 @@ export class SearchGMHComponent implements OnInit {
     this.productsService.getProducts().subscribe(
       res => {
         this.products = res,
-          console.log(res),
+         // console.log(res),
           this.filter()
       },
       err => console.log(err),
@@ -75,24 +75,24 @@ export class SearchGMHComponent implements OnInit {
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res;
-      console.log(res);
+      //console.log(res);
       err => { console.log(err); }
     });
   }
   handleDestinationChange(a: Address) {
     this.adress = a;
-    console.log(a)
+  //  console.log(a)
   }
   getCategoriesForGmach() {
     this.searchForm.controls['tatCategory'].enable();
-    console.log(this.searchForm.controls.category.value);
+  //  console.log(this.searchForm.controls.category.value);
     this.categories.forEach(element => {
       if (element.CategoryName == this.searchForm.controls.category.value)
         this.masterCategory = element;
     });
     this.gmhService.getCategoriesForGmach(this.masterCategory).subscribe(res => {
       this.tatCategories = res;
-      console.log(res);
+     // console.log(res);
       err => { console.log(err); }
     });
   }
@@ -107,10 +107,9 @@ export class SearchGMHComponent implements OnInit {
     else if (this.searchForm.controls.textSearch.value.Productname != ""){
       s.Category = this.products.find(p => p.Productname == this.searchForm.controls.textSearch.value.Productname).CategoryCode;
     }
-console.log(s);
-
+//console.log(s);
     this.gmhService.saveSearch(s).subscribe(
-      res => console.log(res)
+     // res => console.log(res)
     )
   }
   search() {
@@ -147,13 +146,13 @@ console.log(s);
           err => { console.log(err); }
         });
       });
-      console.log(res);
+     // console.log(res);
       this.saveSearch();
       err => { console.log(err); }
     });
   }
   showGMHS(a) {
-    console.log(a);
+   // console.log(a);
     this.router.navigate(['/gmh', this.gmhs]);
   }
   displayFn(c: Product): string {

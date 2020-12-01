@@ -28,8 +28,9 @@
         </div>
         <div class="form-group">
             <label> :סיסמה </label>
-            <input class="txt" type="password" class="form-control" formControlName="password">
+            <input class="txt" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password">
             <div class="error" *ngIf="registerForm.controls['password'].errors!=null"> שדה נדרש </div>
+            <mat-icon (click)="toshow()">visibility</mat-icon>
         </div>
         <div class="form-group">
             <label>אימות סיסמה</label>

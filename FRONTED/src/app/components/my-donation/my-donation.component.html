@@ -1,4 +1,34 @@
+<div class="content">
+    <mat-icon (click)="toDelete()">delete</mat-icon>
+    <mat-icon (click)="toEdit()">create</mat-icon>
 
-<p *ngIf="myDonation">
-    התרומה שלך היא: {{myDonation}}
-</p>
+    <div *ngIf="myDonation && !edit">
+        התרומה שלך היא
+        <p>{{myDonation.donationCode}}</p>
+        <p>{{myDonation. donationName}}</p>
+        <p>{{myDonation. Category}}</p>
+        <p>{{myDonation. MasterCategory}}</p>
+        <p>{{myDonation. Description}}</p>
+        <p>{{myDonation. donorName}}</p>
+        <p>{{myDonation. donorEmail}}</p>
+        <p>{{myDonation. Adress}}</p>
+        <p>{{myDonation. Phone}}</p>
+        <p>{{myDonation. Picture}}</p>
+    </div>
+    <div *ngIf="myDonation && edit">
+        התרומה שלך היא
+        <form  [formGroup]="editDForm">
+        <input type="text" formControlName="donationName" class="form-control">
+        <input type="text" formControlName="Description" class="form-control">
+        <input type="file" (change)="handleFileInput($event.target.files)"
+            accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+            
+       <!-- <input type="email" formControlName="donorEmail" class="form-control">
+        <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+         class="form-control" (onAddressChange)="handleDestinationChange($event)">
+        <input type="number" formControlName="Phone" class="form-control">-->
+        <input type="button" (click)="saveChanges()" class="btn btn-primary" value="שמור שינויים">
+    </form>
+    </div>
+   
+</div>

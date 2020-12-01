@@ -75,7 +75,11 @@ namespace API.Controllers
                 Convert.ToInt32(httpRequest["tatcategory"]),
                 Convert.ToString(httpRequest["adress"])));
         }
- 
+        [Route("saveChangesInGmhim")]
+        public IHttpActionResult saveChangesInGmhim(DTO.User u)
+        {
+            return Ok(BL.gmhBL.saveChangesInGmhim(u));
+        }
     }
 
 }

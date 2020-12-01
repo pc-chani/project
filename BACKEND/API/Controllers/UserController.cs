@@ -13,16 +13,16 @@ namespace API.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        [Route("getuser"),HttpPost]
+        [Route("getUser"),HttpPost]
         [HttpGet]//brirat mecdak
         public IHttpActionResult getUser(DTO.GMH gMH)
         {
             return Ok(BL.UserBL.getUser(gMH));
         }
-        [Route("get1")]
-        public int Get1()
+        [Route("getmyuser"),HttpPost]
+        public IHttpActionResult get([FromBody] int code)
         {
-            return 1;
+            return Ok(BL.UserBL.getUser(code));
         }
         [Route("checkUser"), HttpPost]
         public IHttpActionResult checkUser(DTO.User user)
@@ -32,10 +32,14 @@ namespace API.Controllers
         [Route("addUser"),HttpPost]
         public IHttpActionResult addUser(DTO.User user)
         {
-            if (BL.UserBL.addUser(user))
-                return Ok(true);
-            else return Ok(false);
+            return Ok (BL.UserBL.addUser(user));
         }
-     
+        [Route("saveChanges"), HttpPost]
+        public IHttpActionResult saveChanges(DTO.User user)
+        {
+            return Ok(BL.UserBL.saveChanges(user));
+        }
+        
+
     }
 }

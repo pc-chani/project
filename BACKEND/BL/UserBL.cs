@@ -36,15 +36,44 @@ namespace BL
                 }
             }
         }
-
-        public static User checkUser(string email, string password)
+        public static bool saveChanges(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                User user =BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password));
-                return user;
-              
-          }
+                db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).Name = user.Name;
+               // db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).Password = user.Password;
+                db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).Phone = user.Phone;
+                db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).E_mail = user.E_mail;
+               // db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).Cell_Phone = user.Cell_Phone;
+                db.USERS.FirstOrDefault(u => u.UserCode == user.UserCode).Adress = user.Adress;
+                try { db.SaveChanges(); return true; }
+                 catch (DbEntityValidationException ex)
+                {
+                    //הדפסת שגיאה בקישור לדאטא בס
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine(
+                            "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine("no");
+                    return false;
+                }
+            }
+            }
+        public static User checkUser(string email, string password)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {   if (db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password) != null)
+                {
+                    User user = BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password));
+                    return user;
+                }
+                else return null;
+
+            }
 
         }
         public static User getUser(GMH gMH)
@@ -54,6 +83,15 @@ namespace BL
                 if(gMH!=null)
                 return BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u=>u.UserCode==gMH.UserCode));
                 return new User();
+            }
+
+        }
+        public static User getUser(int code)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+             return BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.UserCode == code));
+             
             }
 
         }

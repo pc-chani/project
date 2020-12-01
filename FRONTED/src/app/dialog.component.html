@@ -1,22 +1,12 @@
-<h1 mat-dialog-title>Hi {{data}}</h1>
+<h1 mat-dialog-title>Hi</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>מה הקוד של התרומה שלך?</p>
   <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data">
+    <mat-label>קוד תרומה:</mat-label>
+    <input matInput [(ngModel)]="data.donationCode">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">ביטול</button>
+  <a [routerLink]="['/myDonation',data.donationCode]" routerLinkActive="active"  mat-button [mat-dialog-close]="data" cdkFocusInitial >אישור</a>
 </div>
-<div mat-dialog-content>
-    <p>מה מספר התרומה?</p>
-    
-    <!-- <input matInput [(ngModel)]="data.donationCode">--> 
-    
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">סגור</button>
-    <button mat-button  cdkFocusInitial  (click)="onClick()" >אישור</button>
-  </div>

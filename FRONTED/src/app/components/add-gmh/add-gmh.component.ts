@@ -38,7 +38,7 @@ export class AddGMHComponent implements OnInit {
     user.Password = this.registerForm.controls.password.value;
     user.Permission=  this.registerForm.controls.permission.value;
     
-    console.log(user);
+   // console.log(user);
     
     this.userService.addUser(user).subscribe(
       res => { console.log(res); },
@@ -47,12 +47,7 @@ export class AddGMHComponent implements OnInit {
   }
   handleDestinationChange(a: Address) {
     this.adrres=a.formatted_address;
-    console.log(a)
+  //  console.log(a)
   }
-  getUser() {
-    this.userService.getUser().subscribe(
-      res => { console.log(res); },
-      err => { console.log(err); }
-    )
-  }
+  
 }

@@ -39,9 +39,11 @@ export class ManageTheGMHComponent implements OnInit {
     //   err => console.log(err)
     //);
     this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
+    console.log(this.myGmhim);
+    
     this.gmhService.setMyGmhim(this.myGmhim)
     this.gmhForm = new FormGroup({
-      GmhName: new FormControl(),
+      GmhName: new FormControl('',Validators.required),
       category: new FormControl(),
       newCategory: new FormControl(),
       tatCategory: new FormControl(),
@@ -70,6 +72,8 @@ export class ManageTheGMHComponent implements OnInit {
   getMyGmhim() {
     this.gmhService.getMyGmhim(this.userService.CurrentUser).subscribe(
       res => {
+        console.log(res);
+        
         this.gmhService.setMyGmhim(res); this.myGmhim = res;
         localStorage.setItem('gmhim', JSON.stringify(res));
 

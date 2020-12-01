@@ -22,7 +22,13 @@ export class GmhService {
     this.myGmhim = gmhim;
   }
   getOneGmh(code: number): GMH {
-    return this.myGmhim.find(g => g.GmhCode == code);
+    if (this.myGmhim) {
+      return this.myGmhim.find(g => g.GmhCode == code);
+    }
+    else {
+      this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
+      return this.myGmhim.find(g => g.GmhCode == code);
+    }
   }
   delete(gmh: GMH): Observable<boolean> {
     this.myGmhim.splice(this.myGmhim.indexOf(gmh), 1)
@@ -45,18 +51,18 @@ export class GmhService {
     //console.log(this.http.post<CategoryGMH[]>(environment.url + 'gmh/getCategoriesForGmach', masterGmh));
     return this.http.post<CategoryGMH[]>(environment.url + 'gmh/getCategoriesForGmach', masterGmh)
   }
-  saveSearch(s: Searches):Observable<boolean> {
+  saveSearch(s: Searches): Observable<boolean> {
     return this.http.post<boolean>(environment.url + 'searches/addSearch', s)
   }
   search(gmhForSearch: CategoryGMH): Observable<GMH[]> {
-   // console.log(this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch));
+    // console.log(this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch));
     return this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch)
   }
-  getNeedsGmhim():Observable<needsGmh[]>{
-    return this.http.get<needsGmh[]>(environment.url+'gmh/getNeedsGmhim')
+  getNeedsGmhim(): Observable<needsGmh[]> {
+    return this.http.get<needsGmh[]>(environment.url + 'gmh/getNeedsGmhim')
   }
-  filterNeedsGmhim(fd:FormData):Observable<needsGmh[]>{
-    return this.http.post<needsGmh[]>(environment.url+'gmh/filterNeedsGmhim',fd)
+  filterNeedsGmhim(fd: FormData): Observable<needsGmh[]> {
+    return this.http.post<needsGmh[]>(environment.url + 'gmh/filterNeedsGmhim', fd)
   }
   //showGMHS(a: any, gmhs: GMH[]) {   }
 

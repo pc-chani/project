@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, DialogOverviewExampleDialog } from './app.component';
+import { AppComponent, dialog } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserService } from './shared/services/user.service';
@@ -29,7 +29,12 @@ import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-
 import { myDonationComponent } from './components/my-donation/my-donation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +51,7 @@ import {MatInputModule} from '@angular/material/input';
     AddDonationComponent,
     EditOwnerDetailsComponent,
     myDonationComponent,
-DialogOverviewExampleDialog
+    dialog
   ],
   imports: [
     BrowserModule,
@@ -61,9 +66,12 @@ DialogOverviewExampleDialog
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    
+    MatIconModule,
     MatButtonModule,
-   MatInputModule
+    MatInputModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatTableModule,
   ],
   providers: [UserService, DatePipe],
   bootstrap: [AppComponent]

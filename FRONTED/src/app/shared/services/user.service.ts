@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
+ 
   private currentUser = undefined
   
   constructor(private http:HttpClient) { }
@@ -31,8 +31,15 @@ export class UserService {
   addUser(user:User): Observable<boolean>{//post
   return this.http.post<boolean>(environment.url+'user/addUser',user)
   }
-  getUser():Observable<number> {//get
-    return this.http.get<number>(environment.url+'user/get')
+  getuser(code:number):Observable<User> {
+    return this.http.post<User>(environment.url+'user/getmyuser',code)
   }
+  saveChanges(u:User):Observable<boolean> {
+    return this.http.post<boolean>(environment.url+'user/saveChanges',u);
+  }
+  saveChangesInGmhim(u: User):Observable<boolean> {
+    return this.http.post<boolean>(environment.url+'gmh/saveChangesInGmhim',u);
+  }
+
 }
 

@@ -1,5 +1,5 @@
 <div class="content">
-    <form [formGroup]="signInForm" (submit)="checkUser()">
+    <form [formGroup]="signInForm" >
         <div class="form-group">
             <label> מייל:</label>
             <input class="txt" type="text" class="form-control" formControlName="e_mail">
@@ -7,11 +7,14 @@
         </div>
         <div class="form-group">
             <label> :סיסמה </label>
-            <input class="txt" type="password" class="form-control" formControlName="password">
+            <input class="txt" [type]="show ? 'text' : 'password'"  class="form-control" formControlName="password">
             <div class="error" *ngIf="signInForm.controls['password'].errors!=null"> שדה נדרש </div>
+            <button mat-icon-button matSuffix (click)="show = !show" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="show">
+                <mat-icon>{{show ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
         </div>
         <div>
-            <input type="submit" class="btn btn-success" value="הכנס"  [disabled]="!signInForm.valid" style="margin-right: 35%;">
+            <button (click)="checkUser()" class="btn btn-success"  [disabled]="!signInForm.valid" style="margin-right: 35%;">הכנס</button>
         </div>
     </form>
 </div>

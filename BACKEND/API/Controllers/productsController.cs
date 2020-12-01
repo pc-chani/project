@@ -78,8 +78,8 @@ namespace API.Controllers
                 //Create custom filename
                 if (postedFile != null)
                 {
-                    imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
-                    imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+                    imageName = postedFile.FileName;
+                    //imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
                     var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
                     postedFile.SaveAs(filePath);
                     photos.Add(postedFile.FileName);
@@ -117,8 +117,8 @@ namespace API.Controllers
                 //Create custom filename
                 if (postedFile != null)
                 {
-                    imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
-                    imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+                    imageName = postedFile.FileName;
+                   // imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
                     var filePath = HttpContext.Current.Server.MapPath("~/image/" + imageName);
                     postedFile.SaveAs(filePath);
                     photos.Add(postedFile.FileName);
