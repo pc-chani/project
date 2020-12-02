@@ -1,11 +1,13 @@
 <div class="content">
+    <button mat-mini-fab color="primary">
     <mat-icon (click)="toDelete()">delete</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
     <mat-icon (click)="toEdit()">create</mat-icon>
-
+</button>
     <div *ngIf="myDonation && !edit">
         התרומה שלך היא
-        <p>{{myDonation.donationCode}}</p>
-        <p>{{myDonation. donationName}}</p>
+        <mat-label>{{myDonation. donationName}}</mat-label>
         <p>{{myDonation. Category}}</p>
         <p>{{myDonation. MasterCategory}}</p>
         <p>{{myDonation. Description}}</p>

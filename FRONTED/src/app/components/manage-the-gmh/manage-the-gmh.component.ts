@@ -9,6 +9,7 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { isCategory } from 'src/app/validators/valid';
 
 @Component({
   selector: 'app-manage-the-gmh',
@@ -49,14 +50,14 @@ export class ManageTheGMHComponent implements OnInit {
       tatCategory: new FormControl(),
       newTatCategory: new FormControl(),
       comments: new FormControl()
-    })
+    },{validators:isCategory('category','newCategory')})
     this.gmhForm.controls["newCategory"].disable();
     this.gmhForm.controls["newTatCategory"].disable();
 
     this.editGmhForm = new FormGroup({
       GmhhName: new FormControl(),
-      Phone: new FormControl(Validators.pattern('[0-9]{9}')),
-      E_mail: new FormControl(Validators.email),
+      Phone: new FormControl('',Validators.pattern('[0-9]{9}')),
+      E_mail: new FormControl('',Validators.email),
       Comments: new FormControl(),
       Adress: new FormControl(),
       userName: new FormControl()
@@ -136,6 +137,8 @@ export class ManageTheGMHComponent implements OnInit {
   setCategoty() {
     let g = new GMH();
     let master;
+    console.log(
+     this.gmhForm.controls["category"].value);
     if (this.gmhForm.controls["category"].value != null)//נבחרה קגורית אב
     {
       this.categories.forEach(element => {

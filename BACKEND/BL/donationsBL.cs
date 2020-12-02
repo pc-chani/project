@@ -14,6 +14,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
+                if (d.MasterCategory == 0) d.MasterCategory = null;
 
                 db.Donations.Add(Converters.DonationConverter.convertToDAL(d));
                 try

@@ -26,3 +26,10 @@ export function CheckPassword(pass1: string, pass2: string): ValidatorFn {
             return null;
         }
     }
+    export function isCategory(c: string, tc: string): ValidatorFn {
+        return (form: FormGroup): { [Key: string]: any } | null => {    
+            if (form.controls[c].value == null && form.controls[tc].value==null) 
+            return {passwordError: 'לא נבחרה קטגוריה  '};
+            return null;
+        }
+    }

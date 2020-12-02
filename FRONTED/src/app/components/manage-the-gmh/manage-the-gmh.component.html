@@ -1,4 +1,5 @@
-<button mat-raised-button color="primary" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים אישיים</button>
+<button mat-raised-button color="primary" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
+    אישיים</button>
 <div class="content">
     <h1>היי {{currentUser.Name}} , הגמחים שלך:</h1>
     <h1>מכאן תוכל\י לנהל אותם בקלות</h1>
@@ -15,22 +16,35 @@
                         <button mat-mini-fab color="primary">
                             <mat-icon (click)="delete(g)">delete</mat-icon>
                         </button>
-                                <span class="text">מחק גמח </span>
+                        <span class="text">מחק גמח </span>
                     </td>
                     <td class="img">
                         <button mat-mini-fab color="primary">
                             <mat-icon (click)="edit(g)">create</mat-icon>
-                           </button>
-                                <span class="text">ערוך פרטי גמח</span>
+                        </button>
+                        <span class="text">ערוך פרטי גמח</span>
                     </td>
-                    <td><button mat-raised-button color="primary"  [routerLink]="['/one-gmh',g.GmhCode]">ניהול הגמ"ח</button></td>
+                    <td><button mat-raised-button color="primary" [routerLink]="['/one-gmh',g.GmhCode]">ניהול
+                            הגמ"ח</button></td>
                 </tr>
                 <tr *ngIf="open && g==currentgmh">פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
                     <div>
                         <form [formGroup]="editGmhForm">
-                            <p>הגמח :<input type="text" formControlName="GmhhName"></p>
-                            <p>טלפון:<input type="text" formControlName="Phone"></p>
-                            <p>אימיל:<input type="text" formControlName="E_mail"></p>
+                            <div class="form-group">
+                                <label> שם הגמח:</label>
+                                <input class="txt" type="text" class="form-control" formControlName="GmhhName">
+                                <div class="error" *ngIf="editGmhForm.controls['GmhhName'].errors!=null">מספר לא תקין</div>
+                            </div>
+                            <div class="form-group">
+                                <label> טלפון :</label>
+                                <input class="txt" type="text" class="form-control" formControlName="Phone">
+                                <div class="error" *ngIf="editGmhForm.controls['Phone'].errors!=null">מספר לא תקין</div>
+                            </div>
+                            <div class="form-group">
+                                <label> מייל :</label>
+                                <input class="txt" type="text" class="form-control" formControlName="E_mail">
+                                <div class="error" *ngIf="editGmhForm.controls['E_mail'].errors!=null">מספר לא תקין</div>
+                            </div>
                             <p>כתובת:
                                 <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
                                     (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
@@ -38,9 +52,8 @@
                             <!--<p>שם:<input type="text" formControlName="Phone"> <input type="text"
                                    ></p>להחליף לשם אחד?-->
                             <p>הערות:<input type="text" formControlName="Comments"></p>
-                            <p><button mat-mini-fab color="primary"
-                                class="btn btn-primary"  (click)="saveChange()">
-                                שמור שינויים</button>
+                            <p><button mat-raised-button color="primary" class="btn btn-primary"  [disabled]="!editGmhForm.valid" (click)="saveChange()">
+                                   שמור שינויים</button>
                             </p>
                         </form>
                     </div>
@@ -48,16 +61,16 @@
             </tbody>
         </table>
         <div class="img">
-        <button mat-mini-fab color="primary" >
-            <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
-        <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon>
-    </button>
-        <span class="text">הוסף גמח </span>
-</div>
-    
+            <button mat-mini-fab color="primary">
+                <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
+                <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon>
+            </button>
+            <span class="text">הוסף גמח </span>
+        </div>
+
         <form [formGroup]="gmhForm" *ngIf="newgmh">
             <div class="form-group">
-               
+
                 <label> שם:</label>
                 <input class="txt" type="text" class="form-control" formControlName="GmhName">
                 <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
@@ -105,9 +118,9 @@
                 <div class="error" *ngIf="gmhForm.controls['comments'].errors!=null">*</div>
             </div>
             <div>
-        <button  mat-raised-button color="primary" (click)="setCategoty()"
-        [disabled]="!gmhForm.valid" style="margin-right: 35%;">הוסף
-        </button>
+                <button mat-raised-button color="primary" (click)="setCategoty()" [disabled]="!gmhForm.valid"
+                    style="margin-right: 35%;">הוסף
+                </button>
             </div>
         </form>
     </div>

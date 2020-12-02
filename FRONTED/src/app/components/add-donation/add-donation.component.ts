@@ -24,6 +24,8 @@ export class AddDonationComponent implements OnInit {
   formData: FormData = new FormData();
   url;
   donationCode;
+  donation=true;
+  donor=false
   constructor(private gmhService: GmhService, private donationService: DonationService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
@@ -104,23 +106,22 @@ export class AddDonationComponent implements OnInit {
   addDonation(d) {
     //let d=new donation()
     d.Adress = this.adress;
-   // d.category = this.donationForm.controls.Categories.value.CategoryCode;
+    // d.category = this.donationForm.controls.Categories.value.CategoryCode;
     d.Description = this.donationForm.controls.comments.value;
     //d.Category=this.donationForm.controls.tatCategories.value.CategoryCode;
     d.Phone = this.donationForm.controls.phone.value;
     d.donationName = this.donationForm.controls.donationName.value;
     d.donorName = this.donationForm.controls.donorName.value;
     d.donorEmail = this.donationForm.controls.donorEmail.value;
-console.log(d);
-
+    console.log(d);
     this.formData.append('donation', JSON.stringify(d))
     this.donationService.addDonation(this.formData).subscribe(
       res => {
         console.log(res)
         this.donationCode = res;
-        if (res != 0){
+        if (res != 0) {
           alert("התקבלה בהצלחה תודה!" + res + "תרומה")
-          this.formData=new FormData()
+          this.formData = new FormData()
         }
       }
     )
@@ -142,6 +143,9 @@ console.log(d);
     this.donationForm.controls["newCategory"].enable();
     this.donationForm.controls["Categories"].disable();
     this.donationForm.controls["tatCategories"].disable();
+    this.donationForm.controls["newTatCategory"].disable();
+    this.donationForm.controls["newTatCategory"].setValue('');
+
     this.donationForm.controls["Categories"].setValue('');
 
   }
@@ -153,9 +157,9 @@ console.log(d);
     // this.tatCategories=new Array<CategoryGMH>();
   }
   choosetatcategory() {
-    if(this.donationForm.controls["newCategory"].disabled)
-    this.donationForm.controls["tatCategories"].enable();
-    this.donationForm.controls["newTatCategory"].disable();   
+    if (this.donationForm.controls["newCategory"].disabled)
+      this.donationForm.controls["tatCategories"].enable();
+    this.donationForm.controls["newTatCategory"].disable();
     this.donationForm.controls["newTatCategory"].setValue('')
   }
   choosecategory() {
@@ -200,15 +204,15 @@ console.log(d);
         res => {
           console.log(res);
           d.Category = res;
-          d.MasterCategory=master;
+          d.MasterCategory = master;
           console.log(d);
           this.addDonation(d);
         }
       )
-     
+
     }
     else if (this.donationForm.controls["tatCategories"].value != "") {//נבחרה תת קטגוריה
-     console.log(this.donationForm.controls["tatCategories"].value );
+      console.log(this.donationForm.controls["tatCategories"].value);
       this.tatCategories.forEach(element => {
         if (element.CategoryName === this.donationForm.controls.tatCategories.value.CategoryName) {
           d.Category = element.CategoryCode;
@@ -217,10 +221,14 @@ console.log(d);
       })
       this.addDonation(d);
     }
-    else{
-      d.MasterCategory=0;
+    else {
+      d.MasterCategory = 0;
       this.addDonation(d);
 
     }
+  }
+  donorDetails(){
+    this.donor=!this.donor
+    this.donation=!this.donation
   }
 }
