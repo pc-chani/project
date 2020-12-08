@@ -34,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
-
+import {TextFieldModule} from '@angular/cdk/text-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +72,7 @@ import {MatTableModule} from '@angular/material/table';
     MatRadioModule,
     MatCheckboxModule,
     MatTableModule,
+    TextFieldModule
   ],
   providers: [UserService, DatePipe],
   bootstrap: [AppComponent]

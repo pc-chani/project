@@ -52,10 +52,10 @@
     <EntitySetMapping Name="LENDINGS">
       <EntityTypeMapping TypeName="Charity_DBModel.LENDINGS">
         <MappingFragment StoreEntitySet="LENDINGS">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="LendingCode" ColumnName="LendingCode" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="LendingDate" ColumnName="LendingDate" />
           <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
         </MappingFragment>

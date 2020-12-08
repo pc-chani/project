@@ -40,19 +40,22 @@ export class ManageTheGMHComponent implements OnInit {
     //   err => console.log(err)
     //);
     this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
-    console.log(this.myGmhim);
+  //  console.log(this.myGmhim);
     
     this.gmhService.setMyGmhim(this.myGmhim)
     this.gmhForm = new FormGroup({
       GmhName: new FormControl('',Validators.required),
       category: new FormControl(),
       newCategory: new FormControl(),
-      tatCategory: new FormControl(),
-      newTatCategory: new FormControl(),
+      tatCategory: new FormControl({ value: '', disabled: true }),
+      newTatCategory: new FormControl({ value: '', disabled: true }),
       comments: new FormControl()
-    },{validators:isCategory('category','newCategory')})
-    this.gmhForm.controls["newCategory"].disable();
-    this.gmhForm.controls["newTatCategory"].disable();
+    },{validators: isCategory('category','newCategory')})
+    
+   // this.gmhForm.controls["newCategory"].disable();
+   // this.gmhForm.controls["tatCategory"].disable();
+//
+   // this.gmhForm.controls["newTatCategory"].disable();
 
     this.editGmhForm = new FormGroup({
       GmhhName: new FormControl(),
@@ -73,7 +76,7 @@ export class ManageTheGMHComponent implements OnInit {
   getMyGmhim() {
     this.gmhService.getMyGmhim(this.userService.CurrentUser).subscribe(
       res => {
-        console.log(res);
+      //  console.log(res);
         
         this.gmhService.setMyGmhim(res); this.myGmhim = res;
         localStorage.setItem('gmhim', JSON.stringify(res));
@@ -101,6 +104,8 @@ export class ManageTheGMHComponent implements OnInit {
   edit(g: GMH) {
     this.open = true
     this.currentgmh = g;
+    console.log(g);
+    
     this.adress=this.currentgmh.Adress;
     this.editGmhForm.controls.GmhhName.setValue(g.GmhName)
     this.editGmhForm.controls.Adress.setValue(g.Adress)
@@ -221,12 +226,12 @@ export class ManageTheGMHComponent implements OnInit {
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res, console.log(res);
-      this.filteredCategories = this.gmhForm.controls.category.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => typeof value === 'string' ? value : value.CategoryName),
-          map(name => name ? this._filter(name) : this.categories.slice())
-        );
+      this.filteredCategories=this.gmhForm.controls.category.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => typeof value === 'string' ? value : value.categoryName),
+      map(name => name ? this._filter(name) : this.categories.slice())
+    );
     }
       ,
       err => { console.log(err); }
@@ -234,12 +239,13 @@ export class ManageTheGMHComponent implements OnInit {
   }
   getTatCategoriesForGmh(c) {
     //console.log(this.gmhForm.controls["newTatCategory"].disabled);
+    this.gmhForm.controls["tatCategory"].enable();
 
     if (this.gmhForm.controls["newTatCategory"].disabled) {
 
       this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
         this.tatCategories = res;
-        console.log(res),
+        //console.log(res),
 
           this.filteredTatCategories = this.gmhForm.controls.tatCategory.valueChanges
             .pipe(
@@ -261,6 +267,8 @@ export class ManageTheGMHComponent implements OnInit {
     this.gmhForm.controls["tatCategory"].disable();
     this.gmhForm.controls["category"].setValue('');
 
+    this.gmhForm.controls["newTatCategory"].disable();
+    this.gmhForm.controls["newTatCategory"].setValue('');
   }
   newtatcategory() {
     this.gmhForm.controls["newTatCategory"].enable();

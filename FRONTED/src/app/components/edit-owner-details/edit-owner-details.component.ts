@@ -50,7 +50,8 @@ export class EditOwnerDetailsComponent implements OnInit {
     u.E_mail = this.editDetailsForm.controls.E_mail.value;
     u.Cell_Phone = this.editDetailsForm.controls.Cell_Phone.value;
     u.Phone = this.editDetailsForm.controls.Phone.value;
-    u.Password = this.editDetailsForm.controls.password.value;
+    //  u.Password = this.editDetailsForm.controls.password.value;
+    u.Password = this.currentUser.Password
     u.Adress = this.editDetailsForm.controls.Adress.value;
     u.Name = this.editDetailsForm.controls.userName.value;
     console.log(u);
@@ -58,9 +59,10 @@ export class EditOwnerDetailsComponent implements OnInit {
     this.userService.saveChanges(u).subscribe(
       res => {
         console.log(res)
+      
         if (res) {
           if (confirm("רוצה לשנות את הפרטים גם בגמחים")) {
-             this.userService.saveChangesInGmhim(u).subscribe(//לשנות תגמחים
+            this.userService.saveChangesInGmhim(u).subscribe(//לשנות תגמחים
               res => {
                 console.log(res)
               }
@@ -69,8 +71,9 @@ export class EditOwnerDetailsComponent implements OnInit {
           this.userService.getuser(this.currentUser.UserCode).subscribe(
             res => {
               this.currentUser = res;
-               this.userService.setCurrentUser(res);
-                console.log(res);
+              this.userService.setCurrentUser(res);
+              localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+              console.log(res);
             }
           )
           this.router.navigate(['/manageTheGMH'])

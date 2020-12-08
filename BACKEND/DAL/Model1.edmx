@@ -56,9 +56,9 @@
           <Property Name="LendingCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserCode" Type="int" Nullable="false" />
           <Property Name="ProductCode" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" />
           <Property Name="LendingDate" Type="date" />
           <Property Name="ReturnDate" Type="date" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NeedsGmhim">
           <Key>
@@ -124,8 +124,8 @@
           <Property Name="UserCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Cell-Phone" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" />
+          <Property Name="Cell-Phone" Type="nchar" MaxLength="9" />
           <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="Permission" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -469,12 +469,12 @@
           <Property Name="LendingCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserCode" Type="Int32" Nullable="false" />
           <Property Name="ProductCode" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" />
           <Property Name="LendingDate" Type="DateTime" Precision="0" />
           <Property Name="ReturnDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="PRODUCTtoGMH" Relationship="Self.FK__LENDINGS__Produc__14270015" FromRole="LENDINGS" ToRole="PRODUCTtoGMH" />
           <NavigationProperty Name="USERS" Relationship="Self.FK__LENDINGS__UserCo__2610A626" FromRole="LENDINGS" ToRole="USERS" />
           <NavigationProperty Name="OPINIONS" Relationship="Self.FK__OPINIONS__Landin__4E88ABD4" FromRole="LENDINGS" ToRole="OPINIONS" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NeedsGmhim">
           <Key>
@@ -552,8 +552,8 @@
           <Property Name="UserCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Cell_Phone" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Cell_Phone" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
           <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Permission" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -888,10 +888,10 @@
           <EntitySetMapping Name="LENDINGS">
             <EntityTypeMapping TypeName="Charity_DBModel.LENDINGS">
               <MappingFragment StoreEntitySet="LENDINGS">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="LendingCode" ColumnName="LendingCode" />
                 <ScalarProperty Name="UserCode" ColumnName="UserCode" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="LendingDate" ColumnName="LendingDate" />
                 <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
               </MappingFragment>

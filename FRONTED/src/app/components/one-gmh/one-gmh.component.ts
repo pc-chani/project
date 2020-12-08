@@ -17,6 +17,7 @@ export var currentProduct: productToGmh
   selector: 'app-one-gmh',
   templateUrl: './one-gmh.component.html',
   styleUrls: ['./one-gmh.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class OneGmhComponent implements OnInit {
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
@@ -162,11 +163,11 @@ export class OneGmhComponent implements OnInit {
         let l = new Lending()
         l.ProductCode = currentProduct.ProductCodeToGMH
         l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
-        l.comment=this.comments.value;
         this.productsServices.removeLending(l).subscribe(
           res => {
             console.log(res);
-            if (res) this.setProducts()
+            if (res) {this.setProducts()
+            this.comments=false}
           }
         )
       }
@@ -176,11 +177,14 @@ export class OneGmhComponent implements OnInit {
         l.ReturnDate = this.datepipe.transform(this.endDate, 'MM/dd/yyyy');
         l.UserCode = this.myGmh.UserCode;
         l.ProductCode = p.ProductCodeToGMH;
+        l.Comment=this.comments.value;
         console.log(l);
         this.productsServices.addLending(l).subscribe(
           res => {
             console.log(res)
-            this.setProducts();
+            if(res)
+            {this.setProducts()
+              this.comments=false}
           }
         )
       }
@@ -314,6 +318,8 @@ export class OneGmhComponent implements OnInit {
       for (let i = 0; i < this.dates.length; i += 2)
         if (new Date(d1) >= new Date(this.dates[i]) && new Date(d1) <= new Date(this.dates[i + 1])) {
           {
+            console.log(1);
+            
             return 'special-date';
           }
         }
@@ -333,9 +339,12 @@ export class OneGmhComponent implements OnInit {
     this.comment = true
     if (this.endDate != null) {
       this.max = new Date(3000, 10, 10)
-      if(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)))
-      this.comments.setValue(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)).comment)
+    //  console.log(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)));
+      
+      if(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15))){
+      this.comments.setValue(currentProduct.Lendings.find(l=>new Date(l.ReturnDate).toDateString().slice(4, 15)==new Date(d).toDateString().slice(4, 15)).Comment)
     }
+  }
     //   console.log(this.startDate, this.endDate);
   }
   rangeFilter(date: Date): boolean {
@@ -345,17 +354,19 @@ export class OneGmhComponent implements OnInit {
     currentProduct.Lendings.forEach(l => {
       this.dates.push(new Date(l.LendingDate).toDateString().slice(4, 15), new Date(l.ReturnDate).toDateString().slice(4, 15));
     });
-    if (this.dates != undefined)
       for (let i = 0; i < this.dates.length; i += 2) {
-        if ((new Date(d1) > new Date(this.dates[i]) && new Date(d1) < new Date(this.dates[i + 1])) || (!this.dates.includes(d1) && new Date(d1) < new Date())) {
+        if ((new Date(d1) > new Date(this.dates[i]) && new Date(d1) < new Date(this.dates[i + 1])) || 
+        (!this.dates.includes(d1) && new Date(d1) < new Date())) {
           return false;
         }
       }
+    if(!this.dates.includes(d1) && new Date(d1) < new Date()) return false;
+      
     //  console.log(d);  
     return true
   }
-  myP(p) {
-    //console.log(p);  
-    currentProduct = p;
+  myP(p){
+    this.comments.setValue("")
+    currentProduct=p
   }
 }

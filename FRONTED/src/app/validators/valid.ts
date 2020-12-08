@@ -27,9 +27,12 @@ export function CheckPassword(pass1: string, pass2: string): ValidatorFn {
         }
     }
     export function isCategory(c: string, tc: string): ValidatorFn {
-        return (form: FormGroup): { [Key: string]: any } | null => {    
-            if (form.controls[c].value == null && form.controls[tc].value==null) 
-            return {passwordError: 'לא נבחרה קטגוריה  '};
+        return (form: FormGroup): { [Key: string]: any } | null => { 
+            if (form.controls[c].value == null && form.controls[tc].value==null  ||
+                (form.controls[c].value == "" && form.controls[tc].value=="")||
+                (form.controls[c].value == "" && form.controls[tc].value==null)||
+                (form.controls[c].value == null && form.controls[tc].value=="")) 
+            return {isCategory: 'לא נבחרה קטגוריה  '};
             return null;
         }
     }

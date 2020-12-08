@@ -272,7 +272,9 @@ namespace BL
                     g.Phone = u.Phone;
                     g.Adress = u.Adress;
                 }
-            return true;
+                try { db.SaveChanges(); return true; }
+                catch { return false; }
+            
             }
         }
     }

@@ -23,7 +23,7 @@ export class DonationsComponent implements OnInit {
   categoriesControl = new FormControl();
   tatcategoriesControl = new FormControl();
 
-  constructor(private donationService: DonationService,private   gmhService: GmhService) { }
+  constructor(private donationService: DonationService, private gmhService: GmhService) { }
   donations: donation[]
   ngOnInit(): void {
     this.donationService.getDonations().subscribe(
@@ -42,7 +42,7 @@ export class DonationsComponent implements OnInit {
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.adress = (position.coords.latitude+ " "+ position.coords.longitude).toString();
+        this.adress = (position.coords.latitude + " " + position.coords.longitude).toString();
       });
     }
     else {
@@ -53,12 +53,12 @@ export class DonationsComponent implements OnInit {
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res, console.log(res);
-      this.filteredCategories=this.categoriesControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : value.categoryName),
-      map(name => name ? this._filter(name) : this.categories.slice())
-    );
+      this.filteredCategories = this.categoriesControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.categoryName),
+          map(name => name ? this._filter(name) : this.categories.slice())
+        );
     }
       ,
       err => { console.log(err); }
@@ -74,28 +74,26 @@ export class DonationsComponent implements OnInit {
   getTatCategoriesForGmh(c) {
     //console.log(this.gmhForm.controls["newTatCategory"].disabled);
     this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
-        this.tatCategories = res;
-        console.log(res),
-          this.filteredTatCategories=this.tatcategoriesControl.valueChanges
-            .pipe(
-              startWith(''),
-              map(value => typeof value === 'string' ? value : value.CategoryName),
-              map(name => name ? this._filter(name) : this.tatCategories.slice())
-            );
-        err => { console.log(err); }
-      });
+      this.tatCategories = res;
+      console.log(res),
+        this.filteredTatCategories = this.tatcategoriesControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => typeof value === 'string' ? value : value.CategoryName),
+            map(name => name ? this._filter(name) : this.tatCategories.slice())
+          );
+      err => { console.log(err); }
+    });
   }
-  filterDonations(){
-    let fd=new FormData()
-    console.log(this.categoriesControl.value.CategoryCode);
-    
-    fd.append('category',this.categoriesControl.value.CategoryCode)
-    if(this.categoriesControl.value==null)
-
-    fd.append('tatcategory',this.tatcategoriesControl.value.CategoryCode)
-    fd.append('adress',this.adress)
+  filterDonations() {
+    let fd = new FormData()
+   if (this.categoriesControl.value == null) fd.append('category', '0')
+   else fd.append('category', this.categoriesControl.value.CategoryCode)
+   if (this.tatcategoriesControl.value == null) fd.append('tatcategory', '0')
+   else fd.append('tatcategory', this.tatcategoriesControl.value.CategoryCode)
+    fd.append('adress', this.adress)
     this.donationService.filterDonations(fd).subscribe(
-      res => this.donations=res
+      res => this.donations = res
     )
   }
 }

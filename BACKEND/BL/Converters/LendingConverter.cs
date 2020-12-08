@@ -12,7 +12,7 @@ namespace BL.Converters
         {
             return new DTO.LENDING
             {
-            Amount=l.Amount,
+            Comment=l.Comment,
             LendingCode=l.LendingCode,
             LendingDate=l.LendingDate,
             ProductCode=l.ProductCode,
@@ -24,7 +24,7 @@ namespace BL.Converters
         {
             return new DAL.LENDINGS
             {
-                Amount = l.Amount,
+                Comment = l.Comment,
                 LendingCode = l.LendingCode,
                 LendingDate = l.LendingDate,
                 ProductCode = l.ProductCode,

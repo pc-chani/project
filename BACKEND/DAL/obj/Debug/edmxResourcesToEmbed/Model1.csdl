@@ -65,12 +65,12 @@
     <Property Name="LendingCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserCode" Type="Int32" Nullable="false" />
     <Property Name="ProductCode" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Int32" />
     <Property Name="LendingDate" Type="DateTime" Precision="0" />
     <Property Name="ReturnDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="PRODUCTtoGMH" Relationship="Self.FK__LENDINGS__Produc__14270015" FromRole="LENDINGS" ToRole="PRODUCTtoGMH" />
     <NavigationProperty Name="USERS" Relationship="Self.FK__LENDINGS__UserCo__2610A626" FromRole="LENDINGS" ToRole="USERS" />
     <NavigationProperty Name="OPINIONS" Relationship="Self.FK__OPINIONS__Landin__4E88ABD4" FromRole="LENDINGS" ToRole="OPINIONS" />
+    <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NeedsGmhim">
     <Key>
@@ -148,8 +148,8 @@
     <Property Name="UserCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Cell_Phone" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Cell_Phone" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
     <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Permission" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />

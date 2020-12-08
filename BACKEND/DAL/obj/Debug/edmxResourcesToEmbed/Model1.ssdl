@@ -51,9 +51,9 @@
     <Property Name="LendingCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserCode" Type="int" Nullable="false" />
     <Property Name="ProductCode" Type="int" Nullable="false" />
-    <Property Name="Amount" Type="int" />
     <Property Name="LendingDate" Type="date" />
     <Property Name="ReturnDate" Type="date" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NeedsGmhim">
     <Key>
@@ -119,8 +119,8 @@
     <Property Name="UserCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Cell-Phone" Type="nchar" MaxLength="9" Nullable="false" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="Cell-Phone" Type="nchar" MaxLength="9" />
     <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="Permission" Type="nvarchar" MaxLength="10" Nullable="false" />

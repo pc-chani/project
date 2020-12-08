@@ -2,7 +2,7 @@ export class Lending {
     LendingCode: number
     UserCode: number
     ProductCode: number
-    comment: string
+    Comment: string
     LendingDate: string
     ReturnDate: string
 }

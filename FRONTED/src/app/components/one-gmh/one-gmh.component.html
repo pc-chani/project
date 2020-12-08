@@ -6,19 +6,26 @@
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}" min="0" #num
                         (change)="changeAmount(p,num.value)"></td>
                 <td *ngIf="!p.IsDisposable">
-                    <mat-form-field appearance="fill" on-mouseover="myP(p)">
+                    <mat-form-field appearance="fill">
                         <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" [max]="max">
+                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" [max]="max"  >
                             <!---->
                             <input matStartDate placeholder="Start date" (dateChange)="setStartDate($event.value)">
                             <input matEndDate placeholder="End date" (dateChange)="setEndDate($event.value)">
                         </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker [dateClass]="dateClass"></mat-date-range-picker>
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                        <mat-date-range-picker (opened)="myP(p)" #picker [dateClass]="dateClass"></mat-date-range-picker>
+                        
                     </mat-form-field>
-                    <input matInput type="text" *ngIf="comment" style="background-color: lightgrey">
+                    <textarea matInput  *ngIf="comment && p==CurrentProduct"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" [formControl]="comments"
+                    class="comment"></textarea>
                 <td> <button  mat-raised-button color="primary" (click)="saveChange(p)">שמור שינויים</button></td>
                 <td>
+
                     <button mat-mini-fab color="primary">
                         <mat-icon (click)="showdetails(p)">create</mat-icon>
                     </button>

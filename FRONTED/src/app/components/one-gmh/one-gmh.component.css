@@ -24,3 +24,10 @@
   .img:hover .text {
     visibility: visible;
   }
+  .comment{
+    background-color: rgb(235, 232, 232);
+     border-radius: 5px; 
+     display: inline;
+     width: 63%;
+     float: right;
+  }

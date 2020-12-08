@@ -17,6 +17,7 @@ namespace BL
                 db.Searches.Add(Converters.SearchesConverter.convertToDal(s));
                 try
                 {
+                    
                     db.SaveChanges();
                     int count = 0;
                     foreach (var s1 in db.Searches)

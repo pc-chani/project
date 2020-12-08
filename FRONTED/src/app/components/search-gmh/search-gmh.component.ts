@@ -43,7 +43,7 @@ export class SearchGMHComponent implements OnInit {
     this.productsService.getProducts().subscribe(
       res => {
         this.products = res,
-         // console.log(res),
+          // console.log(res),
           this.filter()
       },
       err => console.log(err),
@@ -81,18 +81,18 @@ export class SearchGMHComponent implements OnInit {
   }
   handleDestinationChange(a: Address) {
     this.adress = a;
-  //  console.log(a)
+    //  console.log(a)
   }
   getCategoriesForGmach() {
     this.searchForm.controls['tatCategory'].enable();
-  //  console.log(this.searchForm.controls.category.value);
+    //  console.log(this.searchForm.controls.category.value);
     this.categories.forEach(element => {
       if (element.CategoryName == this.searchForm.controls.category.value)
         this.masterCategory = element;
     });
     this.gmhService.getCategoriesForGmach(this.masterCategory).subscribe(res => {
       this.tatCategories = res;
-     // console.log(res);
+      // console.log(res);
       err => { console.log(err); }
     });
   }
@@ -102,15 +102,15 @@ export class SearchGMHComponent implements OnInit {
     s.fingerPrint = fingerprint;
     if (this.currLat != 0) s.Adress = (this.currLat + " " + this.currLng).toString();
     else if (this.adress != undefined) s.Adress = this.adress;
-    if (this.searchForm.controls.tatCategory.value.value != "") s.Category = this.searchForm.controls.tatCategory.value.value;
-    else if (this.searchForm.controls.category.value.value != undefined) s.Category = this.searchForm.controls.category.value.value;
-    else if (this.searchForm.controls.textSearch.value.Productname != ""){
+    if (this.searchForm.controls.tatCategory.value.value != "" && this.searchForm.controls.tatCategory.value.value!=undefined) s.Category = this.tatCategories.find(tc => tc.CategoryName == this.searchForm.controls.tatCategory.value).CategoryCode;
+    else if (this.searchForm.controls.category.value != "") s.Category = this.categories.find(tc => tc.CategoryName == this.searchForm.controls.category.value).CategoryCode;
+    else if (this.searchForm.controls.textSearch.value.Productname != "") {
       s.Category = this.products.find(p => p.Productname == this.searchForm.controls.textSearch.value.Productname).CategoryCode;
     }
-//console.log(s);
-    this.gmhService.saveSearch(s).subscribe(
-     // res => console.log(res)
-    )
+     console.log(s);
+     this.gmhService.saveSearch(s).subscribe(
+     res => console.log(res)
+      )
   }
   search() {
     this.openGmhDetails = null
@@ -126,7 +126,7 @@ export class SearchGMHComponent implements OnInit {
       this.formData.append('tatCategory', this.tatC.CategoryCode)
     }
     else this.formData.append('tatCategory', 0);
-    
+
     if (this.adress == undefined) {
       this.formData.append('CurrentLocation1', this.currLat);
       this.formData.append('CurrentLocation2', this.currLng)
@@ -142,17 +142,17 @@ export class SearchGMHComponent implements OnInit {
       this.gmhs.forEach(e => {
         this.gmhService.getUser(e).subscribe(res => {
           e.User = res;
-          
+
           err => { console.log(err); }
         });
       });
-     // console.log(res);
+       console.log(res);
       this.saveSearch();
       err => { console.log(err); }
     });
   }
   showGMHS(a) {
-   // console.log(a);
+    // console.log(a);
     this.router.navigate(['/gmh', this.gmhs]);
   }
   displayFn(c: Product): string {
