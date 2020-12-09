@@ -21,9 +21,12 @@ namespace BL
                 string geoCodeInfo = wc.DownloadString(uri);
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(geoCodeInfo);
-
-                string duration = xmlDoc.DocumentElement.SelectSingleNode("/DistanceMatrixResponse/row/element/duration/value").InnerText;
-                return Convert.ToInt32(duration) / 60;
+               // if (xmlDoc.DocumentElement.SelectSingleNode("/DistanceMatrixResponse/row/element/duration/value") != null)
+                //{
+                    string duration = xmlDoc.DocumentElement.SelectSingleNode("/DistanceMatrixResponse/row/element/duration/value").InnerText;
+                    return Convert.ToInt32(duration) / 60;
+               // }
+               // return -1;
             }
             catch (Exception)
             {

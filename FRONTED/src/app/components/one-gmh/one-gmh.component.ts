@@ -28,7 +28,7 @@ export class OneGmhComponent implements OnInit {
   newPForm: FormGroup
   editPForm: FormGroup
   comment: boolean = false;
-  comments
+  comments:FormControl
   imageSrc;
   urls = [];
   selectedDate;
@@ -167,7 +167,7 @@ export class OneGmhComponent implements OnInit {
           res => {
             console.log(res);
             if (res) {this.setProducts()
-            this.comments=false}
+            this.comment=false}
           }
         )
       }
@@ -184,7 +184,7 @@ export class OneGmhComponent implements OnInit {
             console.log(res)
             if(res)
             {this.setProducts()
-              this.comments=false}
+              this.comment=false}
           }
         )
       }
@@ -318,7 +318,7 @@ export class OneGmhComponent implements OnInit {
       for (let i = 0; i < this.dates.length; i += 2)
         if (new Date(d1) >= new Date(this.dates[i]) && new Date(d1) <= new Date(this.dates[i + 1])) {
           {
-            console.log(1);
+         //   console.log(1);
             
             return 'special-date';
           }

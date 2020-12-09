@@ -26,13 +26,33 @@ namespace BL
              
 
                     needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY==tc).ToList()));
+                    if (adress != "" && adress != "undefind")
+                    {
+                        foreach (NeedsGmhim ng in needsGmhims)
+                        {
+                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 50)
+                                needsGmhims.Remove(ng);
+                        }
+
+
+                    }
                 }
                 else if (c != 0)
                 {
                     needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY == c).ToList()));
+                    if (adress != "" && adress != "undefind")
+                    {
+                        foreach (NeedsGmhim ng in needsGmhims.ToList())
+                        {
+                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 50)
+                                needsGmhims.Remove(ng);
+                        }
+
+
+                    }
 
                 }
-                if (adress!= "undefined")
+               else
                 {
                     foreach (DAL.NeedsGmhim ng in db.NeedsGmhim)
                     {

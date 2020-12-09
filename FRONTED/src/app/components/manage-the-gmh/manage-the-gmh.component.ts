@@ -224,18 +224,22 @@ export class ManageTheGMHComponent implements OnInit {
     return c && c.CategoryName ? c.CategoryName : '';
   }
   getCategoryGmh() {
-    this.gmhService.getCategoryGmach().subscribe(res => {
-      this.categories = res, console.log(res);
-      this.filteredCategories=this.gmhForm.controls.category.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : value.categoryName),
-      map(name => name ? this._filter(name) : this.categories.slice())
+    this.gmhService.getCategoryGmach().subscribe(
+      res => {
+        this.categories = res; this.filter()
+
+      },
+      err => console.log(err)
     );
-    }
-      ,
-      err => { console.log(err); }
-    );
+  }
+  filter() {
+    console.log(this.categories);
+    this.filteredCategories = this.gmhForm.controls.category.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.CategoryName),
+        map(name => name ? this._filter(name) : this.categories.slice())
+      );
   }
   getTatCategoriesForGmh(c) {
     //console.log(this.gmhForm.controls["newTatCategory"].disabled);
@@ -265,10 +269,10 @@ export class ManageTheGMHComponent implements OnInit {
     this.gmhForm.controls["newCategory"].enable();
     this.gmhForm.controls["category"].disable();
     this.gmhForm.controls["tatCategory"].disable();
-    this.gmhForm.controls["category"].setValue('');
-
     this.gmhForm.controls["newTatCategory"].disable();
     this.gmhForm.controls["newTatCategory"].setValue('');
+
+    this.gmhForm.controls["category"].setValue('');
   }
   newtatcategory() {
     this.gmhForm.controls["newTatCategory"].enable();

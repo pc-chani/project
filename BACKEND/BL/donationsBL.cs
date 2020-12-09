@@ -21,7 +21,11 @@ namespace BL
                 {
                     db.SaveChanges();
                     int code = db.Donations.ToArray().Last().donationCode;
-                 //   BL.EmailService.SendMail("תרומתך התקבלה", code+"מספר התרומה",d.donorEmail);
+                    //   BL.EmailService.SendMail("תרומתך התקבלה", code+"מספר התרומה",d.donorEmail);
+                    foreach (DAL.GMH g in db.GMH.Where(g1=> g1.CategoryCode==d.MasterCategory || g1.CategoryCode == d.Category))
+                    {
+                         BL.EmailService.SendMail("אולי זה מעניין אותך", code+"מספר התרומה",g.e_mail);
+                    }
                     return code;
                       
                //שליחת מייל
@@ -62,6 +66,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
+                if(d!=null)
                 db.Donations.Remove(BL.Converters.DonationConverter.convertToDAL(d));
                 try
                 {
@@ -93,13 +98,33 @@ namespace BL
 
 
                         donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.Category == tc).ToList()));
+                    if (adress != "" && adress != "undefind")
+                    {
+                        foreach (Donations d in donations)
+                        {
+                            if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 50)
+                                donations.Remove(d);
+                        }
+
+
                     }
+                }
                     else if (c != 0)
                     {
                     donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.MasterCategory == c).ToList()));
+                    if (adress != "" && adress != "undefined")
+                    {
+                        foreach (Donations d in donations.ToList())
+                        {
+                            if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 50)
+                                donations.Remove(d);
+                        }
+
+
+                    }
 
                 }
-                if (adress != "undefined")
+                else
                     {
                         foreach (DAL.Donations d in db.Donations)
                         {

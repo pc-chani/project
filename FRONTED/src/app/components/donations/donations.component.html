@@ -20,11 +20,12 @@
             <label> כתובת:</label>
             <mat-radio-group aria-label="Select an option">
             <mat-radio-button value="1">מיקום נוכחי
-            <p (click)="getCurrentLocation()">
+            <p (click)="getCurrentLocation()" >
             </mat-radio-button>
         <mat-radio-button value="2">
+           
             <input ngx-google-places-autocomplete #placesRef="ngx-places" class="form-control"
-                (onAddressChange)="handleDestinationChange($event)" placeholder="Address">
+                (onAddressChange)="handleDestinationChange($event)" placeholder="Address"> 
             </mat-radio-button>
             </mat-radio-group>‏
             <input type="submit" value="סנן" class="btn btn-primary">

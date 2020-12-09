@@ -48,7 +48,6 @@ export class AddDonationComponent implements OnInit {
       adress: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.pattern('[0-9]{9,10}'))
     })
-
   }
   filter() {
     console.log(this.categories);

@@ -1,6 +1,6 @@
 <div class="content">
-    <table *ngFor="let p of products" class="table table-hover">
-        <tbody>
+    <table class="table table-hover">
+        <tbody *ngFor="let p of products" >
             <tr >
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}" min="0" #num
@@ -37,12 +37,15 @@
                 </td>
 
             </tr>
+           
             <tr *ngIf="show && p==CurrentProduct"  >
                 <div>
                     <form [formGroup]="editPForm">
+                        <button mat-mini-fab color="primary">
                         <mat-icon (click)="close()">clear</mat-icon>
+                        </button>
                         <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
-                            [matAutocomplete]="auto" [value]="displayFn">
+                            [matAutocomplete]="auto" [value]="displayFn"  class="form-control">
                         <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let p of filteredPs | async" [value]="p">
                                 {{p.Productname}}
@@ -56,28 +59,32 @@
                                 width="180" mat-card-image>
                             <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
                         </p>
-                        <p>חד פעמי?<input type="checkbox" [checked]="CurrentProduct.FreeDescription"
-                                formControlName="IsDisposable"></p>
+                        <mat-checkbox  class="txt" type="checkbox" formControlName="IsDisposable" [checked]="CurrentProduct.FreeDescription">
+                            האם חד פעמי?</mat-checkbox>
+                         <div class="error" *ngIf="editPForm.controls['IsDisposable'].errors!=null"> שדה נדרש </div>
                         <p>הערות<input type="text" value="{{CurrentProduct.FreeDescription}}"
-                                formControlName="FreeDescription"></p>
+                                formControlName="FreeDescription"  class="form-control"></p>
                         <p>פקדון<input type="number" value="{{CurrentProduct.SecurityDepositAmount}}"
-                                formControlName="SecurityDepositAmount"></p>
-                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status"></p>
-                        <p><input type="button" class="btn btn-primary" (click)="setP()" value="שמור שינויים"></p>
+                                formControlName="SecurityDepositAmount"  class="form-control"></p>
+                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status" class="form-control"></p>
+                        <p> <button  mat-raised-button color="primary"  class="btn btn-primary" (click)="setP()" >שמור שינויים</button></p>
                     </form>
                 </div>
             </tr>
         </tbody>
     </table>
     <div class="img">
-    <button mat-mini-fab color="primary">
-    <mat-icon (click)="add()">add_circle</mat-icon>
-    </button>
-    <span class="text">הוסף מוצר</span>
-</div>
+        <button mat-mini-fab color="primary">
+            <mat-icon (click)="closeNew()" *ngIf="newProduct">clear</mat-icon>
+            <mat-icon (click)="add()" class="img" *ngIf="!newProduct">add_circle</mat-icon>
+        </button>
+        <span class="text" *ngIf="!newProduct">הוסף גמח </span>
+        <span class="text" *ngIf="newProduct">מחק גמח </span>
+
+    </div>
+ 
     <form [formGroup]="newPForm" *ngIf="newProduct">
         <div class="form-group">
-            <mat-icon (click)="closeNew()">clear</mat-icon>
             <label> שם:</label>
             <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
                 [matAutocomplete]="auto" [value]="displayFn">
@@ -125,8 +132,9 @@
             <div class="error" *ngIf="newPForm.controls['Status'].errors!=null"> שדה נדרש </div>
         </div>
         <div>
-            <input type="button" class="btn btn-success" value="הוסף" (click)="setProduct()"
-                [disabled]="!newPForm.valid" style="margin-right: 35%;">
+            <button  mat-raised-button color="primary" class="btn btn-success"  (click)="setProduct()"
+                [disabled]="!newPForm.valid" style="margin-right: 35%;">הוסף
+            </button>
         </div>
     </form>
     <button  mat-raised-button color="primary" [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה לגמחים</button>

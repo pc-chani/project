@@ -13,26 +13,27 @@ import { GmhService } from 'src/app/shared/services/gmh.service';
   styleUrls: ['./needs-gmhim.component.css']
 })
 export class NeedsGMHimComponent implements OnInit {
-needsGmhim;
-categories:CategoryGMH[]
-filteredCategories:Observable<CategoryGMH[]>
-tatCategories:CategoryGMH[]
-filteredTatCategories:Observable<CategoryGMH[]>
-categoriesControl=new FormControl();
-tatcategoriesControl=new FormControl();
-adress;
-displayedColumns=["category","adress"]
-  constructor(private gmhService:GmhService,private categoriesService:CategoriesService) { }
+  needsGmhim;
+  categories: CategoryGMH[]
+  filteredCategories: Observable<CategoryGMH[]>
+  tatCategories: CategoryGMH[]
+  filteredTatCategories: Observable<CategoryGMH[]>
+  categoriesControl = new FormControl();
+  tatcategoriesControl = new FormControl();
+  adress;
+  displayedColumns = ["category", "adress"]
+  constructor(private gmhService: GmhService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
     this.gmhService.getNeedsGmhim().subscribe(
-      res=> {this.needsGmhim=res;
+      res => {
+        this.needsGmhim = res;
         this.needsGmhim.forEach(ng => {
           this.categoriesService.getCategoryName(ng.category).subscribe(
-          res=>  ng.categoryName=res
+            res => ng.categoryName = res
           )
         });
-        console.log(this.needsGmhim);      
+        console.log(this.needsGmhim);
       }
     )
     this.getCategoryGmh()
@@ -40,12 +41,12 @@ displayedColumns=["category","adress"]
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
       this.categories = res, console.log(res);
-      this.filteredCategories=this.categoriesControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : value.categoryName),
-      map(name => name ? this._filter(name) : this.categories.slice())
-    );
+      this.filteredCategories = this.categoriesControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.categoryName),
+          map(name => name ? this._filter(name) : this.categories.slice())
+        );
     }
       ,
       err => { console.log(err); }
@@ -61,52 +62,58 @@ displayedColumns=["category","adress"]
   getTatCategoriesForGmh(c) {
     //console.log(this.gmhForm.controls["newTatCategory"].disabled);
     this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
-        this.tatCategories = res;
-        console.log(res),
-          this.filteredTatCategories=this.tatcategoriesControl.valueChanges
-            .pipe(
-              startWith(''),
-              map(value => typeof value === 'string' ? value : value.CategoryName),
-              map(name => name ? this._filter(name) : this.tatCategories.slice())
-            );
-        err => { console.log(err); }
-      });
+      this.tatCategories = res;
+      console.log(res),
+        this.filteredTatCategories = this.tatcategoriesControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => typeof value === 'string' ? value : value.CategoryName),
+            map(name => name ? this._filter(name) : this.tatCategories.slice())
+          );
+      err => { console.log(err); }
+    });
   }
   handleDestinationChange(a: Address) {
-    var  value=a.address_components
-   console.log(value)
+    var value = a.address_components
+    console.log(value)
     this.adress = a.formatted_address;
   }
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.adress = (position.coords.latitude," ",position.coords.longitude).toString();
+        console.log(position.coords.latitude,position.coords.longitude);
+        
+        this.adress = (position.coords.latitude+ " "+ position.coords.longitude).toString();
+        console.log(this.adress);
+
       });
     }
     else {
       alert("Geolocation is not supported by this browser.");
     }
-    
-  }
-  filterNeedsGmhim(){
-    let fd=new FormData()
-    console.log(this.categoriesControl.value.CategoryCode);
-    
-    fd.append('category',this.categoriesControl.value.CategoryCode)
-    if(this.categoriesControl.value==null)
 
-    fd.append('tatcategory',this.tatcategoriesControl.value.CategoryCode)
-    fd.append('adress',this.adress)
+  }
+  filterNeedsGmhim() {
+    let fd = new FormData()
+    console.log(this.categoriesControl.value,this.tatcategoriesControl.value);
+    if (this.categoriesControl.value == null || this.categoriesControl.value == "") fd.append('category', "0")
+    else fd.append('category', this.categoriesControl.value.CategoryCode)
+    if (this.tatcategoriesControl.value == null || this.tatcategoriesControl.value == "") fd.append('tatcategory', "0")
+    else fd.append('tatcategory', this.tatcategoriesControl.value.CategoryCode)
+    console.log(this.adress);
+    
+    fd.append('adress', this.adress)
     this.gmhService.filterNeedsGmhim(fd).subscribe(
-      res=>{this.needsGmhim=res
+      res => {
+        this.needsGmhim = res
         this.needsGmhim.forEach(ng => {
           this.categoriesService.getCategoryName(ng.category).subscribe(
-          res=>  ng.categoryName=res
+            res => ng.categoryName = res
           )
         });
       }
     )
-    this.adress=""
+    //this.adress = ""
   }
-  
+
 }

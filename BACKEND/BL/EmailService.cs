@@ -13,10 +13,9 @@ namespace BL
     {
         public static void SendMail(string subject,string message,string to)
         {
-            string email = "c0527606305@gmail.com";
-            string password = "ch3152498";
-            //string email = ConfigurationManager.AppSettings["emailAddress"];
-           // string password = ConfigurationManager.AppSettings["emailPassword"];
+
+           string email = ConfigurationManager.AppSettings["emailAddress"];
+           string password = ConfigurationManager.AppSettings["emailPassword"];
 
             var loginInfo = new NetworkCredential(email, password);
             var msg = new MailMessage();

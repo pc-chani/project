@@ -79,9 +79,9 @@
                 <mat-radio-group aria-label="Select an option">
 
                     <label> קטגוריה:</label>
-                    <mat-radio-button value="1" (click)="choosecategory()" [checked]="true">
-                        <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="category"
-                            [matAutocomplete]="auto" [value]="displayFn" class="form-control">
+                    <mat-radio-button [checked]="true" (click)="choosecategory()" value="1">
+                        <input type="text" placeholder="בחר " aria-label="Number" matInput class="form-control"
+                            formControlName="category" [matAutocomplete]="auto" [value]="displayFn">
                         <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
                             (optionSelected)="getTatCategoriesForGmh($event)">
                             <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
@@ -89,8 +89,10 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-radio-button>
-                    <mat-radio-button value="2" (click)="newcategory()">
-                        <input type="text" placeholder="הוסף קטגוריה" formControlName="newCategory" class="form-control">
+                    <div class="error" *ngIf="gmhForm.controls['category'].errors!=null">*</div>
+                    <mat-radio-button (click)="newcategory()" value="2">
+                        <input type="text" placeholder="הוסף קטגוריה" formControlName="newCategory"
+                            class="form-control">
                     </mat-radio-button>
                 </mat-radio-group>
                

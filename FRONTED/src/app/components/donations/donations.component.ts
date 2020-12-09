@@ -40,6 +40,7 @@ export class DonationsComponent implements OnInit {
     this.adress = a.formatted_address;
   }
   getCurrentLocation() {
+    
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.adress = (position.coords.latitude + " " + position.coords.longitude).toString();
@@ -93,7 +94,9 @@ export class DonationsComponent implements OnInit {
    else fd.append('tatcategory', this.tatcategoriesControl.value.CategoryCode)
     fd.append('adress', this.adress)
     this.donationService.filterDonations(fd).subscribe(
-      res => this.donations = res
+      res =>{ this.donations = res;
+      console.log(res);
+      }
     )
   }
 }
