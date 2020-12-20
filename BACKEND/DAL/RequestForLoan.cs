@@ -18,7 +18,7 @@ namespace DAL
         public int UserCode { get; set; }
         public int ProductCode { get; set; }
         public System.DateTime RequestDate { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public string Comment { get; set; }
     
         public virtual Products Products { get; set; }
         public virtual USERS USERS { get; set; }

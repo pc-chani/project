@@ -20,12 +20,15 @@ export class AppComponent {
   cookieValue;
   donationCode: number
   myDonation: donation
-  constructor(private userService: UserService, private cookieService: CookieService,public dialog: MatDialog) { }
+  constructor(public userService: UserService, private cookieService: CookieService,public dialog: MatDialog) { }
   ngOnInit(): void {
 
     this.cookieValue = this.cookieService.get('userName');
     console.log(localStorage.getItem('user'));
    // if(localStorage.getItem('user')!=undefined)
+   console.log(Object.keys(localStorage.getItem('user')).length);
+   
+   if(Object.keys(localStorage.getItem('user')).length!=2)
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.userService.setCurrentUser(this.currentUser)
     console.log(this.cookieValue);

@@ -19,7 +19,6 @@ namespace DAL
         {
             this.CategoryGMH1 = new HashSet<CategoryGMH>();
             this.Donations = new HashSet<Donations>();
-            this.Donations1 = new HashSet<Donations>();
             this.GMH = new HashSet<GMH>();
             this.NeedsGmhim = new HashSet<NeedsGmhim>();
             this.Products = new HashSet<Products>();
@@ -35,8 +34,6 @@ namespace DAL
         public virtual CategoryGMH CategoryGMH2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donations> Donations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donations> Donations1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GMH> GMH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

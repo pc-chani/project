@@ -19,7 +19,7 @@ namespace BL.Converters
                donationName=d.donationName,
                donorName=d.donorName,
                donorEmail=d.donorEmail,
-               MasterCategory=d.MasterCategory,
+             //  MasterCategory=d.MasterCategory,
                Phone=d.Phone,
                Picture=d.Picture
 
@@ -36,7 +36,7 @@ namespace BL.Converters
                 donationName = d.donationName,
                 donorName = d.donorName,
                 donorEmail=d.donorEmail,
-                MasterCategory = d.MasterCategory,
+               // MasterCategory = d.MasterCategory,
                 Phone = d.Phone,
                 Picture = d.Picture
 

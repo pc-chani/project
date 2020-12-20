@@ -27,9 +27,9 @@
                     <td><button mat-raised-button color="primary" [routerLink]="['/one-gmh',g.GmhCode]">ניהול
                             הגמ"ח</button></td>
                 </tr>
-                <tr *ngIf="open && g==currentgmh">פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
-                    <div>
-                        <form [formGroup]="editGmhForm">
+                <tr *ngIf="open && g==currentgmh" >פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
+                    <div  style="width: 250%;">
+                        <form [formGroup]="editGmhForm" >
                             <div class="form-group">
                                 שם הגמח:
                                  <input class="txt" type="text" class="form-control" formControlName="GmhhName">
@@ -65,7 +65,9 @@
                 <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
                 <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon>
             </button>
-            <span class="text">הוסף גמח </span>
+            <span class="text" *ngIf="!newgmh">הוסף גמח </span>
+            <span class="text" *ngIf="newgmh">סגור  </span>
+
         </div>
 
         <form [formGroup]="gmhForm" *ngIf="newgmh">

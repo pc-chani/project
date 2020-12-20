@@ -17,6 +17,7 @@ namespace DAL
         public int ID { get; set; }
         public int CATEGORY { get; set; }
         public string ADRESS { get; set; }
+        public string CITY { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
     }

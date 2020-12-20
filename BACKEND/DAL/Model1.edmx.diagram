@@ -4,22 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c01d73e612d0464293a3463fe6457404" Name="Diagram1" ZoomLevel="108">
+      <Diagram DiagramId="6754b5526ad046aa9421b7e9a674942e" Name="Diagram1">
         <EntityTypeShape EntityType="Charity_DBModel.CategoryGMH" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.Donations" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.GMH" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.Images" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.LENDINGS" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.NeedsGmhim" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.OPINIONS" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.Products" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.PRODUCTtoGMH" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.RequestForLoan" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.Searches" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="Charity_DBModel.USERS" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Donations" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.GMH" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Images" Width="1.5" PointX="10.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.LENDINGS" Width="1.5" PointX="10.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.NeedsGmhim" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.OPINIONS" Width="1.5" PointX="12.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Products" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.PRODUCTtoGMH" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.RequestForLoan" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Searches" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.USERS" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Charity_DBModel.FK__CategoryG__Maste__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="Charity_DBModel.FK__Donations__Categ__756D6ECB" ManuallyRouted="false" />
-        <AssociationConnector Association="Charity_DBModel.FK__Donations__Maste__76619304" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Categ__65F62111" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__GMH__CategoryCod__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__NeedsGmhi__CATEG__44952D46" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__Products__Catego__412EB0B6" ManuallyRouted="false" />
@@ -33,6 +32,7 @@
         <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__Produ__0D7A0286" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__2F9A1060" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Produ__69C6B1F5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

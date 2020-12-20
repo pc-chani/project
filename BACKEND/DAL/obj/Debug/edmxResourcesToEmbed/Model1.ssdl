@@ -14,8 +14,8 @@
     </Key>
     <Property Name="donationCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="donationName" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Category" Type="int" />
-    <Property Name="MasterCategory" Type="int" />
+    <Property Name="ProductCode" Type="int" />
+    <Property Name="Category" Type="int" Nullable="false" />
     <Property Name="Picture" Type="nvarchar" MaxLength="150" />
     <Property Name="Description" Type="nvarchar" MaxLength="150" />
     <Property Name="donorName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -62,6 +62,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CATEGORY" Type="int" Nullable="false" />
     <Property Name="ADRESS" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="OPINIONS">
     <Key>
@@ -101,7 +102,7 @@
     <Property Name="UserCode" Type="int" Nullable="false" />
     <Property Name="ProductCode" Type="int" Nullable="false" />
     <Property Name="RequestDate" Type="date" Nullable="false" />
-    <Property Name="Amount" Type="int" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Searches">
     <Key>
@@ -137,8 +138,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Donations__Categ__56B3DD81">
-    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
+  <Association Name="FK__Donations__Categ__68D28DBC">
+    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="1" />
     <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CategoryGMH">
@@ -149,15 +150,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Donations__Maste__57A801BA">
-    <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
+  <Association Name="FK__Donations__Produ__69C6B1F5">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CategoryGMH">
-        <PropertyRef Name="CategoryCode" />
+      <Principal Role="Products">
+        <PropertyRef Name="ProductCode" />
       </Principal>
       <Dependent Role="Donations">
-        <PropertyRef Name="MasterCategory" />
+        <PropertyRef Name="ProductCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -334,12 +335,12 @@
       <End Role="CategoryGMH" EntitySet="CategoryGMH" />
       <End Role="CategoryGMH1" EntitySet="CategoryGMH" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donations__Categ__56B3DD81" Association="Self.FK__Donations__Categ__56B3DD81">
+    <AssociationSet Name="FK__Donations__Categ__68D28DBC" Association="Self.FK__Donations__Categ__68D28DBC">
       <End Role="CategoryGMH" EntitySet="CategoryGMH" />
       <End Role="Donations" EntitySet="Donations" />
     </AssociationSet>
-    <AssociationSet Name="FK__Donations__Maste__57A801BA" Association="Self.FK__Donations__Maste__57A801BA">
-      <End Role="CategoryGMH" EntitySet="CategoryGMH" />
+    <AssociationSet Name="FK__Donations__Produ__69C6B1F5" Association="Self.FK__Donations__Produ__69C6B1F5">
+      <End Role="Products" EntitySet="Products" />
       <End Role="Donations" EntitySet="Donations" />
     </AssociationSet>
     <AssociationSet Name="FK__GMH__CategoryCod__3A81B327" Association="Self.FK__GMH__CategoryCod__3A81B327">

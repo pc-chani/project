@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       adress: new FormControl('', Validators.required),
-      cell_phone: new FormControl('', Validators.pattern('[0-9]{9}')),
-      phone: new FormControl('', Validators.pattern('[0-9]{10}')),
-      e_mail: new FormControl('',  Validators.email),
+      cell_phone: new FormControl('',Validators.compose([Validators.required, Validators.pattern('[0-9]{9}')])),
+      phone: new FormControl('',Validators.compose([Validators.required, Validators.pattern('[0-9]{10}')])),
+      e_mail: new FormControl('',Validators.compose([Validators.required, ,  Validators.email])),
       password: new FormControl('', Validators.required),
       confirm: new FormControl('', Validators.required),
       //permission: new FormControl('', Validators.required),

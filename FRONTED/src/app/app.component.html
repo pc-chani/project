@@ -1,10 +1,13 @@
+
 <header style="padding: 10px;">
+
   <ul id="nav" class="nav nav-tabs">
-    <p *ngIf="currentUser==undefined " >שלום אורח/ת</p>
-    <p *ngIf="currentUser!=undefined">שלום {{currentUser.Name}}</p>
+   
+    <p *ngIf="userService.CurrentUser==undefined " >שלום אורח/ת</p>
+    <p *ngIf="userService.CurrentUser!=undefined">שלום {{userService.CurrentUser.Name}}</p>
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/signIn']" routerLinkActive="active">כניסה</a>
-      <a *ngIf="currentUser!=undefined" class="nav-link" (click)="exit()" routerLinkActive="active">יציאה</a>
+      <a class="nav-link" *ngIf="userService.CurrentUser==undefined" [routerLink]="['/signIn']" routerLinkActive="active">כניסה</a>
+      <a *ngIf="userService.CurrentUser!=undefined" class="nav-link" (click)="exit()" [routerLink]="['/home']" routerLinkActive="active">יציאה</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">הרשמה</a>
@@ -28,9 +31,9 @@
       <a class="nav-link" [routerLink]="['/searchGMH']"  routerLinkActive="active"> חיפוש גמ"ח </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" *ngIf="currentUser==undefined" (click)="message()" [routerLink]="['/signIn']" routerLinkActive="active"> ניהול גמ"ח </a>
-      <p *ngIf="show && currentUser==undefined"  >עוד לא הזדהת/ה במערכת</p>
-      <a class="nav-link" *ngIf="currentUser!=undefined"  [routerLink]="['/manageTheGMH']" routerLinkActive="active"> ניהול גמ"ח </a>
+      <a class="nav-link" *ngIf="userService.CurrentUser==undefined" (click)="message()" [routerLink]="['/signIn']" routerLinkActive="active"> ניהול גמ"ח </a>
+      <p *ngIf="show && userService.CurrentUser==undefined"  >עוד לא הזדהת/ה במערכת</p>
+      <a class="nav-link" *ngIf="userService.CurrentUser!=undefined"  [routerLink]="['/manageTheGMH']" routerLinkActive="active"> ניהול גמ"ח </a>
     </li>
     <li class="nav-item">
       <a class="nav-link"> תרומה לגמ"ח</a>

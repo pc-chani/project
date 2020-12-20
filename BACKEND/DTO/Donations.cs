@@ -10,8 +10,8 @@ namespace DTO
     {
         public int donationCode { get; set; }
         public string donationName { get; set; }
-        public Nullable<int> Category { get; set; }
-        public Nullable<int> MasterCategory { get; set; }
+        public int Category { get; set; }
+      //  public Nullable<int> MasterCategory { get; set; }
         public string Description { get; set; }
         public string donorName { get; set; }
         public string donorEmail { get; set; }
@@ -19,5 +19,7 @@ namespace DTO
         public string Adress { get; set; }
         public string Phone { get; set; }
         public string Picture { get; set; }
+        public Nullable<int> ProductCode { get; set; }
+
     }
 }

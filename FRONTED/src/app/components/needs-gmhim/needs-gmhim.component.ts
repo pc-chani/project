@@ -33,14 +33,14 @@ export class NeedsGMHimComponent implements OnInit {
             res => ng.categoryName = res
           )
         });
-        console.log(this.needsGmhim);
+     //   console.log(this.needsGmhim);
       }
     )
     this.getCategoryGmh()
   }
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
-      this.categories = res, console.log(res);
+      this.categories = res// console.log(res);
       this.filteredCategories = this.categoriesControl.valueChanges
         .pipe(
           startWith(''),
@@ -74,8 +74,11 @@ export class NeedsGMHimComponent implements OnInit {
     });
   }
   handleDestinationChange(a: Address) {
-    var value = a.address_components
-    console.log(value)
+    //console.log(a);
+    
+   // console.log(a.vicinity);
+    
+   
     this.adress = a.formatted_address;
   }
   getCurrentLocation() {

@@ -13,14 +13,14 @@
     <EntitySetMapping Name="Donations">
       <EntityTypeMapping TypeName="Charity_DBModel.Donations">
         <MappingFragment StoreEntitySet="Donations">
-          <ScalarProperty Name="donorEmail" ColumnName="donorEmail" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="donationCode" ColumnName="donationCode" />
           <ScalarProperty Name="donationName" ColumnName="donationName" />
           <ScalarProperty Name="Category" ColumnName="Category" />
-          <ScalarProperty Name="MasterCategory" ColumnName="MasterCategory" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="donorName" ColumnName="donorName" />
+          <ScalarProperty Name="donorEmail" ColumnName="donorEmail" />
           <ScalarProperty Name="Adress" ColumnName="Adress" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
         </MappingFragment>
@@ -52,18 +52,19 @@
     <EntitySetMapping Name="LENDINGS">
       <EntityTypeMapping TypeName="Charity_DBModel.LENDINGS">
         <MappingFragment StoreEntitySet="LENDINGS">
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="LendingCode" ColumnName="LendingCode" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="LendingDate" ColumnName="LendingDate" />
           <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NeedsGmhim">
       <EntityTypeMapping TypeName="Charity_DBModel.NeedsGmhim">
         <MappingFragment StoreEntitySet="NeedsGmhim">
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
           <ScalarProperty Name="ADRESS" ColumnName="ADRESS" />
@@ -106,11 +107,11 @@
     <EntitySetMapping Name="RequestForLoan">
       <EntityTypeMapping TypeName="Charity_DBModel.RequestForLoan">
         <MappingFragment StoreEntitySet="RequestForLoan">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

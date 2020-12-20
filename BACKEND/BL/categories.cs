@@ -33,7 +33,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-               if(c.MasterCategoryCode==0) c.MasterCategoryCode = 5;
+               if (c.MasterCategoryCode == 0) c.MasterCategoryCode = null;
                 
                 db.CategoryGMH.Add( BL.Converters.CategoryGMHConvereter.convertToDAL(c));
                 

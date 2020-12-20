@@ -59,7 +59,7 @@ export class ManageTheGMHComponent implements OnInit {
 
     this.editGmhForm = new FormGroup({
       GmhhName: new FormControl(),
-      Phone: new FormControl('',Validators.pattern('[0-9]{9}')),
+      Phone: new FormControl('',Validators.pattern('[0-9]{9,10}')),
       E_mail: new FormControl('',Validators.email),
       Comments: new FormControl(),
       Adress: new FormControl(),

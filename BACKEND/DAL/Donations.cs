@@ -16,16 +16,16 @@ namespace DAL
     {
         public int donationCode { get; set; }
         public string donationName { get; set; }
-        public Nullable<int> Category { get; set; }
-        public Nullable<int> MasterCategory { get; set; }
+        public int Category { get; set; }
         public string Picture { get; set; }
         public string Description { get; set; }
         public string donorName { get; set; }
+        public string donorEmail { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }
-        public string donorEmail { get; set; }
+        public Nullable<int> ProductCode { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
-        public virtual CategoryGMH CategoryGMH1 { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

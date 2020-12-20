@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { donation } from 'src/app/shared/models/Donations.model';
+import { Product } from 'src/app/shared/models/Product.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { DonationService } from 'src/app/shared/services/donation.service';
 import { GmhService } from 'src/app/shared/services/gmh.service';
+import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-add-donation',
@@ -24,9 +26,12 @@ export class AddDonationComponent implements OnInit {
   formData: FormData = new FormData();
   url;
   donationCode;
-  donation=true;
-  donor=false
-  constructor(private gmhService: GmhService, private donationService: DonationService, private categoriesService: CategoriesService) { }
+  donation = true;
+  donor = false
+  filteredProducts: Observable<Product[]>;
+  products: Array<Product>
+  constructor(private gmhService: GmhService, private donationService: DonationService,
+    private categoriesService: CategoriesService, private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.gmhService.getCategoryGmach().subscribe(
@@ -48,9 +53,29 @@ export class AddDonationComponent implements OnInit {
       adress: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.pattern('[0-9]{9,10}'))
     })
+
+  }
+  getProducts(c) {
+    this.productsService.getProductsAccordingToGmhCategory(c.option.value).subscribe(
+      res => {
+        this.products = res,
+       //   console.log(res);
+
+        this.filter1();
+      },
+      err => console.log(err),
+    );
+  }
+  filter1() {
+    this.filteredProducts = this.donationForm.controls.donationName.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.ProductName),
+        map(name => name ? this._filter1(name) : this.products.slice())
+      );
+      
   }
   filter() {
-    console.log(this.categories);
     this.filteredCategories = this.donationForm.controls.Categories.valueChanges
       .pipe(
         startWith(''),
@@ -62,11 +87,18 @@ export class AddDonationComponent implements OnInit {
     const filterValue = name.toLowerCase();
     return this.categories.filter(c => c.CategoryName.toLowerCase().indexOf(filterValue) === 0);
   }
+  private _filter1(name: string): Product[] {
+    const filterValue = name.toLowerCase();
+    return this.products.filter(c => c.Productname.toLowerCase().indexOf(filterValue) === 0);
+  }
   displayFn(c: CategoryGMH): string {
     return c && c.CategoryName ? c.CategoryName : '';
   }
+  displayFn1(p: Product): string {
+    return p && p.ProductCode ? p.Productname : '';
+  }
   handleDestinationChange(a: Address) {
-    console.log(a)
+    // console.log(a)
     this.adress = a.formatted_address;
   }
   // getCategoryGmh() {
@@ -91,7 +123,7 @@ export class AddDonationComponent implements OnInit {
     this.donationForm.controls.tatCategories.enable()
     this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
       this.tatCategories = res;
-      console.log(res),
+    //  console.log(res),
 
         this.filteredTatCategories = this.donationForm.controls.tatCategories.valueChanges
           .pipe(
@@ -144,6 +176,7 @@ export class AddDonationComponent implements OnInit {
     this.donationForm.controls["tatCategories"].disable();
     this.donationForm.controls["newTatCategory"].disable();
     this.donationForm.controls["newTatCategory"].setValue('');
+    this.donationForm.controls["tatCategories"].setValue('');
 
     this.donationForm.controls["Categories"].setValue('');
 
@@ -169,7 +202,9 @@ export class AddDonationComponent implements OnInit {
   setCategory() {
     let d = new donation();
     let master;
-    if (this.donationForm.controls["Categories"].value != null)//נבחרה קגורית אב
+    console.log(this.donationForm.controls["Categories"].value != null, this.donationForm.controls["Categories"].value);
+
+    if (this.donationForm.controls["Categories"].value != null && this.donationForm.controls["Categories"].value != "")//נבחרה קגורית אב
     {
       this.categories.forEach(element => {
         if (element.CategoryName == this.donationForm.controls.Categories.value.CategoryName) {
@@ -177,21 +212,27 @@ export class AddDonationComponent implements OnInit {
           master = element.CategoryCode
         }
       })
-
+      this.setTatCategory(d, master)
     }
     else if (this.donationForm.controls["newCategory"].value != "") {//קטגורית אב חדשה
       console.log(this.donationForm.controls["newCategory"].value);
 
       let c = new CategoryGMH();
       c.CategoryName = this.donationForm.controls["newCategory"].value;
+      console.log(c);
+
       this.categoriesService.addCategory(c).subscribe(
         res => {
           console.log(res);
           d.Category = res;
           master = res;
+          this.setTatCategory(d, master)
+
         }
       )
     }
+  }
+  setTatCategory(d, master) {
     if (this.donationForm.controls["newTatCategory"].value != "")//תת קטגוריה חדשה
     {
       console.log(this.donationForm.controls["newTatCategory"].value);
@@ -203,7 +244,7 @@ export class AddDonationComponent implements OnInit {
         res => {
           console.log(res);
           d.Category = res;
-          d.MasterCategory = master;
+          //  d.MasterCategory = master;
           console.log(d);
           this.addDonation(d);
         }
@@ -215,19 +256,18 @@ export class AddDonationComponent implements OnInit {
       this.tatCategories.forEach(element => {
         if (element.CategoryName === this.donationForm.controls.tatCategories.value.CategoryName) {
           d.Category = element.CategoryCode;
-          d.MasterCategory = master
+          // d.MasterCategory = master
         }
       })
       this.addDonation(d);
     }
     else {
-      d.MasterCategory = 0;
+      //   d.MasterCategory = 0;
       this.addDonation(d);
-
     }
   }
-  donorDetails(){
-    this.donor=!this.donor
-    this.donation=!this.donation
+  donorDetails() {
+    this.donor = !this.donor
+    this.donation = !this.donation
   }
 }
