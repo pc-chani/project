@@ -1,0 +1,56 @@
+element.style {
+    direction: rtl !important;
+}
+
+body{
+    direction: rtl !important;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+    direction: rtl;
+    float:right;
+  }
+  p,label,h4{
+    float: right;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: right;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+.txt{  
+    direction: rtl;
+    margin-top: -80px;
+    margin-right: 100px;    
+}
+
+.error{
+ margin-top: -40px;
+ margin-right: 105%;
+ width: 50%; 
+ color: crimson;
+}
+
+.content {
+    display: flex;
+    margin: 82px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: right;
+    margin-top: 5%;
+    direction:rtl; 
+    text-align: right;
+  }
+  .form-group{
+      float:right;
+      width:20%;
+      margin-right: 5%;
+  }

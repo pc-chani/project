@@ -1,0 +1,56 @@
+<body>
+<div class="content">
+    <h1>הרשמה לאתר</h1>
+    <div style="direction: rtl; background-color: rgb(181, 210, 255); padding: 2%;" ><span>ברוכים הבאים למשפחת "CHARITY"! <br> כדי להרשם מלאו את הטופס הבא,<br> מעתה תוכל להוסיף את הגמ"חים שלך למערכת ולנהל אותם בקלות! אנו מודים לך מקרב לב!</span></div>
+    <form [formGroup]="registerForm" (submit)="addUser()">
+        <div class="form-group">
+            <label> שם :</label>
+            <input class="txt" type="text" class="form-control" formControlName="Name">
+            <div class="error" *ngIf="registerForm.controls['Name'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> כתובת:</label>
+            <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="adress"
+                (onAddressChange)="handleDestinationChange($event)" placeholder="Address" class="form-control">‏
+            <div class="error" *ngIf="registerForm.controls['adress'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> טלפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="cell_phone">
+            <div class="error" *ngIf="registerForm.controls['cell_phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> פלאפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="phone">
+            <div class="error" *ngIf="registerForm.controls['phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> מייל:</label>
+            <input class="txt" type="email" class="form-control" formControlName="e_mail" email>
+            <div class="error" *ngIf="registerForm.controls['e_mail'].errors!=null">לא תקינה</div>
+        </div>
+        <div class="form-group">
+            <label> :סיסמה </label>
+            <input class="txt" [type]="show ? 'text' : 'password'" class="form-control" formControlName="password">
+            <div class="error" *ngIf="registerForm.controls['password'].errors!=null"> שדה נדרש </div>
+            <mat-icon (click)="toshow()">visibility</mat-icon>
+        </div>
+        <div class="form-group">
+            <label>אימות סיסמה</label>
+            <input class="txt" type="text" class="form-control" formControlName="confirm">
+        </div>
+        <div *ngIf="registerForm.errors?.passwordError!=null" style="text-align: center;">
+            {{registerForm.errors?.passwordError}}
+        </div>
+        <div>
+            <input type="checkbox" formControlName="accept" style="margin-right: 5%;"><label>אני מסכים לתנאי
+                האתר</label>
+        </div>
+        <div>
+            {{!registerForm.valid}}
+            <input type="submit" class="btn btn-success" value="הרשמי" [disabled]="!registerForm.valid"
+                style="margin-right: 35%;">
+        </div>
+    </form>
+</div>
+</body>

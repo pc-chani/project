@@ -1,0 +1,85 @@
+
+<form [formGroup]="gmhForm" >
+    <h4>: שם</h4>
+<p>{{gmh.GmhName}}</p>
+<h4>: כתובת</h4>
+<p>{{gmh.Adress}}</p>
+<h4>: אימייל</h4>
+<p>{{gmh.e_mail}}</p>
+<h4>: טלפון</h4>
+<p>{{gmh.Phone}}</p>
+<br>
+<br>
+
+<table class="table table-hover">
+    <tr>
+    <th>שם מוצר</th>
+    <th>תמונה</th>
+    <th>כמות</th>
+    <th>תיאור חופשי</th>
+</tr>
+<tbody *ngFor="let p of productsToGmh">
+   <tr >
+       <td>{{p.Name}}</td>
+       <td>{{p.Images}}</td>     
+      <td *ngIf="p.IsDisposable">{{p.Amount}}</td>
+      <td *ngIf="!p.IsDisposable">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <!---->
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker [dateClass]="dateClass.bind(p,this)"></mat-date-range-picker>
+        </mat-form-field>
+       <td>{{p.FreeDescription}}</td>
+       <td>{{p.IsDisposable}}</td>
+       <td>{{p.SecurityDepositAmount}}</td>
+       <td>{{p.Status}}</td>   
+   </tr>
+</tbody>
+</table>
+<table class="table table-hover">
+    <tr>
+    <th>רייטינג </th>
+    <th>טקסט</th>
+    <th>
+        <label>{{opinions.length}}</label>
+        <label>חוות דעת</label>
+        <br>
+        <input type="button" title="זאת ההזדמנות להוכיר טובה ולעזור לעוד אנשים להנות כמוך" value="הוסף חוות דעת" (click)="opinion=true">
+        <div *ngIf="opinion==true">
+         <input formControlName="comment" type="text" >
+         <span class="pointer" style='font-size:50px; color: red;' id="id1" (click)="changeStarColor('id1')">&#9733;</span>
+         <span class="pointer" style='font-size:50px; color: red;' id="id2" (click)="changeStarColor('id2')">&#9733;</span>
+         <span class="pointer" style='font-size:50px; color: red;' id="id3" (click)="changeStarColor('id3')">&#9733;</span>
+         <span class="pointer" style='font-size:50px; color: gray;' id="id4" (click)="changeStarColor('id4')">&#9733;</span>
+         <span class="pointer" style='font-size:50px; color: gray;' id="id5" (click)="changeStarColor('id5')">&#9733;</span>
+         <h3>{{rating}} כוכבים</h3>
+         <input type="button" value="SEND" (click)="addOpinion()">    
+        </div></th>
+    
+</tr>
+   <tr *ngFor="let o of opinions">
+       <td>
+        <span *ngIf="o.Rating < 1 " style='font-size:50px; color: gray;' >&#9733;</span>
+        <span *ngIf="o.Rating < 2 " style='font-size:50px; color: gray;' >&#9733;</span>
+        <span *ngIf="o.Rating < 3 " style='font-size:50px; color: gray;' >&#9733;</span>
+        <span *ngIf="o.Rating < 4 " style='font-size:50px; color: gray;' >&#9733;</span>
+        <span *ngIf="o.Rating < 5 " style='font-size:50px; color: gray;' >&#9733;</span>
+        <span *ngIf="o.Rating > 0 " style='font-size:50px; color: red;'  >&#9733;</span>
+        <span *ngIf="o.Rating > 1 " style='font-size:50px; color: red;'  >&#9733;</span>
+        <span *ngIf="o.Rating > 2 " style='font-size:50px; color: red;'  >&#9733;</span>
+        <span *ngIf="o.Rating > 3 " style='font-size:50px; color: red;'  >&#9733;</span>
+        <span *ngIf="o.Rating > 4 " style='font-size:50px; color: red;'  >&#9733;</span>
+        <h3>{{o.Rating}} כוכבים</h3>
+       </td>
+       <td>{{o.Comment}}</td> 
+       <td></td>    
+   </tr>
+</table>
+
+
+</form>

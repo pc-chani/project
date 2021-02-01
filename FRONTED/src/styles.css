@@ -1,0 +1,94 @@
+/* You can add global styles to this file, and also import other style files */
+/* #HiglightRow tr:hover {
+  background-color:#317082; color:#FFF; }
+
+#HiglightRow table {
+  border:1px solid #000; border-collapse: collapse; }
+
+#HiglightRow thead th { font-weight:bold; color:#000; background-color:#E2EBED; }
+
+#HiglightRow td { padding:2px; }
+
+  
+ 
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding:17px;
+  } */
+  th{
+    background-color: #dddddd;
+  }
+ tr:nth-child(even) {
+    background-color: #dddddd;
+    width: 70%;
+  } /* 
+
+ 
+
+#HiglightRow td { padding:2px; } */
+
+  
+  
+  
+ 
+  
+ 
+
+ 
+table {
+  direction: rtl;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.mat-a{
+  background-color: rgb(198, 230, 231);
+} 
+.content {
+    display: flex;
+    margin: 82px auto;
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    direction:rtl; 
+    text-align: right;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+  
+
+
+ 
+
+
+  
+html, body { height: 100%;
+}
+.search{
+  top:10%;
+  position: relative ;
+  /* bottom: 0; */
+}
+footer {
+  margin-top:5%;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 3px;
+  background-color:rgb(155, 14, 14);
+  color: rgb(68, 46, 46);
+}
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  /* background-image: "assets\images.png"; */
+  /* background-image: url('assets/images.png');  */
+  /* opacity: 0.97; */
+
+}

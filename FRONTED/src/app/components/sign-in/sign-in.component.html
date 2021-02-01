@@ -1,0 +1,34 @@
+<body>
+<div class="content">
+    <h1 style="direction: rtl;text-align: right;">כניסה לאתר</h1>
+    <form [formGroup]="signInForm" >
+        <div class="form-group">
+            <label> מייל:</label>
+            <input class="txt" type="text" class="form-control" formControlName="e_mail">
+            <div class="error" *ngIf="signInForm.controls['e_mail'].errors!=null">שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> :סיסמה </label>
+         <!-- <input id="inputPassword" class="txt" [type]="hide ? 'password' : 'text'" class="form-control" formControlName="password">
+            <img  class="eyeSymbol" src="assets\eye.png" (click)="myFunction()"> -->
+            <input class="txt" [type]="show ? 'text' : 'password'"  class="form-control" formControlName="password"> 
+            <!--  -->
+            
+            <div class="error" *ngIf="signInForm.controls['password'].errors!=null"> שדה נדרש </div>
+            <button mat-icon-button matSuffix (click)="show = !show" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="show">
+                <mat-icon>{{show ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                
+        </div>
+        
+        <a class="btn btn-primary" [routerLink]="['/register']" routerLinkActive="active">
+            משתמש חדש? <br> להרשמה לחץ כאן
+            </a>
+        <div>
+            <button (click)="checkUser()" class="btn btn-success"  [disabled]="!signInForm.valid" style="margin-right: 35%;">הכנס</button>
+            <!-- <div class="error" *ngIf="user"> שדה נדרש</div> -->
+        </div>
+    </form>
+    
+</div>
+</body>

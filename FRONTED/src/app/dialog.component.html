@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  <p>מה הקוד של התרומה שלך?</p>
+  <mat-form-field>
+    <mat-label>קוד תרומה:</mat-label>
+    <input matInput [(ngModel)]="data.donationCode">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">ביטול</button>
+  <a [routerLink]="['/myDonation',data.donationCode]" routerLinkActive="active"  mat-button [mat-dialog-close]="data" cdkFocusInitial >אישור</a>
+</div>

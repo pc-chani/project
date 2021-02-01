@@ -1,0 +1,60 @@
+<div class="content">
+    <form (submit)="filterDonations()">
+        <label> קטגוריה:</label>
+        <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
+            [matAutocomplete]="auto" [value]="displayFn" class="form-control">
+        <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+            (optionSelected)="getTatCategoriesForGmh($event)">
+            <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
+                {{c.CategoryName}}
+            </mat-option>
+        </mat-autocomplete>
+            <label> תת קטגוריה:</label>
+            <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
+                [value]="displayFn" [formControl]="tatcategoriesControl" class="form-control">
+            <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let tc of filteredTatCategories | async" [value]="tc">
+                    {{tc.CategoryName}}
+                </mat-option>
+            </mat-autocomplete>
+            <label> כתובת:</label>
+            <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">מיקום נוכחי
+            <p (click)="getCurrentLocation()" >
+            </mat-radio-button>
+        <mat-radio-button value="2">
+           
+            <input ngx-google-places-autocomplete #placesRef="ngx-places" class="form-control"
+                (onAddressChange)="handleDestinationChange($event)" placeholder="Address"> 
+            </mat-radio-button>
+            </mat-radio-group>‏
+            <input type="submit" value="סנן" class="btn btn-primary">
+        </form>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>כותרת </td>
+                    <td>תאור</td>
+                    <td>תמונה</td>
+
+                    <td>מאת </td>
+                    <td>כתובת </td>
+                    <td>יצירת קשר </td>
+                </tr>
+            </thead>
+            <tbody *ngFor="let d of donations">
+                <tr>
+                    <td>{{d.donationName}} </td>
+                    <td>{{d.Description}} </td>
+                    <td><img *ngIf="d.Picture!=null" [src]="url + d.Picture" class="rounded mb-3" width="180" mat-card-image></td>
+
+                    <td>{{d.donorName}} </td>
+                    <td>{{d.Adress}} </td>
+                    <td>{{d.Phone}} </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

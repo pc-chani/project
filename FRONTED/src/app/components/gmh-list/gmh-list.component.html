@@ -1,0 +1,130 @@
+
+<div style="margin-top: 10%;">
+  <app-search-gmh></app-search-gmh>
+</div>
+
+<div class="mat-elevation-z8">
+  <table class="table-primary table-striped" style="direction: rtl;" mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> שם גמח </th>
+      <td mat-cell *matCellDef="let element"> {{element.GmhName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> כתובת </th>
+      <td  mat-cell *matCellDef="let element"> {{element.Adress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="a">
+      <th mat-header-cell *matHeaderCellDef> כתובת </th>
+      <td mat-cell *matCellDef="let element">     <a (click)="openDialog($event)" class="pointer editObject alertInappropriateDeal" id="alertInappropriateDeal2310309"  
+        title="לחצו כאן כדי לדווח על מודעה שאינה הולמת את רוח האתר">דווחו על מודעה לא הולמת</a>
+      </td>
+    </ng-container>
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+<!-- <table style="width:100%" id="HiglightRow">
+  <tr>
+    <th>שם גמ"ח</th>
+    <th>כתובת</th>
+    <th>טלפון</th>
+    <th>אימייל</th>
+    <th>המלצות</th>
+  </tr>
+  <tr *ngFor="let g of gmhService.gmhsSearch" (click)="r(g.GmhCode)" >
+    <td>{{g.GmhName}}</td>
+    <td>{{g.Adress}}</td>
+    <td>{{g.Phone}}</td>
+    <td>{{g.e_mail}}</td>
+    <td>{{g.comments}}</td>
+    <td>
+    <a (click)="openDialog($event)" class="pointer editObject alertInappropriateDeal" id="alertInappropriateDeal2310309"  
+    title="לחצו כאן כדי לדווח על מודעה שאינה הולמת את רוח האתר">דווחו על מודעה לא הולמת</a>
+    <div *ngIf="d" class="mdc-dialog">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="my-dialog-title"
+          aria-describedby="my-dialog-content">
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            Discard draft?
+          </div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Cancel</span>
+            </button>
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Discard</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
+<div *ngIf="d">
+  <input type="text" formControlName="complainText" (click)="stop($event)">
+  <input type="button" value="send" (click)="stop($event)">
+</div>
+ <div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">סגור</button>
+  <button mat-button  cdkFocusInitial  (click)="onClick()" >אישור</button>
+</div> --> 
+  <!-- </td>
+  </tr> -->
+
+
+<!--
+<div class="animation-content modal-content" style="max-width: 550px;">
+  <div class="card limudnaim-login" style="overflow: hidden;"> 
+    <div class="card-header">
+      <div class="card-header-title">
+        <span class="title">התחברות</span>
+      </div> 
+      <div class="card-header-icon">
+        <span class="icon">
+          <i class="icon-times">X</i>
+        </span>
+      </div>
+    </div> 
+    <div class="limudnaim-user-login-form card-content" initial-data="[object Object]">
+    
+  <form><div class="field">
+    <div class="control is-medium is-clearfix">
+      <input type="text" autocomplete="on" placeholder="כתובת אימייל" class="input is-medium">
+       --> <!----> <!--
+      </div> 
+    </div> 
+    <div class="field">
+      <div class="control has-icons-left is-medium is-clearfix">
+        <input type="password" autocomplete="on" placeholder="סיסמה" class="input is-medium">
+         
+         <span class="icon has-text-primary is-left is-clickable">
+           <i class="icon-eye fa-lg"></i>
+          </span> </div> 
+        </div> <button type="button" class="button is-medium is-fullwidth is-primary">
+          
+       <span>התחבר/י</span>
+  </button></form> <br> <div class="field"><span>אין לך חשבון עדיין? </span>                                
+          <a href="#">להרשמה</a></div> <div class="field"><span>שכחת את הסיסמה? </span>
+            <a href="#">איפוס סיסמה</a>
+</div>
+</div>
+</div>
+</div>
+--> 
+  <!-- </table> -->
+
+  
+  

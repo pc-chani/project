@@ -1,0 +1,83 @@
+<body>
+    <!-- <div class="content"> -->
+<h1 style="font-size: 30px;" *ngIf="currentUser==undefined">רב תודות!<br>אנו שמחים שברצונך להצטרף למשפחת"CHARITY",<br> נשמח תמיד לעמוד לשרותך!</h1>
+<div style="direction: rtl;margin:0% !important; background-color: rgb(181, 210, 255); padding: 2%; width: 50%;">
+<h1 style="font-size: 20px;">אנחנו יכולים לעזור לך לבחור איזה גמח להוסיף, לפי צרכי הציבור, האם אתה מעוניין??</h1>
+<input type="button" [routerLink]="['/needsGMHim']" value="כן תודה!" class="nav-link btn btn-success">
+</div>
+<div *ngIf="currentUser==undefined">
+<h1>בשביל להוסיף גמ"ח עליך להרשם או להיכנס במידה והינך רשום כבר במערכת.</h1>
+<button mat-raised-button color="a" [routerLink]="['/register']" >הרשם</button>
+<button mat-raised-button color="a" [routerLink]="['/signIn']" >הכנס</button>
+</div>
+
+<div *ngIf="currentUser!=undefined">
+<!-- </div> -->
+
+<app-add-gmh></app-add-gmh>
+
+
+
+
+ <!-- <div  class="content">
+    <form [formGroup]="registerForm" (submit)="addUser()" >
+        <div class="form-group">
+            <label > שם פרטי:</label>
+            <input  class="txt" type="text" class="form-control" formControlName="firstName">
+            <div class="error" *ngIf="registerForm.controls['firstName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> שם משפחה:</label>
+            <input class="txt" type="text" class="form-control" formControlName="lastName">
+            <div class="error" *ngIf="registerForm.controls['lastName'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> כתובת:</label>
+            <input  ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="adress"
+            (onAddressChange)="handleDestinationChange($event)" placeholder="Address" class="form-control">‏          
+            <div class="error" *ngIf="registerForm.controls['adress'].errors!=null"> שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> טלפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="cell_phone">
+            <div class="error" *ngIf="registerForm.controls['cell_phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> פלאפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="phone">
+            <div class="error" *ngIf="registerForm.controls['phone'].errors!=null">מספר לא תקין</div>
+        </div>
+        <div class="form-group">
+            <label> מייל:</label>
+            <input class="txt" type="text" class="form-control" formControlName="e_mail">
+            <div class="error" *ngIf="registerForm.controls['e_mail'].errors!=null">שדה נדרש</div>
+        </div>
+        <div class="form-group">
+            <label> :סיסמה </label>
+            <input class="txt" type="password" class="form-control" formControlName="password">
+            <div class="error" *ngIf="registerForm.controls['password'].errors!=null"> שדה נדרש </div>
+        </div>
+        <div class="form-group">
+            <label>אימות סיסמה</label>
+            <input class="txt" type="text" class="form-control" formControlName="confirm">
+        </div>
+        <div *ngIf="registerForm.errors?.passwordError!=null" style="text-align: center;">
+            {{registerForm.errors?.passwordError}}
+        </div>
+        <div class="form-group">
+            <label>הרשאה:</label>
+            <select formControlName="permission" class="form-control">
+               <option>מנהל</option>
+               <option>בעל גמח</option>
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" formControlName="accept" style="margin-right: 5%;"><label>אני מסכים לתנאי האתר</label>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-success" value="הרשמי"  [disabled]="!registerForm.valid" style="margin-right: 35%;">
+        </div>
+    </form> 
+    </div> -->
+</div>
+</body>

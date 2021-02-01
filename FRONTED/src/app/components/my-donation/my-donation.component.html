@@ -1,0 +1,51 @@
+<div class="content">
+
+    <div *ngIf="myDonation && !edit" class="d">
+        <div >
+           
+            <br>
+            <p>התרומה שלך היא:</p><br>
+            <p>{{myDonation. donationName}} </p>
+            <p>תאור: {{myDonation. Description}} </p>
+            <p>שם התורמת: {{myDonation. donorName}} </p>
+            <p>כתובת מייל: {{myDonation. donorEmail}} </p>
+            <p>כתובת מגורים: {{myDonation. Adress}} </p>
+            <p>טלפון: {{myDonation. Phone}} </p>
+            <p><img src=""> </p>
+        </div>
+        <button mat-mini-fab style="display: inline;color: black;background-color: white;">
+            <mat-icon (click)="toDelete()">delete</mat-icon>
+        </button>
+        <button mat-mini-fab
+            style="display: inline;margin-top: -5.5%;color: black;background-color: white;">
+            <mat-icon (click)="toEdit()">create</mat-icon>
+        </button>
+    </div>
+    <br>
+
+    <div *ngIf="myDonation && edit">
+        <button (click)="edit=!edit">
+            <mat-icon >arrow_forward_ios</mat-icon>חזרה
+        </button>
+        <br><br> התרומה שלך היא:<br><br>
+        <form [formGroup]="editDForm">
+            <label>שם התרומה</label>
+            <input type="text" formControlName="donationName" class="form-control"><br>
+            <label>תאור התרומה</label>
+            <input type="text" formControlName="Description" class="form-control">
+            <br>
+            <label>תמונה</label>
+            <input type="file" (change)="handleFileInput($event.target.files)"
+                accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+            <br>
+            <!-- <input type="email" formControlName="donorEmail" class="form-control">
+        <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+         class="form-control" (onAddressChange)="handleDestinationChange($event)">
+        <input type="number" formControlName="Phone" class="form-control">-->
+            <br>
+            <button mat-raised-button color="primary" style="margin-right: 32%;" (click)="saveChanges()">שמור
+                שינויים</button>
+        </form>
+    </div>
+
+</div>

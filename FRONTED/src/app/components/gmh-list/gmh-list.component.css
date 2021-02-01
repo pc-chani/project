@@ -1,0 +1,9 @@
+
+  .editObject {
+    display: list-item;
+    list-style-type: disc;
+    width: 133px;
+    list-style-position: inside;
+    color: #e34062!important;
+    font-size: 12px;
+}

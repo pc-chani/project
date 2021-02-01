@@ -1,0 +1,32 @@
+.txt{  
+    margin-top: -80px;
+    margin-right: 100px;    
+}
+
+.error{
+ margin-top: -40px;
+ margin-right: 105%;
+ width: 50%; 
+ color: crimson;
+}
+
+.content {
+    display: flex;
+    margin: 82px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    margin-top: 10%;
+
+    direction:rtl; 
+    text-align: right;
+    margin-left: 50%;
+  }
+  body{
+    /* background-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 0%),url( "src/assets/bg.png") !important; background-size: 60% 55% !important; margin-top: 10%; background-repeat: no-repeat !important; */
+    background-image:url( "src/assets/bg.png") !important; background-size: 50% 45% !important; margin-top: 10%; background-repeat: no-repeat !important;
+    color: black;
+    height: 120%;
+    }

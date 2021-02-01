@@ -1,0 +1,29 @@
+
+.txt{  
+    margin-top: -80px;
+    margin-right: 100px;    
+}
+
+.error{
+ margin-top: -40px;
+ margin-right: 105%;
+ width: 50%; 
+ color: crimson;
+}
+h1{
+  direction: rtl;
+   text-align: right; 
+   line-height: 100%;
+}
+/* .content {
+    display: flex;
+    margin: 70px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  } */
+  body{
+      margin-top: 10%;
+    background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
+    }

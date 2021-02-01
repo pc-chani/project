@@ -1,0 +1,66 @@
+
+<header style="padding:6px; position: fixed;width: 100%; right: 0; top: 0;background-color: white;">
+  <div style="padding: 10px;float: left;">
+    <ul id="nav" class="nav nav-tabs">
+      <p *ngIf="currentUser==undefined " >שלום אורח/ת</p>
+      <p *ngIf="currentUser!=undefined">שלום היי {{currentUser.Name}}</p>
+      <li class="nav-item menu">
+        <a class="nav-link active" [routerLink]="['/signIn']" routerLinkActive="active">כניסה</a>
+        <a *ngIf="currentUser!=undefined" class="nav-link" (click)="exit()" routerLinkActive="active">יציאה</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">הרשמה</a>
+      </li>
+    </ul>
+  </div>
+  <div style="display: inline-block;">
+  <img  class="logo" src="assets\logo.png">
+</div>
+<div style="display: inline-block;">
+  <ul id="nav" class="nav nav-tabs">
+    <li class="nav-item" >
+      <a class="nav-link">
+        <mat-icon class="nav-link" [routerLink]="['/home']" routerLinkActive="active">home</mat-icon>
+      </a>
+      <!-- <img class="nav-link home" src="assets\home.png" [routerLink]="['/home']" routerLinkActive="active"> -->
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/add-gmh']" > הוספת גמ"ח </a>     
+     <!-- <ul>
+       <li><a  [routerLink]="['/signIn']" routerLinkActive="active">משתמש רשום</a></li>
+       <li><a [routerLink]="['/register']" routerLinkActive="active">משתמש חדש</a></li>
+       <li><a [routerLink]="['/needsGMHim']" routerLinkActive="active">גמ"חים מבוקשים</a></li>
+    </ul> -->
+  </li>
+
+    <li class="nav-item">
+      <a class="nav-link" (click)="getGmahim()" routerLinkActive="active"> גמחי"ם </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="userService.CurrentUser==undefined" (click)="message()" [routerLink]="['/signIn']" routerLinkActive="active"> ניהול גמ"ח </a>
+      <p *ngIf="show && userService.CurrentUser==undefined"  >עוד לא הזדהת/ה במערכת</p>
+      <a class="nav-link" *ngIf="userService.CurrentUser!=undefined"  [routerLink]="['/manageTheGMH']" routerLinkActive="active"> ניהול גמ"ח </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"> תרומה לגמ"ח</a>
+      <ul>
+        <li><a [routerLink]="['/addDonation']" routerLinkActive="active"> לתרומה</a></li>
+        <li><a [routerLink]="['/donations']" routerLinkActive="active">צפייה בתרומות </a></li>
+        <li><a (click)="openDialog()"> למחיקה/עריכה תרומה</a></li>
+     </ul>
+    </li>
+  </ul>
+</div>
+  <!-- <input style="float: left;" type="button" value=" CHARITY הצטרף למשפחת " [routerLink]="['/needsGMHim']"> -->
+
+</header>
+
+
+
+<router-outlet></router-outlet>
+<div style="bottom: 0;">
+  <footer>
+    <p>Author: Hege Refsnes<br>
+    <a href="mailto:hege@example.com">hege@example.com</a></p>
+  </footer>
+</div>

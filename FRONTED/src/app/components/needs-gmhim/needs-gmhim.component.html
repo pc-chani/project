@@ -1,0 +1,62 @@
+<body><div class="content">
+    
+    <form (submit)="filterNeedsGmhim()">
+    <label> קטגוריה:</label>
+    <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
+        [matAutocomplete]="auto" [value]="displayFn" class="form-control">
+    <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+        (optionSelected)="getTatCategoriesForGmh($event)">
+        <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
+            {{c.CategoryName}}
+        </mat-option>
+    </mat-autocomplete>
+        <label> תת קטגוריה:</label>
+        <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
+            [value]="displayFn" [formControl]="tatcategoriesControl" class="form-control">
+        <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let tc of filteredTatCategories | async" [value]="tc">
+                {{tc.CategoryName}}
+            </mat-option>
+        </mat-autocomplete>
+        <label> כתובת:</label>
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1" (click)="getCurrentLocation()">מיקום נוכחי
+            <p >
+            </mat-radio-button>
+        <mat-radio-button value="2">
+            <input ngx-google-places-autocomplete #placesRef="ngx-places" class="form-control"
+                (onAddressChange)="handleDestinationChange($event)" placeholder="Address">
+            </mat-radio-button>
+            </mat-radio-group>‏
+        <input type="submit" value="סנן" class="btn btn-primary">
+    </form>
+    <table mat-table class="table table-hover" [dataSource]="needsGmhim">
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> קטגוריה </th>
+            <td mat-cell *matCellDef="let ng"> {{ng.categoryName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="adress">
+            <th mat-header-cell *matHeaderCellDef> מיקום </th>
+            <td mat-cell *matCellDef="let ng"> {{ng.Adress}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+       <!-- <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>קטגוריה</td>
+                    <td>מקום</td>
+
+                </tr>
+            </thead>
+            <tbody *ngFor="let ng of needsGmhim">
+                <tr >
+                <td>{{ng.categoryName}}</td>
+                <td>{{ng.Adress}}</td>
+            </tr>
+            </tbody>
+        </table>
+        -->
+</div>
+</body>

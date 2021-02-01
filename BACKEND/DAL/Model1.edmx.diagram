@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a18a4187b254a60ad6ab89653fb7058" Name="Diagram1">
+        <EntityTypeShape EntityType="Charity_DBModel.CategoryGMH" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Complaint" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Donations" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.GMH" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Images" Width="1.5" PointX="10.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.LENDINGS" Width="1.5" PointX="10.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.NeedsGmhim" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.OPINIONS" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Products" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.PRODUCTtoGMH" Width="1.5" PointX="8.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.RequestForLoan" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.Searches" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Charity_DBModel.USERS" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="Charity_DBModel.FK__CategoryG__Maste__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Categ__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Donations__Maste__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__GMH__CategoryCod__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__NeedsGmhi__CATEG__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Products__Catego__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Searches__Catego__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Complaint__gmhCo__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__GMH__UserCode__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__OPINIONS__gmhCod__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__GmhCo__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__Images__ProductC__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__Produc__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__LENDINGS__UserCo__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__Produ__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__2BFE89A6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

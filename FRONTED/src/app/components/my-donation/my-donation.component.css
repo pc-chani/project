@@ -1,0 +1,8 @@
+.d{
+    display: inline; 
+    font-family: fantasy;
+    font-size: large;
+    background-color: rgb(218, 212, 212);
+    color: black;
+    border: 2px black solid;
+}

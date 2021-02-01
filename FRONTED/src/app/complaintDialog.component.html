@@ -1,0 +1,8 @@
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">סגור</button>
+    <button mat-button  cdkFocusInitial  (click)="onClick()" >אישור</button>
+  </div>
+  <div mat-dialog-actions *ngIf="dialog">
+  <input type="text" formControlName="complainText">
+  <input type="button" (click)="alert2(g.GmhCode)">
+</div>

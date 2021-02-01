@@ -1,0 +1,34 @@
+.txt{  
+    margin-top: -80px;
+    margin-right: 100px;    
+}
+
+.error{
+ margin-top: -40px;
+ margin-right: 105%;
+ width: 50%; 
+ color: crimson;
+}
+.btn-primary{
+    background-color :rgb(181, 210, 255);
+    color: black;
+}
+.content {
+    display: flex;
+    padding:9% 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: 20%; */
+    direction:rtl; 
+    text-align: right;
+    margin-left: 50%;
+  }
+  .eyeSymbol{
+      height: 50px;
+      width: 50px;
+      display: inline-block;
+  }
+  body{
+    background-image: url( "src/assets/bg.png") !important; background-size: 70% 65% !important; margin-top: 10%; background-repeat: no-repeat !important;
+    }

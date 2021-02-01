@@ -1,0 +1,22 @@
+<button  mat-raised-button color="primary" [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה לגמחים</button>
+
+<div class="content">
+
+    <form [formGroup]="editDetailsForm">
+        <p>שם :<input type="text" formControlName="userName" class="form-control"></p>
+        <p>טלפון:<input type="text" formControlName="Cell_Phone"  class="form-control"></p>
+        <p>פלאפון:<input type="text" formControlName="Phone"  class="form-control"></p>
+       
+        <p>אימיל:<input type="text" formControlName="E_mail" class="form-control"></p>
+        <p>כתובת:
+            <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+                (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
+        </p>
+       
+        
+        <p><button  mat-raised-button color="primary"  (click)="saveChange()">
+            שמור שינויים
+        </button>
+        </p>
+    </form>
+</div>
