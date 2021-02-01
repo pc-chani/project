@@ -17,9 +17,9 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
+            this.Donations = new HashSet<Donations>();
             this.PRODUCTtoGMH = new HashSet<PRODUCTtoGMH>();
             this.RequestForLoan = new HashSet<RequestForLoan>();
-            this.Donations = new HashSet<Donations>();
         }
     
         public int ProductCode { get; set; }
@@ -28,10 +28,10 @@ namespace DAL
     
         public virtual CategoryGMH CategoryGMH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Donations> Donations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTtoGMH> PRODUCTtoGMH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestForLoan> RequestForLoan { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donations> Donations { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace DAL
         }
     
         public virtual DbSet<CategoryGMH> CategoryGMH { get; set; }
+        public virtual DbSet<DonationOffers> DonationOffers { get; set; }
         public virtual DbSet<Donations> Donations { get; set; }
         public virtual DbSet<GMH> GMH { get; set; }
         public virtual DbSet<Images> Images { get; set; }

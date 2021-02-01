@@ -10,23 +10,22 @@ namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
     [RoutePrefix("api/lendings")]
-    public class lendingsController : ApiController
+    public class LendingsController : ApiController
     {
-        [Route("addLending"), HttpPost]
-        public IHttpActionResult addLending(DTO.LENDING l)
-        {
-            
-            return Ok(BL.lendingsBL.addLending(l));
+        [Route("AddLending"), HttpPost]//פונקציה שמוסיפה הלוואה לרשימת ההלואות
+        public IHttpActionResult AddLending(DTO.LENDING l)
+        {          
+            return Ok(BL.LendingsBL.AddLending(l));
         }
-        [Route("getLendings"), HttpPost]
-        public IHttpActionResult getLendings(DTO.ProductToGMH p)
+        [Route("GetLendings"), HttpPost]//פונקציה שמקבלת מוצר ומחזירה את רשימת ההלואות שלו
+        public IHttpActionResult GetLendings(DTO.ProductToGMH p)
         {
-            return Ok(BL.lendingsBL.getLendings(p));
+            return Ok(BL.LendingsBL.GetLendings(p));
         }
-        [Route("deleteLending"), HttpPost]
-        public IHttpActionResult deleteLending(DTO.LENDING l)
+        [Route("DeleteLending"), HttpPost]//פונקציה שמחוקת הלוואה מרשימת ההלואות
+        public IHttpActionResult DeleteLending(DTO.LENDING l)
         {
-            return Ok(BL.lendingsBL.deleteLending(l));
+            return Ok(BL.LendingsBL.DeleteLending(l));
         }
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class gmhBL
+    public class GmhBL
     {
-        public static bool addGMH(GMH gmh)
+        public static bool AddGMH(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -37,8 +37,8 @@ namespace BL
 
             }
 
-        }
-        public static bool delete(GMH gmh)
+        }//פונקציה שמקבלת גמ"ח ומוסיפה אותו לטבלת הגמח"ים
+        public static bool Delete(GMH gmh)
         {
 
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
@@ -93,15 +93,15 @@ namespace BL
 
             }
 
-        }
-        public static GMH[] getMyGmhim(User user)
+        }//פונקציה שמקבלת גמ"ח ומוחקת אותו מרשימת הגמח"ים
+        public static GMH[] GetMyGmhim(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 return BL.Converters.GMHConverter.convertToDTOarray((db.GMH.Where(g => g.UserCode == user.UserCode).ToArray()));
             }
-        }
-        public static bool saveChange(GMH gmh)
+        }//פונקציה שמחזירה את רשימת הגמח"ים
+        public static bool SaveChange(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -134,30 +134,31 @@ namespace BL
 
             }
 
-        }
-        public static CategoryGMH[] getCategoriesForGmach(CategoryGMH masterGmachCode)
+        }//פונקציה שמקבלת גמ"ח ושומרת בו את השינויים
+        public static CategoryGMH[] GetCategoriesForGmach(CategoryGMH masterGmachCode)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == masterGmachCode.CategoryCode).ToList());
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.ConvertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == masterGmachCode.CategoryCode).ToList());
                 // System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
                 return (a.ToArray<CategoryGMH>());
 
             }
         }
-        public static CategoryGMH[] getCategories()
+        public static CategoryGMH[] GetCategories()
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.convertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == null).ToList());
+                List<CategoryGMH> a = BL.Converters.CategoryGMHConvereter.ConvertToDTOList(db.CategoryGMH.Where(s => s.MasterCategoryCode == null).ToList());
                 System.Diagnostics.Debug.WriteLine(a.ToArray<CategoryGMH>());
                 return (a.ToArray<CategoryGMH>());
 
             }
         }
-        public static List<GMH> searchGMH(string text, int category, int tatCategory, double CurrentLocation1, double CurrentLocation2, string location)
+        // פונקציה שמקבלת קריטריונים ומחזירה את הגמחים המתאימים
+        public static List<GMH> SearchGMH(string text, int category, int tatCategory, double CurrentLocation1, double CurrentLocation2, string location)
             {
                 using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
                 {
@@ -259,7 +260,7 @@ namespace BL
                     return a.Distinct().ToList();
                 }
             }
-        public static bool saveChangesInGmhim(User u)
+        public static bool SaveChangesInGmhim(User u)
         {
             List<GMH> myGmhim = new List<GMH>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())

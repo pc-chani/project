@@ -26,19 +26,19 @@ export class UserService {
     this.currentUser=undefined;
   }
   checkUser(user:User):Observable<boolean>{//post 
-    return this.http.post<boolean>(environment.url+'user/checkUser',user);
+    return this.http.post<boolean>(environment.url+'user/CheckUser',user);
   }
   addUser(user:User): Observable<boolean>{//post
-  return this.http.post<boolean>(environment.url+'user/addUser',user)
+  return this.http.post<boolean>(environment.url+'user/AddUser',user)
   }
   getuser(code:number):Observable<User> {
-    return this.http.post<User>(environment.url+'user/getmyuser',code)
+    return this.http.post<User>(environment.url+'user/Getmyuser',code)
   }
   saveChanges(u:User):Observable<boolean> {
-    return this.http.post<boolean>(environment.url+'user/saveChanges',u);
+    return this.http.post<boolean>(environment.url+'user/SaveChanges',u);
   }
   saveChangesInGmhim(u: User):Observable<boolean> {
-    return this.http.post<boolean>(environment.url+'gmh/saveChangesInGmhim',u);
+    return this.http.post<boolean>(environment.url+'gmh/SaveChangesInGmhim',u);
   }
 
 }

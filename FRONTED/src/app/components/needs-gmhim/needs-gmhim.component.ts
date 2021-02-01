@@ -76,7 +76,7 @@ export class NeedsGMHimComponent implements OnInit {
   handleDestinationChange(a: Address) {
     //console.log(a);
     
-   // console.log(a.vicinity);
+    console.log(a.vicinity);
     
    
     this.adress = a.formatted_address;

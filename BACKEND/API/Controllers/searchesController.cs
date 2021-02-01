@@ -11,11 +11,11 @@ namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
     [RoutePrefix("api/searches")]
-    public class searchesController : ApiController
+    public class SearchesController : ApiController
     {
-        [Route("addSearch"), HttpPost]
+        [Route("AddSearch"), HttpPost]
 
-        public IHttpActionResult addSearch(DTO.searches s)
+        public IHttpActionResult AddSearch(DTO.searches s)
         {
 
             return Ok(BL.searchesBL.addSearch(s));

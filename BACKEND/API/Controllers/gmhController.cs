@@ -7,48 +7,48 @@ namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
     [RoutePrefix("api/gmh")]
-    public class gmhController : ApiController
+    public class GmhController : ApiController
     {
-        [Route("add"), HttpPost]
-        public IHttpActionResult add(DTO.GMH gMH)
+        [Route("Add"), HttpPost]//פונקציה שמקבלת גמ"ח ומוסיפה אותו לטבלת הגמח"ים
+        public IHttpActionResult Add(DTO.GMH gMH)
         {
 
-            return Ok(BL.gmhBL.addGMH(gMH));
+            return Ok(BL.GmhBL.AddGMH(gMH));
    
         }
-        [Route("getMyGmhim"), HttpPost]
-        public IHttpActionResult getMyGmhim(DTO.User user)
+        [Route("GetMyGmhim"), HttpPost]//פונקציה שמחזירה את רשימת הגמח"ים
+        public IHttpActionResult GetMyGmhim(DTO.User user)
         {
-            return Ok(BL.gmhBL.getMyGmhim(user));      
+            return Ok(BL.GmhBL.GetMyGmhim(user));      
         }
-        [Route("delete"), HttpPost]
-        public IHttpActionResult delete(DTO.GMH gMH)
+        [Route("Delete"), HttpPost]//פונקציה שמקבלת גמ"ח ומוחקת אותו מרשימת הגמח"ים
+        public IHttpActionResult Delete(DTO.GMH gMH)
         {
-            return Ok(BL.gmhBL.delete(gMH));
+            return Ok(BL.GmhBL.Delete(gMH));
         }
-        [Route("saveChange"), HttpPost]
-        public IHttpActionResult saveChange(DTO.GMH gMH)
+        [Route("SaveChange"), HttpPost]//פונקציה שמקבלת גמ"ח ושומרת בו את השינויים
+        public IHttpActionResult SaveChange(DTO.GMH gMH)
         {
-            return Ok(BL.gmhBL.saveChange(gMH));
+            return Ok(BL.GmhBL.SaveChange(gMH));
         }
-        [Route("getCategories")]
-        public IHttpActionResult getCategories()
-        {
-
-            return Ok(BL.gmhBL.getCategories());
-        }
-        [Route("getCategoriesForGmach"), HttpPost]
-        public IHttpActionResult getCategoriesForGmach(DTO.CategoryGMH masterGmachCode)
+        [Route("GetCategories")]
+        public IHttpActionResult GetCategories()
         {
 
-            return Ok(BL.gmhBL.getCategoriesForGmach(masterGmachCode));
+            return Ok(BL.GmhBL.GetCategories());
         }
-        [Route("searchGMH"), HttpPost]
-        public IHttpActionResult searchGMH()
+        [Route("GetCategoriesForGmach"), HttpPost]
+        public IHttpActionResult GetCategoriesForGmach(DTO.CategoryGMH masterGmachCode)
+        {
+
+            return Ok(BL.GmhBL.GetCategoriesForGmach(masterGmachCode));
+        }
+        [Route("SearchGMH"), HttpPost]
+        public IHttpActionResult SearchGMH()
         {
 
             var httpRequest = HttpContext.Current.Request;
-            return Ok(BL.gmhBL.searchGMH(
+            return Ok(BL.GmhBL.SearchGMH(
                 httpRequest["text"],
                 Convert.ToInt32(httpRequest["category"]),
                 Convert.ToInt32(httpRequest["tatCategory"]),
@@ -57,24 +57,24 @@ namespace API.Controllers
                 httpRequest["location"]
                 ));
         }
-        [Route("getNeedsGmhim")]
-        public IHttpActionResult getNeedsGmhim()
+        [Route("GetNeedsGmhim")]
+        public IHttpActionResult GetNeedsGmhim()
         {
-            return Ok(BL.needsGmhim.GetNeedsGmhim());
+            return Ok(BL.NeedsGMHim.GetNeedsGmhim());
         }
-        [Route("filterNeedsGmhim")]
-        public IHttpActionResult filterNeedsGmhim()
+        [Route("FilterNeedsGmhim")]
+        public IHttpActionResult FilterNeedsGmhim()
         {
             var httpRequest = HttpContext.Current.Request;
-            return Ok(BL.needsGmhim.filterNeedsGmhim(
+            return Ok(BL.NeedsGMHim.FilterNeedsGmhim(
                 Convert.ToInt32(httpRequest["category"]),
                 Convert.ToInt32(httpRequest["tatcategory"]),
                 Convert.ToString(httpRequest["adress"])));
         }
-        [Route("saveChangesInGmhim")]
-        public IHttpActionResult saveChangesInGmhim(DTO.User u)
+        [Route("SaveChangesInGmhim")]
+        public IHttpActionResult SaveChangesInGmhim(DTO.User u)
         {
-            return Ok(BL.gmhBL.saveChangesInGmhim(u));
+            return Ok(BL.GmhBL.SaveChangesInGmhim(u));
         }
     }
 

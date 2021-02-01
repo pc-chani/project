@@ -9,7 +9,7 @@ namespace BL
 {
     public class UserBL
     {
-        public static bool addUser(User user)
+        public static bool AddUser(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -35,8 +35,8 @@ namespace BL
                     return false;
                 }
             }
-        }
-        public static bool saveChanges(User user)
+        }//פונקציה שמוספה משתמש
+        public static bool SaveChanges(User user)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -62,8 +62,8 @@ namespace BL
                     return false;
                 }
             }
-            }
-        public static User checkUser(string email, string password)
+        }//פונקציה ששומרת שינויים לפרטי משתמש
+        public static User CheckUser(string email, string password)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {   if (db.USERS.FirstOrDefault(u => u.E_mail == email && u.Password == password) != null)
@@ -75,8 +75,8 @@ namespace BL
 
             }
 
-        }
-        public static User getUser(GMH gMH)
+        }//פונקציה שבודקת האם המשתמש קיים במערכת
+        public static User GetUser(GMH gMH)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -85,15 +85,15 @@ namespace BL
                 return new User();
             }
 
-        }
-        public static User getUser(int code)
-        {
-            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
-            {
-             return BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.UserCode == code));
-             
-            }
-
-        }
+        }//פונקציה שממקבלת גמ"ח ומחזירה את המנהל שלה
+       // public static User getUser(int code)
+       // {
+       //     using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+       //     {
+       //      return BL.Converters.UserConverter.convertToDTO(db.USERS.FirstOrDefault(u => u.UserCode == code));
+       //      
+       //     }
+       //
+       // }
     }
 }

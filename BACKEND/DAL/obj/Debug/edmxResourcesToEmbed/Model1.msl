@@ -10,12 +10,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DonationOffers">
+      <EntityTypeMapping TypeName="Charity_DBModel.DonationOffers">
+        <MappingFragment StoreEntitySet="DonationOffers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="DonationCode" ColumnName="DonationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Donations">
       <EntityTypeMapping TypeName="Charity_DBModel.Donations">
         <MappingFragment StoreEntitySet="Donations">
-          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="donationCode" ColumnName="donationCode" />
           <ScalarProperty Name="donationName" ColumnName="donationName" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="Category" ColumnName="Category" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -64,10 +73,10 @@
     <EntitySetMapping Name="NeedsGmhim">
       <EntityTypeMapping TypeName="Charity_DBModel.NeedsGmhim">
         <MappingFragment StoreEntitySet="NeedsGmhim">
-          <ScalarProperty Name="CITY" ColumnName="CITY" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
           <ScalarProperty Name="ADRESS" ColumnName="ADRESS" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -107,11 +116,11 @@
     <EntitySetMapping Name="RequestForLoan">
       <EntityTypeMapping TypeName="Charity_DBModel.RequestForLoan">
         <MappingFragment StoreEntitySet="RequestForLoan">
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
           <ScalarProperty Name="UserCode" ColumnName="UserCode" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

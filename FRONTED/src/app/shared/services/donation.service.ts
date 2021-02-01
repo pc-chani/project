@@ -10,10 +10,10 @@ import { donation } from '../models/Donations.model';
 export class DonationService {
   constructor(private http: HttpClient) { }
   filterDonations(fd:FormData): Observable<donation[]> {
-    return this.http.post<donation[]>(environment.url + 'donation/filterDonations',fd);
+    return this.http.post<donation[]>(environment.url + 'donation/FilterDonations',fd);
   }
   getDonations(): Observable<donation[]> {
-    return this.http.get<donation[]>(environment.url + 'donation/getDonations');
+    return this.http.get<donation[]>(environment.url + 'donation/GetDonations');
   }
   addDonation(fd:FormData): Observable<number> {   
     return this.http.post<number>(environment.url + 'donation/AddDonation',fd);
@@ -22,9 +22,9 @@ export class DonationService {
     return this.http.post<boolean>(environment.url + 'donation/DeleteDonation',d);
   }
   getDonation(code: number) {
-    return this.http.post<donation>(environment.url + 'donation/getDonation',code);
+    return this.http.post<donation>(environment.url + 'donation/SetDonation',code);
   }
   savechanges(fd:FormData): Observable<boolean> {
-    return this.http.post<boolean>(environment.url + 'donation/savechanges',fd);
+    return this.http.post<boolean>(environment.url + 'donation/Savechanges',fd);
   }
 }

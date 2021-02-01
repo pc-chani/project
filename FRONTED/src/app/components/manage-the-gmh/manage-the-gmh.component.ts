@@ -22,6 +22,7 @@ export class ManageTheGMHComponent implements OnInit {
   myGmhim: GMH[]
   currentgmh: GMH = undefined
   open: boolean = false;
+  myDetails:boolean=true;
   newgmh = false;
   gmhForm: FormGroup;
   editGmhForm: FormGroup;
@@ -32,6 +33,7 @@ export class ManageTheGMHComponent implements OnInit {
   tatC: CategoryGMH;
   tatCategories: CategoryGMH[];
   filteredTatCategories: Observable<CategoryGMH[]>;
+  needsgnhim:boolean=false
   constructor(private gmhService: GmhService, private userService: UserService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
@@ -49,6 +51,10 @@ export class ManageTheGMHComponent implements OnInit {
       newCategory: new FormControl(),
       tatCategory: new FormControl({ value: '', disabled: true }),
       newTatCategory: new FormControl({ value: '', disabled: true }),
+      adress: new FormControl(),
+      email: new FormControl(),
+      phone: new FormControl(),
+
       comments: new FormControl()
     },{validators: isCategory('category','newCategory')})
     
@@ -134,7 +140,9 @@ export class ManageTheGMHComponent implements OnInit {
   new() {
     this.newgmh = true;
     this.getCategoryGmh();
-
+    if(confirm('רוצה לדעת מהם הגמח"ים הנצרכים ביותר?')){
+      this.needsgnhim=true
+    }
   }
   closeNew() {
     this.newgmh = false
@@ -198,9 +206,16 @@ export class ManageTheGMHComponent implements OnInit {
   }
   addGmh(g) {
     g.GmhName = this.gmhForm.controls.GmhName.value;
+    if(this.myDetails){
     g.Adress = this.currentUser.Adress;
     g.Phone = this.currentUser.Phone;
     g.e_mail = this.currentUser.E_mail;
+  }
+else{
+  g.Adress =this.gmhForm.controls.adress.value;
+  g.Phone = this.gmhForm.controls.phone.value;
+  g.e_mail = this.gmhForm.controls.email.value;
+}
     g.UserCode = this.currentUser.UserCode;
     g.comments = this.gmhForm.controls.comments.value;
     console.log(g);

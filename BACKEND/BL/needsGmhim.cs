@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-   public class needsGmhim
+   public class NeedsGMHim
     {
         public static List<NeedsGmhim> GetNeedsGmhim()
         {
@@ -16,7 +16,7 @@ namespace BL
                 return BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.ToList());
             }
         }
-        public static List<NeedsGmhim> filterNeedsGmhim(int c,int tc,string adress)
+        public static List<NeedsGmhim> FilterNeedsGmhim(int c,int tc,string adress)
         {
             List<DTO.NeedsGmhim> needsGmhims = new List<DTO.NeedsGmhim>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())

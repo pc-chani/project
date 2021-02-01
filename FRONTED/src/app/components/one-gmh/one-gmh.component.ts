@@ -129,12 +129,12 @@ export class OneGmhComponent implements OnInit {
       )
     }
   }
-  close() {
-    this.show = false;
-  }
-  closeNew(){
-    this.newProduct=false;
-  }
+  //close() {
+  //  this.show = false;
+  //}
+  //closeNew(){
+  //  this.newProduct=false;
+  //}
   showdetails(p) {
     // console.log(p);
     this.show = true;
@@ -149,29 +149,29 @@ export class OneGmhComponent implements OnInit {
     //this.myImages.push(i.Path)
     //})
   }
-  add() {
-    this.newProduct = true
-  }
+ // add() {
+ //   this.newProduct = true
+ // }
   changeAmount(p, v) {
     currentProduct = p;
     currentProduct.Amount = v;
   }
   saveChange(p) {
     currentProduct = p;
-    if (!p.IsDisposable) {
-      if (this.dates.includes(this.startDate.toDateString().slice(4, 15))) {
-        let l = new Lending()
-        l.ProductCode = currentProduct.ProductCodeToGMH
-        l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
-        this.productsServices.removeLending(l).subscribe(
-          res => {
-            console.log(res);
-            if (res) {this.setProducts()
-            this.comment=false}
-          }
-        )
-      }
-      else {
+  if (!p.IsDisposable) {
+ //    if (this.dates.includes(this.startDate.toDateString().slice(4, 15))) {
+ //      let l = new Lending()
+ //      l.ProductCode = currentProduct.ProductCodeToGMH
+ //      l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
+ //      this.productsServices.removeLending(l).subscribe(
+ //        res => {
+ //          console.log(res);
+ //          if (res) {this.setProducts()
+ //          this.comment=false}
+ //        }
+ //      )
+ //    }
+ //    else {
         let l = new Lending();
         l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
         l.ReturnDate = this.datepipe.transform(this.endDate, 'MM/dd/yyyy');
@@ -188,16 +188,45 @@ export class OneGmhComponent implements OnInit {
           }
         )
       }
-    }
-    else {
-      this.productsServices.changeAmount(p).subscribe(
+    
+  else {
+    this.productsServices.changeAmount(p).subscribe(
+      res => {
+        console.log(res)
+        this.setProducts();
+      }
+    )
+  }
+}
+  editComment(p){
+    currentProduct=p;
+    if (this.dates.includes(this.startDate.toDateString().slice(4, 15))) {
+      let l = new Lending()
+      l.ProductCode = currentProduct.ProductCodeToGMH
+      l.Comment = this.comments.value
+      this.productsServices.setLending(l).subscribe(
         res => {
-          console.log(res)
-          this.setProducts();
+          console.log(res);
+          if (res) {this.setProducts()
+          this.comment=false}
         }
       )
     }
-
+  }
+  deleteLending(p){
+    currentProduct=p;
+    if (this.dates.includes(this.startDate.toDateString().slice(4, 15))) {
+      let l = new Lending()
+      l.ProductCode = currentProduct.ProductCodeToGMH
+      l.LendingDate = this.datepipe.transform(this.startDate, 'MM/dd/yyyy');
+      this.productsServices.removeLending(l).subscribe(
+        res => {
+          console.log(res);
+          if (res) {this.setProducts()
+          this.comment=false}
+        }
+      )
+    }
   }
   edit(p) {
     //  let p = new productToGmh();
@@ -265,10 +294,13 @@ export class OneGmhComponent implements OnInit {
     p.GmhCode = this.myGmh.GmhCode;
     p.FreeDescription = this.newPForm.controls.FreeDescription.value;
     p.Amount = this.newPForm.controls.Amount.value;
-    if (p.IsDisposable == null) p.IsDisposable = false;
+    console.log(this.newPForm.controls.IsDisposable.value);
+    
+    if ( this.newPForm.controls.IsDisposable.value==null) p.IsDisposable = false;
+    else p.IsDisposable=true
     p.SecurityDepositAmount = this.newPForm.controls.SecurityDepositAmount.value;
     p.Status = this.newPForm.controls.Status.value;
-    //console.log(p);
+    console.log(p);
     this.formData.append('product', JSON.stringify(p));
     this.productsServices.addProduct(this.formData).subscribe(
       res => {

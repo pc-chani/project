@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-   public class categories
+   public class Categories
     {
         public static List<DTO.CategoryGMH> GetCategories()
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
 
-                return BL.Converters.CategoryGMHConvereter.convertToDTOList((db.CategoryGMH.Select(c=>c).ToList()));
+                return BL.Converters.CategoryGMHConvereter.ConvertToDTOList((db.CategoryGMH.Select(c=>c).ToList()));
 
             }
         }
@@ -28,14 +28,13 @@ namespace BL
 
             }
         }
-
-        public static int addCategory(CategoryGMH c)
+        public static int AddCategory(CategoryGMH c)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                if (c.MasterCategoryCode == 0) c.MasterCategoryCode = null;
                 
-                db.CategoryGMH.Add( BL.Converters.CategoryGMHConvereter.convertToDAL(c));
+                db.CategoryGMH.Add( BL.Converters.CategoryGMHConvereter.ConvertToDAL(c));
                 
                 try
                 {

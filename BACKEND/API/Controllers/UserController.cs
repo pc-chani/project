@@ -13,31 +13,30 @@ namespace API.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        [Route("getUser"),HttpPost]
-        [HttpGet]//brirat mecdak
-        public IHttpActionResult getUser(DTO.GMH gMH)
+        [Route("GetUser"),HttpPost]//פונקציה שממקבלת גמ"ח ומחזירה את המנהל שלה
+        public IHttpActionResult GetUser(DTO.GMH gMH)
         {
-            return Ok(BL.UserBL.getUser(gMH));
+            return Ok(BL.UserBL.GetUser(gMH));
         }
-        [Route("getmyuser"),HttpPost]
-        public IHttpActionResult get([FromBody] int code)
+       // [Route("getmyuser"),HttpPost]//פונקציה שמקבלת קוד משתמש ומחזירה את הנתונים שלו
+       // public IHttpActionResult get([FromBody] int code)
+       // {
+       //     return Ok(BL.UserBL.getUser(code));
+       // }
+        [Route("CheckUser"), HttpPost]//פונקציה שבודקת האם המשתמש קיים במערכת
+        public IHttpActionResult CheckUser(DTO.User user)
         {
-            return Ok(BL.UserBL.getUser(code));
+          return Ok(BL.UserBL.CheckUser(user.E_mail, user.Password));           
         }
-        [Route("checkUser"), HttpPost]
-        public IHttpActionResult checkUser(DTO.User user)
+        [Route("AddUser"),HttpPost]//פונקציה שמוספה משתמש
+        public IHttpActionResult AddUser(DTO.User user)
         {
-          return Ok(BL.UserBL.checkUser(user.E_mail, user.Password));           
+            return Ok (BL.UserBL.AddUser(user));
         }
-        [Route("addUser"),HttpPost]
-        public IHttpActionResult addUser(DTO.User user)
+        [Route("SaveChanges"), HttpPost]//פונקציה ששומרת שינויים לפרטי משתמש
+        public IHttpActionResult SaveChanges(DTO.User user)
         {
-            return Ok (BL.UserBL.addUser(user));
-        }
-        [Route("saveChanges"), HttpPost]
-        public IHttpActionResult saveChanges(DTO.User user)
-        {
-            return Ok(BL.UserBL.saveChanges(user));
+            return Ok(BL.UserBL.SaveChanges(user));
         }
         
 

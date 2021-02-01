@@ -14,8 +14,15 @@ namespace DAL
     
     public partial class Donations
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Donations()
+        {
+            this.DonationOffers = new HashSet<DonationOffers>();
+        }
+    
         public int donationCode { get; set; }
         public string donationName { get; set; }
+        public Nullable<int> ProductCode { get; set; }
         public int Category { get; set; }
         public string Picture { get; set; }
         public string Description { get; set; }
@@ -23,9 +30,10 @@ namespace DAL
         public string donorEmail { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> ProductCode { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DonationOffers> DonationOffers { get; set; }
         public virtual Products Products { get; set; }
     }
 }

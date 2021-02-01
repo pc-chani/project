@@ -1,51 +1,54 @@
 <div class="content">
     <table class="table table-hover">
-        <tbody *ngFor="let p of products" >
-            <tr >
+        <tbody *ngFor="let p of products">
+            <tr>
                 <td (click)="showdetails(p)">{{p.Name}} </td>
                 <td *ngIf="p.IsDisposable"><input type="number" value="{{p.Amount}}" min="0" #num
                         (change)="changeAmount(p,num.value)"></td>
                 <td *ngIf="!p.IsDisposable">
                     <mat-form-field appearance="fill">
                         <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" [max]="max"  >
+                        <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" [max]="max">
                             <!---->
                             <input matStartDate placeholder="Start date" (dateChange)="setStartDate($event.value)">
                             <input matEndDate placeholder="End date" (dateChange)="setEndDate($event.value)">
                         </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-                        <mat-date-range-picker (opened)="myP(p)" #picker [dateClass]="dateClass"></mat-date-range-picker>
-                        
-                    </mat-form-field>
-                    <textarea matInput  *ngIf="comment && p==CurrentProduct"
-                    cdkTextareaAutosize
-                    #autosize="cdkTextareaAutosize"
-                    cdkAutosizeMinRows="1"
-                    cdkAutosizeMaxRows="5" [formControl]="comments"
-                    class="comment"></textarea>
-                <td> <button  mat-raised-button color="primary" (click)="saveChange(p)">שמור שינויים</button></td>
-                <td>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker (opened)="myP(p)" #picker [dateClass]="dateClass">
+                        </mat-date-range-picker>
 
-                    <button mat-mini-fab color="primary">
+                    </mat-form-field>
+                    <textarea matInput *ngIf="comment && p==CurrentProduct" cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                        [formControl]="comments" class="comment"></textarea>
+                <td *ngIf="!p.IsDisposable"> 
+                    <button mat-raised-button color="a" (click)="saveChange(p)">הוסף הלוואה</button>
+                    <button mat-raised-button color="a" (click)="deleteLending(p)">מחק הלוואה</button>
+                    <button mat-raised-button color="a" (click)="editComment(p)">ערוך הערה</button>
+                </td>
+                <td *ngIf="p.IsDisposable">
+                    <button mat-raised-button color="a" (click)="saveChange(p)">שמור שינויים</button>
+
+                </td>
+                <td>
+                    <button mat-mini-fab color="a">
                         <mat-icon (click)="showdetails(p)">create</mat-icon>
                     </button>
                 </td>
                 <td>
-                    <button mat-mini-fab color="primary">
+                    <button mat-mini-fab color="a">
                         <mat-icon (click)="deleteProduct(p)">delete</mat-icon>
                     </button>
                 </td>
-
             </tr>
-           
-            <tr *ngIf="show && p==CurrentProduct"  >
+            <tr *ngIf="show && p==CurrentProduct">
                 <div>
                     <form [formGroup]="editPForm">
-                        <button mat-mini-fab color="primary">
-                        <mat-icon (click)="close()">clear</mat-icon>
+                        <button mat-mini-fab color="a">
+                            <mat-icon (click)="show=false">clear</mat-icon>
                         </button>
                         <input type="text" placeholder="בחר " aria-label="Number" matInput formControlName="Name"
-                            [matAutocomplete]="auto" [value]="displayFn"  class="form-control">
+                            [matAutocomplete]="auto" [value]="displayFn" class="form-control">
                         <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let p of filteredPs | async" [value]="p">
                                 {{p.Productname}}
@@ -59,30 +62,33 @@
                                 width="180" mat-card-image>
                             <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" mat-card-image>
                         </p>
-                        <mat-checkbox  class="txt" type="checkbox" formControlName="IsDisposable" [checked]="CurrentProduct.FreeDescription">
+                        <mat-checkbox class="txt" type="checkbox" formControlName="IsDisposable"
+                            [checked]="CurrentProduct.FreeDescription">
                             האם חד פעמי?</mat-checkbox>
-                         <div class="error" *ngIf="editPForm.controls['IsDisposable'].errors!=null"> שדה נדרש </div>
+                        <div class="error" *ngIf="editPForm.controls['IsDisposable'].errors!=null"> שדה נדרש </div>
                         <p>הערות<input type="text" value="{{CurrentProduct.FreeDescription}}"
-                                formControlName="FreeDescription"  class="form-control"></p>
+                                formControlName="FreeDescription" class="form-control"></p>
                         <p>פקדון<input type="number" value="{{CurrentProduct.SecurityDepositAmount}}"
-                                formControlName="SecurityDepositAmount"  class="form-control"></p>
-                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status" class="form-control"></p>
-                        <p> <button  mat-raised-button color="primary"  class="btn btn-primary" (click)="setP()" >שמור שינויים</button></p>
+                                formControlName="SecurityDepositAmount" class="form-control"></p>
+                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status"
+                                class="form-control"></p>
+                        <p> <button mat-raised-button color="a"  (click)="setP()">שמור
+                                שינויים</button></p>
                     </form>
                 </div>
             </tr>
         </tbody>
     </table>
     <div class="img">
-        <button mat-mini-fab color="primary">
-            <mat-icon (click)="closeNew()" *ngIf="newProduct">clear</mat-icon>
-            <mat-icon (click)="add()" class="img" *ngIf="!newProduct">add_circle</mat-icon>
+        <button mat-mini-fab color="a">
+            <mat-icon (click)="newProduct=false" *ngIf="newProduct">clear</mat-icon>
+            <mat-icon (click)="newProduct=true" class="img" *ngIf="!newProduct">add_circle</mat-icon>
         </button>
         <span class="text" *ngIf="!newProduct">הוסף גמח </span>
         <span class="text" *ngIf="newProduct">מחק גמח </span>
 
     </div>
- 
+
     <form [formGroup]="newPForm" *ngIf="newProduct">
         <div class="form-group">
             <label> שם:</label>
@@ -116,9 +122,9 @@
         </div>
 
         <div class="form-group">
-           
-             <mat-checkbox  class="txt" type="checkbox" formControlName="IsDisposable">
-               האם חד פעמי?</mat-checkbox>
+
+            <mat-checkbox class="txt" type="checkbox" formControlName="IsDisposable">
+                האם חד פעמי?</mat-checkbox>
             <div class="error" *ngIf="newPForm.controls['IsDisposable'].errors!=null"> שדה נדרש </div>
         </div>
         <div class="form-group">
@@ -132,10 +138,11 @@
             <div class="error" *ngIf="newPForm.controls['Status'].errors!=null"> שדה נדרש </div>
         </div>
         <div>
-            <button  mat-raised-button color="primary" class="btn btn-success"  (click)="setProduct()"
+            <button mat-raised-button color="a" (click)="setProduct()"
                 [disabled]="!newPForm.valid" style="margin-right: 35%;">הוסף
             </button>
         </div>
     </form>
-    <button  mat-raised-button color="primary" [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה לגמחים</button>
+    <button mat-raised-button color="a" [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה
+        לגמחים</button>
 </div>

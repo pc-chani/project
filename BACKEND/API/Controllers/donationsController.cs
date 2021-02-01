@@ -13,26 +13,26 @@ namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
     [RoutePrefix("api/donation")]
-    public class donationsController : ApiController
+    public class DonationsController : ApiController
     {
-        [Route("getDonations")]
-        public IHttpActionResult getDonations()
+        [Route("GetDonations")]//פונקציה שמחזירה את כל התרומות
+        public IHttpActionResult GetDonations()
         {          
-          return Ok(BL.donationsBL.GetDonations());
+          return Ok(BL.DonationsBL.GetDonations());
         }
-        [Route("getDonation"),HttpPost]
-        public IHttpActionResult getDonation([FromBody] int code)
+        [Route("GetDonation"),HttpPost]// פונקציה שמקבלת קוד תרומה ומחזירה את אותה תרומה 
+        public IHttpActionResult GetDonation([FromBody] int code)
         {
-            return Ok(BL.donationsBL.GetDonation(code));
+            return Ok(BL.DonationsBL.GetDonation(code));
         }
-        [Route("AddDonation")]
+        [Route("AddDonation")]//פונקציה שמקבלת תרומה ומוסיפה אותה לטבלת התרומות
         public IHttpActionResult AddDonation()
         {
             var httpRequest = HttpContext.Current.Request;
             // System.Diagnostics.Debug.WriteLine(httpRequest.Params["product"]);
             var donation = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["donation"]);
             var dictionary = (Dictionary<string, object>)donation;
-            DTO.Donations d = new DTO.Donations();
+            DTO.Donations d = new DTO.Donations { };
             d.Adress = (string)dictionary["Adress"];
           //  d.MasterCategory = (int?)dictionary["MasterCategory"];
             d.Category = (int)dictionary["Category"];
@@ -45,7 +45,7 @@ namespace API.Controllers
             d.donorName = (string)dictionary["donorName"];
             d.donorEmail= (string)dictionary["donorEmail"];
 
-            string imageName = null;
+          //  string imageName = null;
             //Upload Image          
                 var postedFile = httpRequest.Files["Image"];
                 //Create custom filename
@@ -57,34 +57,34 @@ namespace API.Controllers
                     postedFile.SaveAs(filePath);
                     d.Picture=postedFile.FileName;
                 }
-            return Ok(BL.donationsBL.AddDonations(d));
+            return Ok(BL.DonationsBL.AddDonations(d));
         }
-        [Route("DeleteDonation")]
+        [Route("DeleteDonation")]//פונקציה שמקבלת תרומה ומוחקת אותה מטבלת בתרומות
         public IHttpActionResult DeleteDonation(DTO.Donations d)
         {
-            return Ok(BL.donationsBL.RemoveDonation(d));
+            return Ok(BL.DonationsBL.RemoveDonation(d));
         }
-        [Route("filterDonations")]
-        public IHttpActionResult filterDonations()
+        [Route("FilterDonations")]//פונקציה שמקבלת קריטריונים ומחזירה את התרומות המתאימות להם
+        public IHttpActionResult FilterDonations()
         {
             var httpRequest = HttpContext.Current.Request;
-            return Ok(BL.donationsBL.filterDonations(
+            return Ok(BL.DonationsBL.FilterDonations(
                 Convert.ToInt32(httpRequest["category"]),
                 Convert.ToInt32(httpRequest["tatcategory"]),
                 Convert.ToString(httpRequest["adress"])));
         }
-        [Route("saveChanges")]
-        public IHttpActionResult saveChanges()
+        [Route("SaveChanges")]
+        public IHttpActionResult SaveChanges()
         {
             var httpRequest = HttpContext.Current.Request;
             // System.Diagnostics.Debug.WriteLine(httpRequest.Params["product"]);
             var donation = new JavaScriptSerializer().DeserializeObject(httpRequest.Params["donation"]);
             var dictionary = (Dictionary<string, object>)donation;
-            DTO.Donations d = new DTO.Donations();
+            DTO.Donations d = new DTO.Donations { };
             d.donationCode = (int)dictionary["donationCode"];
             d.Description = (string)dictionary["Description"];
             d.donationName = (string)dictionary["donationName"];
-            string imageName = null;
+            string imageName;
             //Upload Image          
             var postedFile = httpRequest.Files["Image"];
             //Create custom filename
@@ -96,7 +96,7 @@ namespace API.Controllers
                 postedFile.SaveAs(filePath);
                 d.Picture = postedFile.FileName;
             }
-            return Ok(BL.donationsBL.saveChanges(d));
+            return Ok(BL.DonationsBL.SaveChanges(d));
         }
 
     }

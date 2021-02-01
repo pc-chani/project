@@ -100,7 +100,7 @@ export class SearchGMHComponent implements OnInit {
     const fingerprint = getBrowserFingerprint();
     let s = new Searches();
     s.fingerPrint = fingerprint;
-    s.City=this.adress.vicinity
+   // s.City=this.adress.vicinity
     if (this.currLat != 0) s.Adress = (this.currLat + " " + this.currLng).toString();
     else if (this.adress != undefined) s.Adress = this.adress;
     if (this.searchForm.controls.tatCategory.value.value != "" && this.searchForm.controls.tatCategory.value.value!=undefined) s.Category = this.tatCategories.find(tc => tc.CategoryName == this.searchForm.controls.tatCategory.value).CategoryCode;

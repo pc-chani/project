@@ -6,7 +6,7 @@
             <div class="error" *ngIf="signInForm.controls['e_mail'].errors!=null">שדה נדרש</div>
         </div>
         <div class="form-group">
-            <label> :סיסמה </label>
+            <label> :סיסמה </label><button (click)="changePassword()">שכחתי סיסמה</button>
             <input class="txt" [type]="show ? 'text' : 'password'"  class="form-control" formControlName="password">
             <div class="error" *ngIf="signInForm.controls['password'].errors!=null"> שדה נדרש </div>
             <button mat-icon-button matSuffix (click)="show = !show" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="show">
@@ -14,7 +14,12 @@
                 </button>
         </div>
         <div>
+            <input type="checkbox" formControlName="accept" style="margin-right: 5%;"><label>
+                זכור אותי תמיד על מחשב זה</label>
+        </div>
+        <div>
             <button (click)="checkUser()" class="btn btn-success"  [disabled]="!signInForm.valid" style="margin-right: 35%;">הכנס</button>
+            <div *ngIf="user">פרטים שגויים</div>
         </div>
     </form>
 </div>

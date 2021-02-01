@@ -1,4 +1,4 @@
-<button mat-raised-button color="primary" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
+<button mat-raised-button color="a" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
     אישיים</button>
 <div class="content">
     <h1>היי {{currentUser.Name}} , הגמחים שלך:</h1>
@@ -13,22 +13,26 @@
                     <td>{{g.e_mail}}</td>
                     <td>{{g.commits}}</td>
                     <td class="img">
-                        <button mat-mini-fab color="primary">
+                        <button mat-mini-fab color="a">
                             <mat-icon (click)="delete(g)">delete</mat-icon>
                         </button>
                         <span class="text">מחק גמח </span>
                     </td>
                     <td class="img">
-                        <button mat-mini-fab color="primary">
+                        <button mat-mini-fab color="a">
                             <mat-icon (click)="edit(g)">create</mat-icon>
                         </button>
                         <span class="text">ערוך פרטי גמח</span>
                     </td>
-                    <td><button mat-raised-button color="primary" [routerLink]="['/one-gmh',g.GmhCode]">ניהול
+                    <td><button mat-raised-button color="a" [routerLink]="['/one-gmh',g.GmhCode]">ניהול
                             הגמ"ח</button></td>
                 </tr>
-                <tr *ngIf="open && g==currentgmh" >פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
-                    <div  style="width: 250%;">
+                <tr *ngIf="open && g==currentgmh" >פרטי הגמח:
+                    <button mat-mini-fab color="a">
+                    <mat-icon (click)="close()">clear</mat-icon>
+                </button>
+                    <div >
+                        <!-- style="width: 250%;"-->
                         <form [formGroup]="editGmhForm" >
                             <div class="form-group">
                                 שם הגמח:
@@ -52,7 +56,7 @@
                             <!--<p>שם:<input type="text" formControlName="Phone"> <input type="text"
                                    ></p>להחליף לשם אחד?-->
                             <p>הערות:<input type="text" formControlName="Comments" class="form-control"></p>
-                            <p><button mat-raised-button color="primary" class="btn btn-primary"  [disabled]="!editGmhForm.valid" (click)="saveChange()">
+                            <p><button mat-raised-button color="a"   [disabled]="!editGmhForm.valid" (click)="saveChange()">
                                    שמור שינויים</button>
                             </p>
                         </form>
@@ -61,7 +65,7 @@
             </tbody>
         </table>
         <div class="img">
-            <button mat-mini-fab color="primary">
+            <button mat-mini-fab color="a">
                 <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
                 <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon>
             </button>
@@ -71,6 +75,7 @@
         </div>
 
         <form [formGroup]="gmhForm" *ngIf="newgmh">
+            <app-needs-gmhim *ngIf="needsgnhim"></app-needs-gmhim>
             <div class="form-group">
 
                 <label> שם:</label>
@@ -78,10 +83,10 @@
                 <div class="error" *ngIf="gmhForm.controls['GmhName'].errors!=null">*</div>
             </div>
             <div class="form-group">
-                <mat-radio-group aria-label="Select an option">
+                <mat-radio-group color="a" aria-label="Select an option">
 
                     <label> קטגוריה:</label>
-                    <mat-radio-button [checked]="true" (click)="choosecategory()" value="1">
+                    <mat-radio-button  [checked]="true" (click)="choosecategory()" value="1">
                         <input type="text" placeholder="בחר " aria-label="Number" matInput class="form-control"
                             formControlName="category" [matAutocomplete]="auto" [value]="displayFn">
                         <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
@@ -92,7 +97,7 @@
                         </mat-autocomplete>
                     </mat-radio-button>
                     <div class="error" *ngIf="gmhForm.controls['category'].errors!=null">*</div>
-                    <mat-radio-button (click)="newcategory()" value="2">
+                    <mat-radio-button  (click)="newcategory()" value="2">
                         <input type="text" placeholder="הוסף קטגוריה" formControlName="newCategory"
                             class="form-control">
                     </mat-radio-button>
@@ -106,7 +111,7 @@
                 <mat-radio-group aria-label="Select an option">
 
                     <label> תת קטגוריה:</label>
-                    <mat-radio-button value="1" (click)="choosetatcategory()" [checked]="true">
+                    <mat-radio-button color="a" value="1" (click)="choosetatcategory()" [checked]="true">
                         <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
                             [value]="displayFn" formControlName="tatCategory" class="form-control">
                         <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
@@ -115,7 +120,7 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-radio-button>
-                    <mat-radio-button value="2" (click)="newtatcategory()">
+                    <mat-radio-button color="a" value="2" (click)="newtatcategory()">
                         <input type="text" placeholder="הוסף קטגוריה" formControlName="newTatCategory" [checked]="true" class="form-control">
                     </mat-radio-button>
                 </mat-radio-group>
@@ -125,8 +130,27 @@
                 <input class="txt" type="text" class="form-control" formControlName="comments">
                 <div class="error" *ngIf="gmhForm.controls['comments'].errors!=null">*</div>
             </div>
+            <button mat-raised-button color="a"(click)="myDetails=true"
+            style="margin-right: 35%;">פרטי הגמח כפרטי האישים
+        </button>
+        <button mat-raised-button color="a" (click)="myDetails=false"
+            style="margin-right: 35%;">הזן פרטים שונים 
+        </button>
+        <div class="form-group" *ngIf="!myDetails">
+            <label> כתובת:</label>
+            <input class="txt" type="text" class="form-control" formControlName="adress">
+        </div>
+        <div class="form-group"  *ngIf="!myDetails">
+            <label> טלפון:</label>
+            <input class="txt" type="text" class="form-control" formControlName="phone">
+           
+        </div>
+        <div class="form-group"  *ngIf="!myDetails">
+            <label> אימיל:</label>
+            <input class="txt" type="text" class="form-control" formControlName="e_mail">
+        </div>
             <div>
-                <button mat-raised-button color="primary" (click)="setCategoty()" [disabled]="!gmhForm.valid"
+                <button mat-raised-button color="a" (click)="setCategoty()" [disabled]="!gmhForm.valid"
                     style="margin-right: 35%;">הוסף
                 </button>
             </div>

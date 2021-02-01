@@ -16,6 +16,7 @@ export class AddGMHComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+   
     this.registerForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       adress: new FormControl('', Validators.required),
@@ -28,23 +29,23 @@ export class AddGMHComponent implements OnInit {
       accept: new FormControl('', Validators.requiredTrue),
     }, { validators: CheckPassword('password', 'confirm') });
   }
-  addUser() {
-    let user = new User();
-    user.Name = this.registerForm.controls.Name.value;
-    user.Adress = this.adrres;
-    user.Cell_Phone = this.registerForm.controls.cell_phone.value;
-    user.Phone = this.registerForm.controls.phone.value;
-    user.E_mail = this.registerForm.controls.e_mail.value;
-    user.Password = this.registerForm.controls.password.value;
-    user.Permission=  this.registerForm.controls.permission.value;
-    
-   // console.log(user);
-    
-    this.userService.addUser(user).subscribe(
-      res => { console.log(res); },
-      err => { console.log(err); }
-    )
-  }
+ addUser() {
+   let user = new User();
+   user.Name = this.registerForm.controls.Name.value;
+   user.Adress = this.adrres;
+   user.Cell_Phone = this.registerForm.controls.cell_phone.value;
+   user.Phone = this.registerForm.controls.phone.value;
+   user.E_mail = this.registerForm.controls.e_mail.value;
+   user.Password = this.registerForm.controls.password.value;
+   user.Permission=  this.registerForm.controls.permission.value;
+   
+  // console.log(user);
+   
+   this.userService.addUser(user).subscribe(
+     res => { console.log(res); },
+     err => { console.log(err); }
+   )
+ }
   handleDestinationChange(a: Address) {
     this.adrres=a.formatted_address;
   //  console.log(a)

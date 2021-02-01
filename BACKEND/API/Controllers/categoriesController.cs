@@ -10,24 +10,24 @@ namespace API.Controllers
 {
     [EnableCors("*", "*", "*")]
     [RoutePrefix("api/categories")]
-    public class categoriesController : ApiController
+    public class CategoriesController : ApiController
     {
         [Route("getCategories")]
-        public IHttpActionResult getCategories()
+        public IHttpActionResult GetCategories()
         {
-            return Ok(BL.categories.GetCategories());
+            return Ok(BL.Categories.GetCategories());
 
         }
         [Route("getCategoryName"),HttpPost]
-        public IHttpActionResult getCategoryName([FromBody] int c)
+        public IHttpActionResult GetCategoryName([FromBody] int c)
         {
-            return Ok(BL.categories.GetCategoryName(c));
+            return Ok(BL.Categories.GetCategoryName(c));
 
         }
         [Route("addCategory"),HttpPost]
-        public IHttpActionResult addCategory(DTO.CategoryGMH c)
+        public IHttpActionResult AddCategory(DTO.CategoryGMH c)
         {
-            return Ok(BL.categories.addCategory(c));
+            return Ok(BL.Categories.AddCategory(c));
 
         }
     }

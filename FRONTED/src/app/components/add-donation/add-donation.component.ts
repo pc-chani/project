@@ -1,3 +1,4 @@
+import { getLocaleDateTimeFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
@@ -141,6 +142,7 @@ export class AddDonationComponent implements OnInit {
     d.Description = this.donationForm.controls.comments.value;
     //d.Category=this.donationForm.controls.tatCategories.value.CategoryCode;
     d.Phone = this.donationForm.controls.phone.value;
+    console.log(this.donationForm.controls.donationName.value);
     d.donationName = this.donationForm.controls.donationName.value;
     d.donorName = this.donationForm.controls.donorName.value;
     d.donorEmail = this.donationForm.controls.donorEmail.value;
@@ -270,4 +272,5 @@ export class AddDonationComponent implements OnInit {
     this.donor = !this.donor
     this.donation = !this.donation
   }
+ 
 }

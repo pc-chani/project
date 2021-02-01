@@ -5,6 +5,7 @@ import { CheckPassword } from 'src/app/validators/valid';
 import { User } from 'src/app/shared/models/User.model';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,19 +13,19 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  show: boolean=false;
-  
+  show: boolean = false;
 
-  constructor(private userService: UserService,private cookieService: CookieService) { }
+
+  constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
   registerForm: FormGroup;
   adress
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       adress: new FormControl('', Validators.required),
-      cell_phone: new FormControl('',Validators.compose([Validators.required, Validators.pattern('[0-9]{9}')])),
-      phone: new FormControl('',Validators.compose([Validators.required, Validators.pattern('[0-9]{10}')])),
-      e_mail: new FormControl('',Validators.compose([Validators.required, ,  Validators.email])),
+      cell_phone: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[0-9]{9}')])),
+      phone: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[0-9]{10}')])),
+      e_mail: new FormControl('', Validators.compose([Validators.required, , Validators.email])),
       password: new FormControl('', Validators.required),
       confirm: new FormControl('', Validators.required),
       //permission: new FormControl('', Validators.required),
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     }, { validators: CheckPassword('password', 'confirm') });
   }
   handleDestinationChange(a: Address) {
-    this.adress=a.formatted_address
+    this.adress = a.formatted_address
     console.log(a)
   }
   addUser() {
@@ -43,22 +44,40 @@ export class RegisterComponent implements OnInit {
     user.Phone = this.registerForm.controls.phone.value;
     user.E_mail = this.registerForm.controls.e_mail.value;
     user.Password = this.registerForm.controls.password.value;
-    user.Permission=  'בעל גמ"ח'
-    
+    user.Permission = 'בעל גמ"ח'
+
     console.log(user);
-    
-    this.userService.addUser(user).subscribe(
-      res => { console.log(res); 
-        this.cookieService.set('userName', this.userService.CurrentUser.Name);
-        localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
-        },
-      err => { console.log(err); }
-    )
+    this.userService.checkUser(user).subscribe(
+      res => {
+        console.log(res);
+        
+        if (res != null) {
+console.log(1);
+
+          this.userService.addUser(user).subscribe(
+            res => {
+              console.log(res);
+              if (res) {
+                this.router.navigate(['/manageTheGMH'])
+                this.userService.CurrentUser(user);
+                this.cookieService.set('userName', this.userService.CurrentUser.Name);
+                localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+              }
+            },
+            err => { console.log(err); }
+          )
+        }
+        else{
+          confirm("משתמש קיים")
+          this.router.navigate(['/signIn'])
+
+        }
+      })
   }
- 
-  toshow(){
-    this.show=!this.show
-      }
+
+  toshow() {
+    this.show = !this.show
+  }
 }
 
 

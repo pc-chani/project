@@ -8,7 +8,7 @@ namespace BL.Converters
 {
     public class CategoryGMHConvereter
     {
-        public static DTO.CategoryGMH convertToDTO(DAL.CategoryGMH c)
+        public static DTO.CategoryGMH ConvertToDTO(DAL.CategoryGMH c)
         {
             return new DTO.CategoryGMH
             {
@@ -18,7 +18,7 @@ namespace BL.Converters
 
             };
         }
-        public static DAL.CategoryGMH convertToDAL(DTO.CategoryGMH c)
+        public static DAL.CategoryGMH ConvertToDAL(DTO.CategoryGMH c)
         {
             return new DAL.CategoryGMH
             {
@@ -28,9 +28,9 @@ namespace BL.Converters
 
             };
         }
-        public static List<DTO.CategoryGMH> convertToDTOList(List<DAL.CategoryGMH> cList)
+        public static List<DTO.CategoryGMH> ConvertToDTOList(List<DAL.CategoryGMH> cList)
         {
-            return cList.Select(c => convertToDTO(c)).ToList();
+            return cList.Select(c => ConvertToDTO(c)).ToList();
         }
     }
 }

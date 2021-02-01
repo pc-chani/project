@@ -1,20 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
-
- 
-
 #HiglightRow td { padding:2px; }
-
-  
-  
-  
- 
-  
- 
-
- 
-
- 
 .content {
     display: flex;
     margin: 82px auto;
@@ -26,12 +11,8 @@
     direction:rtl; 
     text-align: right;
   }
-  
-
-
- 
-
-
-  
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; background-image: url( "assets/bg.png") ; background-size: 55% 50%;background-repeat: no-repeat;}
+body { margin: 0; font-family: Arial, Helvetica, sans-serif }
+  .mat-a{
+ background-color: rgb(198, 230, 231);
+}
