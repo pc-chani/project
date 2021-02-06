@@ -11,8 +11,7 @@
     direction:rtl; 
     text-align: right;
   }
-html, body { height: 100%; background-image: url( "assets/bg.png") ; background-size: 55% 50%;background-repeat: no-repeat;}
 body { margin: 0; font-family: Arial, Helvetica, sans-serif }
   .mat-a{
- background-color: rgb(198, 230, 231);
+ background-color: rgb(185, 229, 247);
 }

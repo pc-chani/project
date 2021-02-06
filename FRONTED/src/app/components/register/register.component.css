@@ -21,3 +21,9 @@
     direction:rtl; 
     text-align: right;
   }
+  body{
+    /* background-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 0%),url( "src/assets/bg.png") !important; background-size: 60% 55% !important; margin-top: 10%; background-repeat: no-repeat !important; */
+    background-image:url( "src/assets/bg.png") !important; background-size: 50% 45% !important; margin-top: 10%; background-repeat: no-repeat !important;
+    color: black;
+    height: 120%;
+    }

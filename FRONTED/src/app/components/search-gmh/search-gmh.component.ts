@@ -31,6 +31,11 @@ export class SearchGMHComponent implements OnInit {
   currLng;
   adress;
   openGmhDetails;
+  distance=20;
+  hideTatCategory=true;
+  //openGmhDetails;
+  IncreaseTheSearchArea;
+  uniqueChars: GMH[] = [];
   constructor(private userService: UserService, private productsService: ProductsService, private router: Router, private gmhService: GmhService) { }
   ngOnInit(): void {
     this.searchForm = new FormGroup({
@@ -38,6 +43,7 @@ export class SearchGMHComponent implements OnInit {
       category: new FormControl(''),
       tatCategory: new FormControl({ value: '' }),
       location: new FormControl(''),
+      distance:new FormControl(''),
     });
     this.getCategoryGmh();
     this.productsService.getProducts().subscribe(

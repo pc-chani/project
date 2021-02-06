@@ -20,4 +20,63 @@ margin-right: 70px;
       display: inline;
       
   }
+  #HiglightRow tr:hover {
+    background-color:#317082; color:#FFF; }
+  
+  #HiglightRow table {
+    border:1px solid #000; border-collapse: collapse; }
+  
+  #HiglightRow thead th { font-weight:bold; color:#000; background-color:#E2EBED; }
+  
+  #HiglightRow td { padding:2px; }
+  
+  table {
+    direction: rtl;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .txt{  
+      margin-top: -80px;
+      margin-right: 100px;    
+  }
+  
+  .error{
+  position: absolute;
+   color: crimson;
+  }
+  
+  
+    .form-group {
+      display: inline-block;
+  margin-right: 40px;
+    }
+  
+    .place{
+        display: inline;
+        
+    }
+    .content{
+    background-color:#ade0e2;
+    /* margin-top: -0px; */
+  }
+  .decorate{
+    margin-right: -50px!important;
+  }
+  .form{
+  width: 100%;
+  }
+  
+  
+    
   

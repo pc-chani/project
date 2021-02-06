@@ -21,3 +21,11 @@
     direction:rtl; 
     text-align: right;
   }
+  .eyeSymbol{
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+body{
+  background-image: url( "src/assets/bg.png") !important; background-size: 70% 65% !important; margin-top: 10%; background-repeat: no-repeat !important;
+  }
