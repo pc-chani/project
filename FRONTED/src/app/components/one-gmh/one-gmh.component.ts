@@ -296,7 +296,7 @@ export class OneGmhComponent implements OnInit {
     p.Amount = this.newPForm.controls.Amount.value;
     console.log(this.newPForm.controls.IsDisposable.value);
     
-    if ( this.newPForm.controls.IsDisposable.value==null) p.IsDisposable = false;
+    if ( this.newPForm.controls.IsDisposable.value==null ||this.newPForm.controls.IsDisposable.value==false ) p.IsDisposable = false;
     else p.IsDisposable=true
     p.SecurityDepositAmount = this.newPForm.controls.SecurityDepositAmount.value;
     p.Status = this.newPForm.controls.Status.value;
